@@ -28,7 +28,7 @@
                                 <td>{{ $sale->id }}</td>
                                 <td>{{ $sale->client->full_name }}</td>
                                 <td>{{ $sale->deliver_on->format('d/m/Y') }}</td>
-                                <td>{{ $sale->delivered_at->diffForHumans() }}</td>
+                                <td>{{ $sale->delivered_at }}</td>
                                 <td>{{ $sale->seller->full_name }}</td>
                                 <td>{{ $sale->created_at->diffForHumans() }}</td>
                                 <td>

@@ -1,6 +1,6 @@
 const stepperEl = document.querySelector(".bs-stepper");
 var stepper = new Stepper(stepperEl, {
-    linear: true,
+    linear: false,
     animation: true,
     selectors: {
         steps: ".step",

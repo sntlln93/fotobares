@@ -131,46 +131,46 @@
                             <div class="card-body">
                                 <div class="form-row">
                                     <div class="col-md-5 form-group">
-                                        <label for="address_neiborhood">Barrio</label>
-                                        <input type="text" class="form-control" id="address_neiborhood"
-                                            name="address_neiborhood" value="{{ old('address_neiborhood') }}">
-                                        @error('address_neiborhood')
+                                        <label for="address[neighborhood]">Barrio</label>
+                                        <input type="text" class="form-control" id="address[neighborhood]"
+                                            name="address[neighborhood]" value="{{ old('address.neighborhood') }}">
+                                        @error('address.neighborhood')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
 
                                     <div class="col-md-5 form-group">
-                                        <label for="address_street">Calle</label>
-                                        <input type="text" class="form-control" id="address_street" name="address_street"
-                                            value="{{ old('address_street') }}">
-                                        @error('address_street')
+                                        <label for="address[street]">Calle</label>
+                                        <input type="text" class="form-control" id="address[street]" name="address[street]"
+                                            value="{{ old('address.street') }}">
+                                        @error('address.street')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
 
                                     <div class="col-md-2 form-group">
-                                        <label for="address_number">Número</label>
-                                        <input type="text" class="form-control" id="address_number" name="address_number"
-                                            value="{{ old('address_number') }}">
-                                        @error('address_number')
+                                        <label for="address[number]">Número</label>
+                                        <input type="text" class="form-control" id="address[number]" name="address[number]"
+                                            value="{{ old('address.number') }}">
+                                        @error('address.number')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
 
                                     <div class="col-md-6 form-group">
-                                        <label for="address_indications">Indicaciones</label>
-                                        <textarea name="address_indications" id="address_indications" rows="2"
-                                            class="form-control">{{ old('address_indications') }}</textarea>
-                                        @error('address_indications')
+                                        <label for="address[indications]">Indicaciones</label>
+                                        <textarea name="address[indications]" id="address[indications]" rows="2"
+                                            class="form-control">{{ old('address.indications') }}</textarea>
+                                        @error('address.indications')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
 
                                     <div class="col-md-6 form-group">
-                                        <label for="address_details">Detalles de la casa</label>
-                                        <textarea name="address_details" id="address_details" rows="2"
-                                            class="form-control">{{ old('address_details') }}</textarea>
-                                        @error('address_details')
+                                        <label for="address[details]">Detalles de la casa</label>
+                                        <textarea name="address[details]" id="address[details]" rows="2"
+                                            class="form-control">{{ old('address.details') }}</textarea>
+                                        @error('address.details')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
@@ -194,13 +194,12 @@
                                     </div>
 
                                     <div class="col-md-6 form-group">
-                                        <label for="address_location">Detalles de la casa</label><br>
-                                        <input type="hidden" name="address_lat">
-                                        <input type="hidden" name="address_lon">
-                                        <button class="btn btn-info">Guardar ubicación (opcional)</button>
-                                        @error('address_location')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
+                                        <label for="location">Detalles de la casa</label><br>
+                                        <div id="location">
+                                            <input type="hidden" name="address[lat]">
+                                            <input type="hidden" name="address[lon]">
+                                            <button class="btn btn-info">Guardar ubicación (opcional)</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -230,6 +229,10 @@
                                                             ${{ number_format($product->price, 2, ',', '.') }}</p>
                                                     </label>
                                                 @endforeach
+                                                
+                                                @error('product_id')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
 
                                             <div class="form-group radio--select">
@@ -253,14 +256,18 @@
                                                         style="background-color: #8e4fab">
                                                         <span class="radio--title">VIOLETA</span>
                                                     </label>
+                                                    
+                                                    @error('color')
+                                                        <small class="text-danger">{{ $message }}</small>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="has_whatsapp.0"
-                                                            name="phones[0][has_whatsapp]" @if (old('phones.0.has_whatsapp') == 'on') checked @endif>
-                                                        <label class="form-check-label" for="has_whatsapp.0">Es
+                                                        <input class="form-check-input" type="checkbox" id="is_reproduction"
+                                                            name="is_reproduction" @if (old('is_reproduction') == 'on') checked @endif>
+                                                        <label class="form-check-label" for="is_reproduction">Es
                                                             reproducción</label>
                                                     </div>
                                                 </div>
@@ -282,50 +289,41 @@
                                 <div class="form-row mb-2">
                                     <div class="col-12 col-md-6">
                                         <label for="delivery">Monto de la entrega</label>
-                                        <input type="number" class="form-control" id="delivery" name="delivery"
-                                            placeholder="Colocá cuánto se abona para la entrega" required>
-                                        <div class="invalid-feedback">
-                                            Debes indicar cuánto cobrás por entregar el producto
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">$</div>
+                                            </div>
+                                            <input type="number" class="form-control" id="delivery" name="delivery"
+                                            placeholder="Colocá cuánto se abona para la entrega">
                                         </div>
+                                        @error('delivery')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
                                     <div class="col-12 col-md-6">
                                         <label for="deliver_date">Día de entrega</label>
                                         <input type="date" class="form-control" id="deliver_date" name="deliver_date"
-                                            placeholder="Indicá qué fecha realizas la entrega" required>
-                                        <div class="invalid-feedback">
-                                            Debes indicar un día para entregar
-                                        </div>
+                                            placeholder="Indicá qué fecha realizas la entrega"
+                                            min="{{ Carbon\Carbon::tomorrow()->format('Y-m-d') }}">
+                                        @error('deliver_date')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                 </div>
 
                                 <h1 class="h4 mt-5 text-gray-800">Pago</h1>
                                 <div class="form-row mb-2">
                                     <div class="col-12 col-md-6">
-                                        <label for="methodValidation">Forma de pago</label>
-                                        <select class="custom-select" name="method_id" id="methodValidation" required>
-                                            <option>Por favor elegí un método de pago</option>
-                                            <option value="1">Efectivo</option>
-                                            <option value="2">Mercado Pago</option>
-                                            <option value="3">Posnet</option>
-                                        </select>
-                                        <div class="invalid-feedback">
-                                            Debes elegir un método de pago
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 col-md-6">
                                         <label for="quotaValidation">Cantidad de cuotas</label>
                                         <input type="number" class="form-control" id="quotaValidation" name="quotas"
-                                            placeholder="Colocá la cantidad de pagos" min="1" required>
-                                        <div class="invalid-feedback">
-                                            Debes indicar en cuántos pagos se va a hacer
-                                        </div>
+                                            placeholder="Colocá la cantidad de pagos" min="1">
+                                        @error('quotas')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
-                                </div>
 
-                                <div class="form-row mb-2">
-                                    <div class="col-sm-12">
+                                    <div class="col-md-6">
                                         <label for="payment_description">Descripción
                                             <i><small>(OPCIONAL)</small></i></label>
                                         <input type="text" class="form-control" id="payment_description"
@@ -340,10 +338,10 @@
                                         <label for="dateValidation">Día aproximado de cobro</label>
                                         <input type="number" class="form-control" id="dateValidation" name="due_date"
                                             placeholder="Indicá, aproximadamente, qué día del mes tenés que pasar a cobrar"
-                                            required>
-                                        <div class="invalid-feedback">
-                                            Debes indicar un día
-                                        </div>
+                                            min="1" max="28">
+                                        @error('due_date')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
                                     <div class="col-12 col-md-6">
@@ -376,5 +374,4 @@
 @section('scripts')
     <script src="{{ asset('js/utils/bs-stepper.min.js') }}"></script>
     <script src="{{ asset('js/views/sell/create.js') }}"></script>
-
 @endsection

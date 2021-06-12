@@ -41,7 +41,7 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-          @yield('content')
+      @yield('content')
         </div>
         <!-- /.container-fluid -->
 

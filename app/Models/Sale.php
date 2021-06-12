@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sale extends Model
 {
+    protected $guarded = [];
     protected $dates = ['deliver_on', 'delivered_at'];
 
     public function client()

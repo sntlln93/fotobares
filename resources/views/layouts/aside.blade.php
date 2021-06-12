@@ -30,7 +30,7 @@
                       <a href="{{ route('sales.index') }}" class="collapse-item" >
                         Ver ventas
                       </a>
-                        <a href="{{ route('sales.create') }}}" class="collapse-item">
+                        <a href="{{ route('sales.create') }}" class="collapse-item">
                           Vender
                         </a>
                     </div>

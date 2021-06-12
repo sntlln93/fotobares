@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new Class extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -17,6 +17,8 @@ return new Class extends Migration
             $table->id();
             $table->float('amount');
             $table->date('paid_at')->nullable();
+            $table->date('due_date');
+            $table->string('hour')->nullable();
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new Class extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -16,7 +16,7 @@ return new Class extends Migration
         Schema::table('payments', function (Blueprint $table) {
             $table->foreignId('sale_id')->constrained();
 
-            $table->unsignedBigInteger('collector_id');
+            $table->unsignedBigInteger('collector_id')->nullable();
             $table->foreign('collector_id')->references('id')->on('employees');
         });
     }
