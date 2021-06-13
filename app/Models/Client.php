@@ -12,4 +12,14 @@ class Client extends Model
     {
         return $this->lastname . ' ' . $this->name;
     }
+
+    public function phones()
+    {
+        return $this->morphMany(Phone::class, 'phoneable');
+    }
+
+    public function address()
+    {
+        return $this->hasOne(Address::class);
+    }
 }

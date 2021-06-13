@@ -28,4 +28,9 @@ class Sale extends Model
     {
         return $this->hasMany(Payment::class);
     }
+
+    public function getDeliveredAtAttribute($value)
+    {
+        return $value ? $value->format('D [de] MMMM') : "Esta venta no tiene entregas";
+    }
 }

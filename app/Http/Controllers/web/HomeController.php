@@ -51,11 +51,4 @@ class HomeController extends Controller
         return view('home')->with('sales', $sales)
             ->with('payments', collect($payments));
     }
-
-    public function sales()
-    {
-        $sales = Sale::with('seller', 'client')->orderBy('id', 'desc')->paginate(20);
-
-        return view('sales.index')->with('sales', $sales);
-    }
 }

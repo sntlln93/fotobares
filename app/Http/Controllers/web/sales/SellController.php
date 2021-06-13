@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\web\sell;
+namespace App\Http\Controllers\web\sales;
 
 use App\Models\Sale;
 use App\Models\Phone;
@@ -9,7 +9,6 @@ use App\Models\Address;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\SaleDetail;
-use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Requests\SellRequest;
 use Illuminate\Support\Facades\DB;
