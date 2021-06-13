@@ -18,4 +18,14 @@ class Sale extends Model
     {
         return $this->belongsTo(Employee::class, 'seller_id');
     }
+
+    public function details()
+    {
+        return $this->hasMany(SaleDetail::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

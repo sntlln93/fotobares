@@ -59,7 +59,8 @@ class SellController extends Controller
                 'color' => $validated['color'],
                 'amount' => $product->amount,
                 'product_id' => $product->id,
-                'amount' => $product->price
+                'amount' => $product->price,
+                'sale_id' => $sale->id
             ]);
 
             Address::create([
