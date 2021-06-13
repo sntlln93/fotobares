@@ -1,3 +1,4 @@
+//stepper
 const stepperEl = document.querySelector(".bs-stepper");
 var stepper = new Stepper(stepperEl, {
     linear: false,
@@ -31,5 +32,33 @@ stepperEl.addEventListener("show.bs-stepper", function (event) {
         submitBtn.classList.add("d-none");
         nextStepBtn.classList.remove("d-none");
     }
-    console.warn(event.detail);
 });
+
+//geolocalization
+const success = (location) => {
+    const coordinates = location.coords;
+    const latInput = document.getElementById("latInput");
+    const lonInput = document.getElementById("lonInput");
+
+    latInput.value = coordinates.latitude;
+    lonInput.value = coordinates.longitude;
+};
+
+const error = (err) => {
+    console.warn("ERROR(" + err.code + "): " + err.message);
+};
+
+const saveCoordinates = (e) => {
+    e.preventDefault();
+
+    const options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
+    };
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
+};
+
+const getLocationBtn = document.getElementById("btnLocation");
+getLocationBtn.addEventListener("click", (e) => saveCoordinates(e));
