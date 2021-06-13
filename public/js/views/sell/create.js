@@ -35,17 +35,24 @@ stepperEl.addEventListener("show.bs-stepper", function (event) {
 });
 
 //geolocalization
+const locationFeedback = document.getElementById("locationFeedback");
+
 const success = (location) => {
     const coordinates = location.coords;
     const latInput = document.getElementById("latInput");
     const lonInput = document.getElementById("lonInput");
 
+    locationFeedback.innerHTML =
+        'Ubicación guardada con éxito <i class="fas fa-check-circle"></i>';
+    locationFeedback.classList.add("text-success");
     latInput.value = coordinates.latitude;
     lonInput.value = coordinates.longitude;
 };
 
-const error = (err) => {
-    console.warn("ERROR(" + err.code + "): " + err.message);
+const error = (error) => {
+    locationFeedback.innerHTML = `No se pudo guardar tu ubicación. <i class="fas fa-exclamation-circle"></i>`;
+    locationFeedback.classList.add("text-danger");
+    console.warn("ERROR(" + error.code + "): " + error.message);
 };
 
 const saveCoordinates = (e) => {

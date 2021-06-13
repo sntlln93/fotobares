@@ -47,7 +47,7 @@
             </div>
         </div>
 
-        <form action="{{ route('sales.store') }}" method="POST">
+        <form action="{{ route('sales.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="bs-stepper-content">
                 <div id="client-part" class="content" role="tabpanel" aria-labelledby="client-part-trigger">
@@ -193,13 +193,14 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-md-6 form-group">
+                                <div class="col form-group">
                                     <label for="location">Detalles de la casa</label><br>
-                                    <div id="location">
+                                    <div id="location w-100">
                                         <input type="hidden" name="address[lat]" id="latInput">
                                         <input type="hidden" name="address[lon]" id="lonInput">
-                                        <button class="btn btn-info" id="btnLocation">Guardar ubicación
-                                            (opcional)</button>
+                                        <button class="btn btn-info mb-1" id="btnLocation">Guardar ubicación
+                                            (opcional)</button><br>
+                                        <span id="locationFeedback"></span>
                                     </div>
                                 </div>
                             </div>
