@@ -37,7 +37,7 @@ class HomeController extends Controller
             'payments.hour',
             DB::raw('concat(phones.area_code, phones.number) as number'),
             'phones.has_whatsapp',
-            DB::raw('if(addresses.lat = null AND addresses.lon = null, true, false) AS has_location')
+            DB::raw('if(addresses.lat is null AND addresses.lon is null, false, true) AS has_location')
         )
             ->joinSub($closest_payments, 'payments', function ($join) {
                 $join->on('sales.id', '=', 'payments.sale_id');
