@@ -59,15 +59,16 @@
                             </div>
                             Ver en mapa
                         </a>
-                        @endif @if ($payment->delivered_at)
-                        <a href="{{ url('collect/' . $payment->client_id) }}" class="dropdown-item">
+                        @endif
+                        @if ($payment->delivered_at == false)
+                        <a href="{{ route('collect.index', ['sale' => $payment->sale_id]) }}" class="dropdown-item">
                             <div class="btn btn-sm btn-primary">
                                 <i class="fas fa-dollar-sign"></i>
                             </div>
                             Cobrar
                         </a>
                         @else
-                        <a href="{{ url('deliver/' . $payment->sale_id) }}" class="dropdown-item">
+                        <a href="{{ route('deliver.form', ['sale' => $payment->sale_id]) }}" class="dropdown-item">
                             <div class="btn btn-sm btn-primary">
                                 <i class="fas fa-box"></i>
                             </div>

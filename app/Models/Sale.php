@@ -31,6 +31,6 @@ class Sale extends Model
 
     public function getDeliveredAtAttribute($value)
     {
-        return $value ? $value->format('D [de] MMMM') : "Esta venta no tiene entregas";
+        return $value ? $value : false;
     }
 }

@@ -32,6 +32,7 @@ class HomeController extends Controller
             'sales.client_id as client_id',
             DB::raw('concat(clients.name, " ", clients.lastname) as client_name'),
             'sales.id as sale_id',
+            DB::raw('if(sales.delivered_at is null, false, true) as delivered_at'),
             'payments.amount',
             'payments.due_date',
             'payments.hour',

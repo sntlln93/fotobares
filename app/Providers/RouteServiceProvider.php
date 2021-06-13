@@ -43,18 +43,9 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
 
-            Route::middleware(['web', 'auth'])
-                ->namespace($this->namespace)
-                ->group(base_path('routes/web/web.php'));
-
             Route::middleware(['web'])
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web/auth.php'));
-
-            Route::middleware(['web', 'auth'])
-                ->namespace($this->namespace)
-                ->prefix('sales')
-                ->group(base_path('routes/web/sales.php'));
 
             Route::middleware(['web', 'auth'])
                 ->namespace($this->namespace)
@@ -63,8 +54,32 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware(['web', 'auth'])
                 ->namespace($this->namespace)
+                ->prefix('deliveries')
+                ->group(base_path('routes/web/deliver.php'));
+
+            Route::middleware(['web', 'auth'])
+                ->namespace($this->namespace)
                 ->prefix('employees')
                 ->group(base_path('routes/web/employee.php'));
+
+            Route::middleware(['web', 'auth'])
+                ->namespace($this->namespace)
+                ->prefix('map')
+                ->group(base_path('routes/web/map.php'));
+
+            Route::middleware(['web', 'auth'])
+                ->namespace($this->namespace)
+                ->prefix('sales')
+                ->group(base_path('routes/web/sales.php'));
+
+            Route::middleware(['web', 'auth'])
+                ->namespace($this->namespace)
+                ->prefix('quotas')
+                ->group(base_path('routes/web/quota.php'));
+
+            Route::middleware(['web', 'auth'])
+                ->namespace($this->namespace)
+                ->group(base_path('routes/web/web.php'));
         });
     }
 
