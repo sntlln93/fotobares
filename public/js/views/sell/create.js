@@ -201,8 +201,8 @@ const quotasContainer = document.getElementById('quota_id');
 
 quotasContainer.addEventListener('change', (e) => {
     const option = e.target.options[e.target.selectedIndex];
-    const quotas = parseInt(option.getAttribute('data-quota'));
-    const price = parseFloat(option.getAttribute('data-price'));
+    const quotas = parseInt(option.getAttribute('data-quota')) || 0;
+    const price = parseFloat(option.getAttribute('data-price')) || 0;
     document.getElementById('total').value = price * quotas;
 });
 
@@ -220,7 +220,7 @@ onProductChange = (event) => {
     fetch(`${BASE_URL}/sales/product/${productId}/quotas`)
     .then(response => response.json())
     .then(quotas => {
-        quotasContainer.innerHTML = "";
+        quotasContainer.innerHTML = "<option></option>";
 
         quotas.forEach(quota => {
             const option = document.createElement('option');
