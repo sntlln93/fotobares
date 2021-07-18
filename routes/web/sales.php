@@ -7,3 +7,6 @@ Route::post('/', [App\Http\Controllers\web\sales\SellController::class, 'store']
 
 Route::get('/', [App\Http\Controllers\web\sales\ShowSalesController::class, 'index'])->name('sales.index');
 Route::get('/{sale}', [App\Http\Controllers\web\sales\ShowSalesController::class, 'show'])->name('sales.show');
+
+//helper endpoints
+Route::get('/product/{product}/quotas', [App\Http\Controllers\web\endpoints\GetQuotasFromProduct::class, 'index']);

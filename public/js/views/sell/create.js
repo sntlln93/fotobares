@@ -37,7 +37,7 @@ stepperEl.addEventListener("show.bs-stepper", function (event) {
 //geolocalization
 const locationFeedback = document.getElementById("locationFeedback");
 
-const success = (location) => {
+success = (location) => {
     const coordinates = location.coords;
     const latInput = document.getElementById("latInput");
     const lonInput = document.getElementById("lonInput");
@@ -49,13 +49,13 @@ const success = (location) => {
     lonInput.value = coordinates.longitude;
 };
 
-const error = (error) => {
+error = (error) => {
     locationFeedback.innerHTML = `No se pudo guardar tu ubicación. <i class="fas fa-exclamation-circle"></i>`;
     locationFeedback.classList.add("text-danger");
     console.warn("ERROR(" + error.code + "): " + error.message);
 };
 
-const saveCoordinates = (e) => {
+saveCoordinates = (e) => {
     e.preventDefault();
 
     const options = {
@@ -70,6 +70,7 @@ const saveCoordinates = (e) => {
 const getLocationBtn = document.getElementById("btnLocation");
 getLocationBtn.addEventListener("click", (e) => saveCoordinates(e));
 
+//add phone row
 createInputColumn = ({className, value, disabled, id, name}) => {
     const column = document.createElement('td');
     const input = document.createElement('input');
@@ -195,9 +196,44 @@ Array.from(document.querySelectorAll('.deleteRowButton')).forEach(deleteBtn => {
     deleteBtn.addEventListener('click', (event) => onDeletePhoneRow(event));
 });
 
-document.getElementById('quota_id').addEventListener('change', (e) => {
+//add total price calc based in what amount of quotas the user choose
+const quotasContainer = document.getElementById('quota_id');
+
+quotasContainer.addEventListener('change', (e) => {
     const option = e.target.options[e.target.selectedIndex];
     const quotas = parseInt(option.getAttribute('data-quota'));
     const price = parseFloat(option.getAttribute('data-price'));
     document.getElementById('total').value = price * quotas;
-})
+});
+
+//fetch selected product's quotas
+let BASE_URL = "";
+
+const setBaseUrl = (url) => {
+    BASE_URL = url;
+}
+
+onProductChange = (event) => {
+    const productId = event.target.value;
+    console.log(productId, BASE_URL);
+    
+    fetch(`${BASE_URL}/sales/product/${productId}/quotas`)
+    .then(response => response.json())
+    .then(quotas => {
+        quotasContainer.innerHTML = "";
+
+        quotas.forEach(quota => {
+            const option = document.createElement('option');
+            option.value = quota.id;
+            option.setAttribute('data-quota', quota.quantity);
+            option.setAttribute('data-quota', quota.quota_amount);
+            option.innerText = `${quota.quantity} cuotas | Valor de la cuota: ${quota.quota_amount}`;
+
+            quotasContainer.appendChild(option);
+        });
+
+        quotasContainer.disabled = false;
+    });
+}
+document.querySelectorAll('.products').forEach(product => product.addEventListener('change', onProductChange));
+
