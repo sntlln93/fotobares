@@ -88,37 +88,62 @@
                 <div id="phone-part" class="content" role="tabpanel" aria-labelledby="phone-part-trigger">
                     <div class="card">
                         <div class="card-header">
-                            <h1 class="h4 text-gray-800">Teléfonos</h1>
+                            <h1 class="h4 text-gray-800">
+                                Teléfonos
+                                <button id="addPhone" class="btn btn-sm btn-info">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </h1>
                         </div>
                         <div class="card-body">
-                            <div class="form-row">
-                                <div class="col-md-6 form-group">
-                                    <label for="area_code.0">Característica</label>
-                                    <input type="text" class="form-control" id="area_code.0" name="phones[0][area_code]"
-                                        value="{{ old('phones.0.area_code') }}">
-                                    @error('phones.0.area_code')
-                                    <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-
-                                <div class="col-md-6 form-group">
-                                    <label for="number.0">Número</label>
-                                    <input type="text" class="form-control" id="number.0" name="phones[0][number]"
-                                        value="{{ old('phones.0.number') }}">
-                                    @error('phones.0.number')
-                                    <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="has_whatsapp.0"
-                                            name="phones[0][has_whatsapp]" @if (old('phones.0.has_whatsapp')=='on' )
-                                            checked @endif>
-                                        <label class="form-check-label" for="has_whatsapp.0">Whatsapp</label>
-                                    </div>
-                                </div>
-                            </div>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10%">#</th>
+                                        <th>Característica</th>
+                                        <th>Número</th>
+                                        <th>Whatsapp</th>
+                                        <th>Eliminar</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="phonesContainer">
+                                    <tr>
+                                        <td>
+                                            <input class="form-control order" value="1" type="text" disabled>
+                                        </td>
+                                        <td>
+                                            <input value="{{ old('phones.0.area_code', '380') }}"
+                                                class="form-control @error('phones.0.area_code') invalid-feedback @enderror"
+                                                id="phones.0.area_code" name="phones[][area_code]" type="text">
+                                            @error('phones.0.area_code')
+                                            <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input value="{{ old('phones.0.number') }}"
+                                                class="form-control @error('phones.0.number') invalid-feedback @enderror"
+                                                id="phones.0.number" name="phones[][number]" type="text">
+                                            @error('phones.0.number')
+                                            <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-switch h5">
+                                                <input @if(old('phones.0.has_whatsapp')=='on' ) checked @endif
+                                                    class="custom-control-input" id="phones.0.has_whatsapp"
+                                                    name="phones[][has_whatsapp]" type="checkbox">
+                                                <label class="custom-control-label"
+                                                    for="phones.0.has_whatsapp">Sí</label>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <button class="btn btn-sm btn-danger deleteRowButton" disabled>
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -221,7 +246,7 @@
 
                                         <div class="form-group">
                                             @foreach ($products as $product)
-                                            <input type="radio" class="d-none" name="product_id"
+                                            <input type="radio" class="d-none products" name="product_id"
                                                 id="product.{{ $product->id }}" value="{{ $product->id }}">
                                             <label for="product.{{ $product->id }}" class="radio--container">
                                                 <p class="my-1 radio--title">
@@ -267,9 +292,9 @@
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" id="is_reproduction"
-                                                        name="is_reproduction" @if (old('is_reproduction')=='on' )
-                                                        checked @endif>
+                                                    <input @if (old('is_reproduction')=='on' ) checked @endif
+                                                        class="form-check-input" type="checkbox" id="is_reproduction"
+                                                        name="is_reproduction">
                                                     <label class="form-check-label" for="is_reproduction">Es
                                                         reproducción</label>
                                                 </div>
@@ -291,20 +316,6 @@
                             <h1 class="h4 text-gray-800">Entrega</h1>
                             <div class="form-row mb-2">
                                 <div class="col-12 col-md-6">
-                                    <label for="delivery">Monto de la entrega</label>
-                                    <div class="input-group mb-2">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">$</div>
-                                        </div>
-                                        <input type="number" class="form-control" id="delivery" name="delivery"
-                                            placeholder="Colocá cuánto se abona para la entrega">
-                                    </div>
-                                    @error('delivery')
-                                    <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-
-                                <div class="col-12 col-md-6">
                                     <label for="deliver_date">Día de entrega</label>
                                     <input type="date" class="form-control" id="deliver_date" name="deliver_date"
                                         placeholder="Indicá qué fecha realizas la entrega"
@@ -317,16 +328,22 @@
 
                             <h1 class="h4 mt-5 text-gray-800">Pago</h1>
                             <div class="form-row mb-2">
-                                <div class="col-12 col-md-6">
-                                    <label for="quotaValidation">Cantidad de cuotas</label>
-                                    <input type="number" class="form-control" id="quotaValidation" name="quotas"
-                                        placeholder="Colocá la cantidad de pagos" min="1">
-                                    @error('quotas')
+                                <div class="col-12 col-md-8">
+                                    <label for="quota_id">Cantidad de cuotas</label>
+                                    <select class="custom-select" id="quota_id" name="quota_id" disabled>
+                                        <option></option>
+                                    </select>
+                                    @error('quota_id')
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-12 col-md-4">
+                                    <label for="quotaValidation">Total</label>
+                                    <input class="form-control" id="total" disabled>
+                                </div>
+
+                                <div class="col-12">
                                     <label for="payment_description">Descripción
                                         <i><small>(OPCIONAL)</small></i></label>
                                     <input type="text" class="form-control" id="payment_description"
@@ -377,4 +394,7 @@
 @section('scripts')
 <script src="{{ asset('js/utils/bs-stepper.min.js') }}"></script>
 <script src="{{ asset('js/views/sell/create.js') }}"></script>
+<script>
+    setBaseUrl("{{ env('APP_URL') }}");
+</script>
 @endsection
