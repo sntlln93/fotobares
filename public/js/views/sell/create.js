@@ -226,7 +226,7 @@ onProductChange = (event) => {
             const option = document.createElement('option');
             option.value = quota.id;
             option.setAttribute('data-quota', quota.quantity);
-            option.setAttribute('data-quota', quota.quota_amount);
+            option.setAttribute('data-price', quota.quota_amount);
             option.innerText = `${quota.quantity} cuotas | Valor de la cuota: ${quota.quota_amount}`;
 
             quotasContainer.appendChild(option);
