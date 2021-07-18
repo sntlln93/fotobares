@@ -38,14 +38,6 @@
         </div>
       </li>
     </div>
-
-    <div>
-      <li class="{{ Route::currentRouteName() ==  'home' ? 'nav-item active' : 'nav-item'  }}">
-        <a class="nav-link" href="{{ route('home') }}">
-          <i class="fas fa-home"></i>
-          <span>Inicio</span></a>
-      </li>
-    </div>
   </div>
 
   <!-- Sidebar Toggler (Sidebar) -->
