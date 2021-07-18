@@ -194,3 +194,10 @@ document.getElementById('addPhone').addEventListener('click', (event) => onAddPh
 Array.from(document.querySelectorAll('.deleteRowButton')).forEach(deleteBtn => {
     deleteBtn.addEventListener('click', (event) => onDeletePhoneRow(event));
 });
+
+document.getElementById('quota_id').addEventListener('change', (e) => {
+    const option = e.target.options[e.target.selectedIndex];
+    const quotas = parseInt(option.getAttribute('data-quota'));
+    const price = parseFloat(option.getAttribute('data-price'));
+    document.getElementById('total').value = price * quotas;
+})
