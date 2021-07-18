@@ -9,6 +9,7 @@ use App\Models\Address;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\SaleDetail;
+use App\Models\Quota;
 use Illuminate\Support\Carbon;
 use App\Http\Requests\SellRequest;
 use Illuminate\Support\Facades\DB;
@@ -41,24 +42,25 @@ class SellController extends Controller
             ]);
 
             $product = Product::find($validated['product_id']);
-            $quotas = intval($validated['quotas']);
+            $quota =   Quota::find($validated['quota_id']);
 
-            for ($i = 0; $i < $quotas; $i++) {
-                $now = Carbon::now();
+            $deliver_on = Carbon::parse($validated['deliver_date']);
+            for ($i = 0; $i < $quota->quantity; $i++) {
                 $hour = array_key_exists('hour', $validated) ? $validated['hour'] : null;
+                $due_date = $i == 0 ? $deliver_on->format('Y-m-d') : $deliver_on->year . '-' . $deliver_on->addMonth($i)->month . '-' . $validated['due_date'];
+                
                 Payment::create([
-                    'amount' => ceil($product->price / $quotas),
-                    'due_date' => Carbon::parse($now->year . '-' . $now->month . '-' . $validated['due_date']),
+                    'amount' => $quota->quota_amount,
+                    'due_date' => $due_date,
                     'hour' => $hour,
                     'sale_id' => $sale->id,
                 ]);
             }
 
             SaleDetail::create([
+                'amount' => $quota->quota_amount * $quota->quantity,
                 'color' => $validated['color'],
-                'amount' => $product->amount,
                 'product_id' => $product->id,
-                'amount' => $product->price,
                 'sale_id' => $sale->id
             ]);
 
@@ -77,13 +79,12 @@ class SellController extends Controller
                 Phone::create([
                     'area_code' => $phone['area_code'],
                     'number' => $phone['number'],
-                    'has_whatsapp' => array_key_exists('has_whatsapp', $phone) ?? true,
+                    'has_whatsapp' => array_key_exists('has_whatsapp', $phone) ?? false,
                     'phoneable_id' => $client->id,
                     'phoneable_type' => get_class($client)
                 ]);
             }
         });
-
         return redirect()->route('sales.index');
     }
 }

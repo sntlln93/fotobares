@@ -47,7 +47,7 @@
             </div>
         </div>
 
-        <form action="{{ route('sales.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('sales.store') }}" method="POST" enctype="multipart/form-data" novalidate>
             @csrf
             <div class="bs-stepper-content">
                 <div id="client-part" class="content" role="tabpanel" aria-labelledby="client-part-trigger">
@@ -59,8 +59,8 @@
 
                             <div class="form-group">
                                 <label for="lastname">Apellido</label>
-                                <input type="text" class="form-control" name="lastname" id="lastname"
-                                    value="{{ old('lastname') }}">
+                                <input type="text" class="form-control @error('lastname') is-invalid @enderror"
+                                    name="lastname" id="lastname" value="{{ old('lastname') }}">
                                 @error('lastname')
                                 <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -68,7 +68,8 @@
 
                             <div class="form-group">
                                 <label for="name">Nombre</label>
-                                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                                    id="name" value="{{ old('name') }}">
                                 @error('name')
                                 <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -76,7 +77,8 @@
 
                             <div class="form-group">
                                 <label for="dni">N° de documento</label>
-                                <input type="text" class="form-control" name="dni" id="dni" value="{{ old('dni') }}">
+                                <input type="text" class="form-control @error('dni') is-invalid @enderror" name="dni"
+                                    id="dni" value="{{ old('dni') }}">
                                 @error('dni')
                                 <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -113,25 +115,20 @@
                                         </td>
                                         <td>
                                             <input value="{{ old('phones.0.area_code', '380') }}"
-                                                class="form-control @error('phones.0.area_code') invalid-feedback @enderror"
-                                                id="phones.0.area_code" name="phones[][area_code]" type="text">
-                                            @error('phones.0.area_code')
-                                            <small class="text-danger">{{ $message }}</small>
-                                            @enderror
+                                                class="form-control @error('phones.0.area_code') is-invalid @enderror"
+                                                id="phones.0.area_code" name="phones[0][area_code]" type="text">
                                         </td>
                                         <td>
                                             <input value="{{ old('phones.0.number') }}"
-                                                class="form-control @error('phones.0.number') invalid-feedback @enderror"
-                                                id="phones.0.number" name="phones[][number]" type="text">
-                                            @error('phones.0.number')
-                                            <small class="text-danger">{{ $message }}</small>
-                                            @enderror
+                                                class="form-control @error('phones.0.number') is-invalid @enderror"
+                                                id="phones.0.number" name="phones[0][number]" type="text">
+
                                         </td>
                                         <td>
                                             <div class="custom-control custom-switch h5">
                                                 <input @if(old('phones.0.has_whatsapp')=='on' ) checked @endif
                                                     class="custom-control-input" id="phones.0.has_whatsapp"
-                                                    name="phones[][has_whatsapp]" type="checkbox">
+                                                    name="phones[0][has_whatsapp]" type="checkbox">
                                                 <label class="custom-control-label"
                                                     for="phones.0.has_whatsapp">Sí</label>
                                             </div>
@@ -143,6 +140,30 @@
                                         </td>
                                     </tr>
                                 </tbody>
+                                @if($errors->first('phones.0.area_code') OR $errors->first('phones.0.number'))
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5">
+                                            <ul class="alert alert-danger">
+                                                @error('phones.0.area_code')
+                                                <li>
+                                                    <small class="text-danger">
+                                                        {{ $message }}
+                                                    </small>
+                                                </li>
+                                                @enderror
+                                                @error('phones.0.number')
+                                                <li>
+                                                    <small class="text-danger">
+                                                        {{ $message }}
+                                                    </small>
+                                                </li>
+                                                @enderror
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                                @endif
                             </table>
                         </div>
                     </div>
@@ -157,8 +178,10 @@
                             <div class="form-row">
                                 <div class="col-md-5 form-group">
                                     <label for="address[neighborhood]">Barrio</label>
-                                    <input type="text" class="form-control" id="address[neighborhood]"
-                                        name="address[neighborhood]" value="{{ old('address.neighborhood') }}">
+                                    <input type="text"
+                                        class="form-control @error('address.neighborhood') is-invalid @enderror"
+                                        id="address[neighborhood]" name="address[neighborhood]"
+                                        value="{{ old('address.neighborhood') }}">
                                     @error('address.neighborhood')
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
@@ -166,8 +189,9 @@
 
                                 <div class="col-md-5 form-group">
                                     <label for="address[street]">Calle</label>
-                                    <input type="text" class="form-control" id="address[street]" name="address[street]"
-                                        value="{{ old('address.street') }}">
+                                    <input type="text"
+                                        class="form-control @error('address.street') is-invalid @enderror"
+                                        id="address[street]" name="address[street]" value="{{ old('address.street') }}">
                                     @error('address.street')
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
@@ -175,8 +199,9 @@
 
                                 <div class="col-md-2 form-group">
                                     <label for="address[number]">Número</label>
-                                    <input type="text" class="form-control" id="address[number]" name="address[number]"
-                                        value="{{ old('address.number') }}">
+                                    <input type="text"
+                                        class="form-control @error('address.number') is-invalid @enderror"
+                                        id="address[number]" name="address[number]" value="{{ old('address.number') }}">
                                     @error('address.number')
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
@@ -185,7 +210,7 @@
                                 <div class="col-md-6 form-group">
                                     <label for="address[indications]">Indicaciones</label>
                                     <textarea name="address[indications]" id="address[indications]" rows="2"
-                                        class="form-control">{{ old('address.indications') }}</textarea>
+                                        class="form-control @error('address.indications') is-invalid @enderror">{{ old('address.indications') }}</textarea>
                                     @error('address.indications')
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
@@ -194,7 +219,7 @@
                                 <div class="col-md-6 form-group">
                                     <label for="address[details]">Detalles de la casa</label>
                                     <textarea name="address[details]" id="address[details]" rows="2"
-                                        class="form-control">{{ old('address.details') }}</textarea>
+                                        class="form-control @error('address.details') is-invalid @enderror">{{ old('address.details') }}</textarea>
                                     @error('address.details')
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
@@ -210,7 +235,8 @@
                                         <label class="custom-file-label" for="house_photo">
                                             0 fotos seleccionadas
                                         </label>
-                                        <input type="file" name="house_photo" class="custom-file-input"
+                                        <input type="file" name="house_photo"
+                                            class="custom-file-input @error('house_photo') is-invalid @enderror"
                                             id="house_photo">
                                     </div>
                                     @error('house_photo')
@@ -219,7 +245,7 @@
                                 </div>
 
                                 <div class="col form-group">
-                                    <label for="location">Detalles de la casa</label><br>
+                                    <label for="location">Ubicación de la casa</label><br>
                                     <div id="location w-100">
                                         <input type="hidden" name="address[lat]" id="latInput">
                                         <input type="hidden" name="address[lon]" id="lonInput">
@@ -293,8 +319,8 @@
                                             <div class="form-group">
                                                 <div class="form-check form-check-inline">
                                                     <input @if (old('is_reproduction')=='on' ) checked @endif
-                                                        class="form-check-input" type="checkbox" id="is_reproduction"
-                                                        name="is_reproduction">
+                                                        class="form-check-input @error('is_reproduction') is-invalid @enderror"
+                                                        type="checkbox" id="is_reproduction" name="is_reproduction">
                                                     <label class="form-check-label" for="is_reproduction">Es
                                                         reproducción</label>
                                                 </div>
@@ -317,7 +343,8 @@
                             <div class="form-row mb-2">
                                 <div class="col-12 col-md-6">
                                     <label for="deliver_date">Día de entrega</label>
-                                    <input type="date" class="form-control" id="deliver_date" name="deliver_date"
+                                    <input type="date" class="form-control @error('deliver_date') is-invalid @enderror"
+                                        id="deliver_date" name="deliver_date"
                                         placeholder="Indicá qué fecha realizas la entrega"
                                         min="{{ Carbon\Carbon::tomorrow()->format('Y-m-d') }}">
                                     @error('deliver_date')
@@ -330,7 +357,8 @@
                             <div class="form-row mb-2">
                                 <div class="col-12 col-md-8">
                                     <label for="quota_id">Cantidad de cuotas</label>
-                                    <select class="custom-select" id="quota_id" name="quota_id" disabled>
+                                    <select class="custom-select @error('quota_id') is-invalid @enderror" id="quota_id"
+                                        name="quota_id" disabled>
                                         <option></option>
                                     </select>
                                     @error('quota_id')
@@ -346,8 +374,9 @@
                                 <div class="col-12">
                                     <label for="payment_description">Descripción
                                         <i><small>(OPCIONAL)</small></i></label>
-                                    <input type="text" class="form-control" id="payment_description"
-                                        name="payment_description"
+                                    <input type="text"
+                                        class="form-control @error('payment_description') is-invalid @enderror"
+                                        id="payment_description" name="payment_description"
                                         placeholder="Ingresá información referida a los pagos">
                                 </div>
                             </div>
@@ -356,7 +385,8 @@
                             <div class="form-row mb-2">
                                 <div class="col-12 col-md-6">
                                     <label for="dateValidation">Día aproximado de cobro</label>
-                                    <input type="number" class="form-control" id="dateValidation" name="due_date"
+                                    <input type="number" class="form-control @error('due_date') is-invalid @enderror"
+                                        id="dateValidation" name="due_date"
                                         placeholder="Indicá, aproximadamente, qué día del mes tenés que pasar a cobrar"
                                         min="1" max="28">
                                     @error('due_date')
@@ -366,7 +396,8 @@
 
                                 <div class="col-12 col-md-6">
                                     <label for="hourValidation">Hora aproximada <i><small>(OPCIONAL)</small></i></label>
-                                    <input type="text" class="form-control" id="hourValidation" name="hour"
+                                    <input type="text" class="form-control @error('hour') is-invalid @enderror"
+                                        id="hourValidation" name="hour"
                                         placeholder="La hora a la que más probablemente encuentres a tu cliente en casa">
                                 </div>
                             </div>

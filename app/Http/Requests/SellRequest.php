@@ -29,8 +29,8 @@ class SellRequest extends FormRequest
             "dni" => ['required', 'numeric'],
 
             "phones" => ['required'],
-            "phones.*.area_code" => ['required', 'numeric'],
-            "phones.*.number" => ['required', 'numeric'],
+            "phones.*.area_code" => ['required', 'numeric', 'digits_between:2,4'],
+            "phones.*.number" => ['required', 'numeric', 'digits_between:6,9'],
             "phones.*_has_whatsapp" => ['nullable'],
 
             "address" => ['required'],
@@ -46,12 +46,41 @@ class SellRequest extends FormRequest
             "product_id" => ['required', 'numeric'],
             "color" => ['required', 'alpha'],
             "is_reproduction" => ['nullable'],
-            "delivery" => ['required', 'numeric'],
             "deliver_date" => ['required', 'date'],
-            "quotas" => ['required', 'numeric'],
+            "quota_id" => ['required'],
             "payment_description" => ['nullable'],
             "due_date" => ['required'],
             "hour" => ['nullable'],
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            "lastname" => 'apellido',
+            "name" => 'nombre',
+
+            "phones" => 'telefonos',
+            "phones.*.area_code" => 'característica',
+            "phones.*.number" => 'número',
+
+            "address" => 'dirección',
+            "address.neighborhood" => 'barrio',
+            "address.street" => 'calle',
+            "address.number" => 'número o altura',
+            "address.indications" => 'indicaciones',
+            "address.details" => 'detalles de la casa',
+            "address.lat" => 'latitud',
+            "address.lon" => 'longitud',
+            "house_photo" => 'foto de la casa',
+
+            "product_id" => 'producto',
+            "is_reproduction" => 'es reproducción',
+            "deliver_date" => 'fecha de entrega',
+            "quota_id" => 'cantidad de cuotas',
+            "payment_description" => 'descripción del pago',
+            "due_date" => 'fecha de pago',
+            "hour" => 'hora de visitas',
         ];
     }
 }
