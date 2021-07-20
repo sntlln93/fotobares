@@ -93,7 +93,7 @@ createToggleSwitch = (index) => {
     const toggleSwitch = document.createElement('input');
     toggleSwitch.className = "custom-control-input";
     toggleSwitch.id = `phones.${index}.has_whatsapp`;
-    toggleSwitch.name = `phones[][has_whatsapp]`;
+    toggleSwitch.name = `phones[${index + 1}][has_whatsapp]`;
     toggleSwitch.type = "checkbox";
     
     div.appendChild(toggleSwitch);
@@ -138,7 +138,7 @@ createPhoneRow = (phonesCount) => {
         disabled: false,
         id: `phones.${phonesCount}.area_code`,
         className: 'form-control',
-        name: `phones[][area_code]`
+        name: `phones[${phonesCount}][area_code]`
     }));
 
     phoneRow.appendChild(createInputColumn({
@@ -146,7 +146,7 @@ createPhoneRow = (phonesCount) => {
         disabled: false,
         id: `phones.${phonesCount}.number`,
         className: 'form-control',
-        name: `phones[][number]`
+        name: `phones[${phonesCount}][number]`
     }));
 
     phoneRow.appendChild(createToggleSwitch(phonesCount));

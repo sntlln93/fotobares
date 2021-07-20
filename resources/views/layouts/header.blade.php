@@ -21,8 +21,13 @@
 
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
 
-                <h6 class="dropdown-header">Cuenta</h6>
+                <h6 class="dropdown-header">Productos</h6>
+                <a class="dropdown-item" href="{{ route('products.index') }}">
+                    <i class="fas fa-boxes fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Ver productos
+                </a>
 
+                <h6 class="dropdown-header">Cuenta</h6>
                 <a class="dropdown-item" href="{{ route('password.form') }}">
                     <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
                     Cambiar contraseña
