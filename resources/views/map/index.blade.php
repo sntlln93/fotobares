@@ -75,7 +75,7 @@
 
         const collecBtn = document.createElement('a');
         collecBtn.className = "btn btn-sm btn-primary my-2";
-        collecBtn.href = `${BASE_URL}/quotas/${client.id}`;
+        collecBtn.href = `${BASE_URL}/payments/${client.id}`;
         collecBtn.innerHTML = '<i class="fas fa-dollar-sign mr-1"></i> Cobrar';
         actionsContainer.appendChild(collecBtn);
         container.appendChild(actionsContainer);

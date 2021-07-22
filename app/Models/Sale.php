@@ -8,6 +8,7 @@ class Sale extends Model
 {
     protected $guarded = [];
     protected $dates = ['deliver_on', 'delivered_at'];
+    protected $appends = ['next_payment_to_collect'];
 
     public function client()
     {
@@ -32,5 +33,10 @@ class Sale extends Model
     public function getDeliveredAtAttribute($value)
     {
         return $value ? $value : false;
+    }
+
+    public function getNextPaymentToCollectAttribute()
+    {
+        return $this->payments->whereNull('paid_at')->first();
     }
 }

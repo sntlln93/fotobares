@@ -61,7 +61,7 @@
                         </a>
                         @endif
                         @if ($payment->delivered_at == false)
-                        <a href="{{ route('collect.index', ['sale' => $payment->sale_id]) }}" class="dropdown-item">
+                        <a href="{{ route('collect', ['sale' => $payment->sale_id]) }}" class="dropdown-item">
                             <div class="btn btn-sm btn-primary">
                                 <i class="fas fa-dollar-sign"></i>
                             </div>
