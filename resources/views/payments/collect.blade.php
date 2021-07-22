@@ -47,9 +47,9 @@
                 </div>
             </form>
             @else
-            <p>
+            <div class="h-100 d-flex flex-column justify-content-around align-items-center">
                 Esta venta no tiene pagos pendientes.
-            </p>
+            </div>
             @endif
         </div>
     </div>
