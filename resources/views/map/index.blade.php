@@ -43,6 +43,8 @@
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{ env('MAP_KEY') }}&callback=initMap" async defer></script>
 <script>
+    @if($clients->count() > 0)
+        
     setClientContent = (client) => {
         const container = document.createElement('div');
 
@@ -161,5 +163,6 @@
         }
     }
 
+@endif
 </script>
 @endsection
