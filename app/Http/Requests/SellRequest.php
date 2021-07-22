@@ -24,8 +24,8 @@ class SellRequest extends FormRequest
     public function rules()
     {
         return [
-            "lastname" => ['required', 'alpha'],
-            "name" => ['required', 'alpha'],
+            "lastname" => ['required', 'regex:/^[a-zA-Z\s]*$/'],
+            "name" => ['required', 'regex:/^[a-zA-Z\s]*$/'],
             "dni" => ['required', 'numeric'],
 
             "phones" => ['required'],
