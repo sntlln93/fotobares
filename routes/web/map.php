@@ -1,6 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Client;
 
-Route::get('/{client}', fn (Client $client) => $client->address)->name('map.show');
+Route::get('/{client}', [App\Http\Controllers\web\map\ShowClientLocation::class, 'show'])->name('map.show');
+Route::get('/', [App\Http\Controllers\web\map\ShowClientsLocation::class, 'index'])->name('map.index');
