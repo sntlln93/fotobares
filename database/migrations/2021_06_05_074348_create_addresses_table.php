@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('neighborhood');
             $table->string('street');
-            $table->string('number');
+            $table->string('number')->nullable();
             $table->string('indications')->nullable();
             $table->string('details')->nullable();
             $table->string('photo')->nullable();

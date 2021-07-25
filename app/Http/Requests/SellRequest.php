@@ -36,7 +36,7 @@ class SellRequest extends FormRequest
             "address" => ['required'],
             "address.neighborhood" => ['required'],
             "address.street" => ['required'],
-            "address.number" => ['required', 'numeric'],
+            "address.number" => ['nullable', 'numeric'],
             "address.indications" => ['required'],
             "address.details" => ['required'],
             "address.lat" => ['nullable'],

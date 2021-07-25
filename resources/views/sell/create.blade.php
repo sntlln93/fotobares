@@ -198,13 +198,18 @@
                                 </div>
 
                                 <div class="col-md-2 form-group">
-                                    <label for="address[number]">Número</label>
+                                    <label for="address[number]">
+                                        Número
+                                        <small class="font-italic font-weight-light text-muted">
+                                            (opcional) </small>
+                                    </label>
                                     <input type="text"
                                         class="form-control @error('address.number') is-invalid @enderror"
                                         id="address[number]" name="address[number]" value="{{ old('address.number') }}">
                                     @error('address.number')
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
+                                    <small>Deja este campo en blanco si la casa no tiene numeración</small>
                                 </div>
 
                                 <div class="col-md-6 form-group">
