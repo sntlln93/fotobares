@@ -200,8 +200,6 @@
                                 <div class="col-md-2 form-group">
                                     <label for="address[number]">
                                         Número
-                                        <small class="font-italic font-weight-light text-muted">
-                                            (opcional) </small>
                                     </label>
                                     <input type="text"
                                         class="form-control @error('address.number') is-invalid @enderror"
@@ -213,7 +211,11 @@
                                 </div>
 
                                 <div class="col-md-6 form-group">
-                                    <label for="address[indications]">Indicaciones</label>
+                                    <label for="address[indications]">
+                                        Indicaciones
+                                        <small class="font-italic font-weight-light text-muted">
+                                            (opcional) </small>
+                                    </label>
                                     <textarea name="address[indications]" id="address[indications]" rows="2"
                                         class="form-control @error('address.indications') is-invalid @enderror">{{ old('address.indications') }}</textarea>
                                     @error('address.indications')
@@ -222,7 +224,11 @@
                                 </div>
 
                                 <div class="col-md-6 form-group">
-                                    <label for="address[details]">Detalles de la casa</label>
+                                    <label for="address[details]">
+                                        Detalles de la casa
+                                        <small class="font-italic font-weight-light text-muted">
+                                            (opcional) </small>
+                                    </label>
                                     <textarea name="address[details]" id="address[details]" rows="2"
                                         class="form-control @error('address.details') is-invalid @enderror">{{ old('address.details') }}</textarea>
                                     @error('address.details')
