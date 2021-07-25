@@ -13,7 +13,7 @@
 
 <br>
 <h1 class="h4 text-gray-800">Valor de las cuotas</h1>
-<table class="table table-bordered">
+<table class="table table-responsive table-bordered">
     <thead>
         <tr>
             <th>Cantidad de cuotas</th>
