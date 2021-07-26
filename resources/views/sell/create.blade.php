@@ -7,7 +7,7 @@
 
 <div class="bs-stepper">
     <div class="overflow-hidden">
-        <div class="bs-stepper-header justify-content-between" role="tablist">
+        <div class="bs-stepper-header justify-content-between mb-2" role="tablist">
             <!-- your steps here -->
             <div class="step" data-target="#client-part">
                 <button type="button" class="step-trigger" role="tab" aria-controls="client-part"
@@ -96,22 +96,18 @@
                             </button>
                         </h1>
                     </div>
-                    <div class="card-body">
-                        <table class="table table-responsive table-bordered">
+                    <div class="pt-4 pb-2 pl-2 table-responsive">
+                        <table class="table table-bordered mx-0">
                             <thead>
                                 <tr>
-                                    <th style="width: 10%">#</th>
-                                    <th style="width: 10%">Característica</th>
-                                    <th>Número</th>
-                                    <th>Whatsapp</th>
-                                    <th>Eliminar</th>
+                                    <th class="text-center">Característica</th>
+                                    <th class="text-center text-nowrap">Número sin característica</th>
+                                    <th class="text-center"><i class="fab fa-whatsapp"></i></th>
+                                    <th class="text-center"><i class="fas fa-trash"></i></th>
                                 </tr>
                             </thead>
                             <tbody id="phonesContainer">
                                 <tr>
-                                    <td>
-                                        <input class="form-control order" value="1" type="text" disabled>
-                                    </td>
                                     <td>
                                         <input value="{{ old('phones.0.area_code', '380') }}"
                                             class="form-control @error('phones.0.area_code') is-invalid @enderror"
@@ -119,7 +115,7 @@
                                     </td>
                                     <td>
                                         <input value="{{ old('phones.0.number') }}"
-                                            class="form-control @error('phones.0.number') is-invalid @enderror"
+                                            class="form-control w-100 @error('phones.0.number') is-invalid @enderror"
                                             id="phones.0.number" name="phones[0][number]" type="text">
 
                                     </td>
@@ -128,7 +124,7 @@
                                             <input @if(old('phones.0.has_whatsapp')=='on' ) checked @endif
                                                 class="custom-control-input" id="phones.0.has_whatsapp"
                                                 name="phones[0][has_whatsapp]" type="checkbox">
-                                            <label class="custom-control-label" for="phones.0.has_whatsapp">Sí</label>
+                                            <label class="custom-control-label" for="phones.0.has_whatsapp"></label>
                                         </div>
                                     </td>
                                     <td class="text-center">
