@@ -8,7 +8,6 @@ class Sale extends Model
 {
     protected $guarded = [];
     protected $dates = ['deliver_on', 'delivered_at'];
-    protected $appends = ['next_payment_to_collect'];
 
     public function client()
     {

@@ -45,16 +45,21 @@ class SellController extends Controller
             $quota =   Quota::find($validated['quota_id']);
 
             $deliver_on = Carbon::parse($validated['deliver_date']);
+            
+            $previous_payment = null;
             for ($i = 0; $i < $quota->quantity; $i++) {
                 $hour = array_key_exists('hour', $validated) ? $validated['hour'] : null;
                 $due_date = $i == 0 ? $deliver_on->format('Y-m-d') : $deliver_on->year . '-' . $deliver_on->addMonth($i)->month . '-' . $validated['due_date'];
                 
-                Payment::create([
+                $payment = Payment::create([
                     'amount' => $quota->quota_amount,
                     'due_date' => $due_date,
                     'hour' => $hour,
                     'sale_id' => $sale->id,
+                    'previous_id' => $previous_payment
                 ]);
+
+                $previous_payment = $payment->id;
             }
 
             SaleDetail::create([
@@ -67,7 +72,7 @@ class SellController extends Controller
             if(array_key_exists('house_photo', $validated)) {
                 $photo_path = $validated['house_photo']->storePublicly('addresses', 'public');
             }
-            dd($photo_path);
+
             Address::create([
                 'neighborhood' => $validated['address']['neighborhood'],
                 'street' => $validated['address']['street'],

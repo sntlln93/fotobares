@@ -19,6 +19,10 @@ return new class extends Migration
             $table->date('paid_at')->nullable();
             $table->date('due_date');
             $table->string('hour')->nullable();
+
+            $table->unsignedBigInteger('previous_id')->nullable();
+            $table->foreign('previous_id')->references('id')->on('payments');
+
             $table->timestamps();
         });
     }

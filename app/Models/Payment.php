@@ -19,6 +19,16 @@ class Payment extends Model
         return $this->belongsTo(Employee::class, 'collector_id');
     }
 
+    public function previous()
+    {
+        return $this->belongsTo(Payment::class, 'previous_id');
+    }
+
+    public function next()
+    {
+        return $this->hasOne(Payment::class, 'previous_id');
+    }
+
     public function getHourAttribute($value)
     {
         return $value ? $value : 'Sin hora de visita registrada';
