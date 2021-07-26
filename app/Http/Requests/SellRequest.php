@@ -24,8 +24,8 @@ class SellRequest extends FormRequest
     public function rules()
     {
         return [
-            "lastname" => ['required', 'regex:/^[a-zA-Z\s]*$/'],
-            "name" => ['required', 'regex:/^[a-zA-Z\s]*$/'],
+            "lastname" => ['required', 'regex:'.$this->regex()],
+            "name" => ['required', 'regex:'.$this->regex()],
             "dni" => ['required', 'numeric'],
 
             "phones" => ['required'],
@@ -82,5 +82,10 @@ class SellRequest extends FormRequest
             "due_date" => 'fecha de pago',
             "hour" => 'hora de visitas',
         ];
+    }
+
+    private function regex()
+    {
+        return '/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$/';
     }
 }
