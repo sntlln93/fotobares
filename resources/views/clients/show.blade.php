@@ -95,8 +95,9 @@
     <div class="col-sm-12">
         <div class="card my-4">
             <div class="card-header">
-                Datos personales <a class="btn btn-link text-warning"
-                    href="{{ url('clients/'.$client->id.'/edit') }}"><i class="fas fa-edit"></i></a>
+                Datos personales
+                {{-- <a class="btn btn-link text-warning"
+                    href="{{ url('clients/'.$client->id.'/edit') }}"><i class="fas fa-edit"></i></a> --}}
             </div>
             <div class="card-body">
                 <p><b>Nombres:</b> {{ $client->name }}</p>
@@ -115,10 +116,9 @@
         <div class="card">
             <div class="card-header">
                 Dirección
-                <a class="btn btn-link text-primary" href="{{ url('address/1/create') }}"><i
-                        class="fas fa-plus"></i></a>
             </div>
             <div class="card-body">
+                <img src="{{ asset('storage/'.$client->address->photo) }}" alt="">
                 <p><b>Localidad:</b> {{ $client->address->city }}</p>
                 <p><b>Barrio:</b> {{ $client->address->neighborhood }}</p>
                 <p><b>Calle:</b> {{ $client->address->street }} al {{ $client->address->number ?? "S/N" }}</p>
@@ -134,8 +134,9 @@
     <div class="col-sm-6">
         <div class="card my-4">
             <div class="card-header">
-                Teléfono <a class="btn btn-link text-warning" href="{{ url('phone/'.$phone->id.'/edit') }}"><i
-                        class="fas fa-edit"></i></a>
+                Teléfono
+                {{-- <a class="btn btn-link text-warning" href="{{ url('phone/'.$phone->id.'/edit') }}"><i
+                    class="fas fa-edit"></i></a> --}}
             </div>
             <div class="card-body">
                 <p><b>Número:</b> {{ $phone->full_number }}</p>
