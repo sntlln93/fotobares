@@ -139,7 +139,7 @@
                     class="fas fa-edit"></i></a> --}}
             </div>
             <div class="card-body">
-                <p><b>Número:</b> {{ $phone->full_number }}</p>
+                <p><b>Número:</b> {{ $phone->formatted_number }}</p>
                 <p><b>Whatsapp:</b> {{ $phone->has_whatsapp ? "Sí" : "No" }}</p>
                 @if($phone->has_whatsapp)
                 <a target="_blank"

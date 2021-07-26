@@ -13,6 +13,11 @@ class Phone extends Model
         return '(' . $this->area_code . ') ' . $this->number;
     }
 
+    public function getFullNumberAttribute()
+    {
+        return $this->area_code.$this->number;
+    }
+
     public function phoneable()
     {
         return $this->morphTo();
