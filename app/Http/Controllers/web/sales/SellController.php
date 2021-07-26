@@ -64,10 +64,10 @@ class SellController extends Controller
                 'sale_id' => $sale->id
             ]);
 
-            dd($validated);
             if(array_key_exists('house_photo', $validated)) {
                 $photo_path = $validated['house_photo']->storePublicly('addresses', 'public');
             }
+            dd($photo_path);
             Address::create([
                 'neighborhood' => $validated['address']['neighborhood'],
                 'street' => $validated['address']['street'],
