@@ -240,7 +240,7 @@
                                     </label>
                                     <input type="file" name="house_photo"
                                         class="custom-file-input @error('house_photo') is-invalid @enderror"
-                                        id="house_photo" accept="image/jpeg, jpg">
+                                        id="house_photo" accept="image/jpeg, jpg" capture="camera">
                                 </div>
                                 @error('house_photo')
                                 <small class="text-danger">{{ $message }}</small>
