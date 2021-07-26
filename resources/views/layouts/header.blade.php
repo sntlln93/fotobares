@@ -10,6 +10,13 @@
 
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('sales-without-photos') }}" id="userDropdown">
+                <i class="fas fa-image fa-2x"></i><sup class="badge badge-danger">2</sup>
+            </a>
+        </li>
+
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
