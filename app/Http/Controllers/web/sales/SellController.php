@@ -64,6 +64,10 @@ class SellController extends Controller
                 'sale_id' => $sale->id
             ]);
 
+            if(array_key_exists('house_photo', $validated)) {
+                $photo_path = $validated['house_photo']->store('addresses');
+            }
+
             Address::create([
                 'neighborhood' => $validated['address']['neighborhood'],
                 'street' => $validated['address']['street'],
@@ -72,6 +76,7 @@ class SellController extends Controller
                 'details' => $validated['address']['details'],
                 'lat' => $validated['address']['lat'],
                 'lon' => $validated['address']['lon'],
+                'photo' => $photo_path ?? null,
                 'client_id' => $client->id
             ]);
 
