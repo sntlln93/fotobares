@@ -45,7 +45,8 @@
                     <div class="form-group col-md-6">
                         <label for="amount">Monto</label>
                         <input type="number" class="form-control" value="{{ $sale->nextPaymentToCollect->amount }}"
-                            name="amount">
+                            name="amount" @if(! $sale->nextPaymentToCollect->next)
+                        max="{{ $sale->nextPaymentToCollect->amount }}" @endif>
                     </div>
 
                     <div class="form-group col-md-6">

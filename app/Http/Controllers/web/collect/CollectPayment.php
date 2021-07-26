@@ -31,9 +31,19 @@ class CollectPayment extends Controller
             
             if( $current_payment_amount != $new_payment_amount) {
                 $nextPayment = $payment->next;
-                $balancedAmount = $nextPayment->amount + ($current_payment_amount - $new_payment_amount);
+                $balance = $current_payment_amount - $new_payment_amount;
                 
-                $nextPayment->update([ 'amount' => $balancedAmount ]);
+                $nextPayment 
+                    ? $nextPayment->update([ 
+                        'amount' => $nextPayment->amount + $balance,
+                    ])
+                    : Payment::create([
+                        'amount' => $balance,
+                        'due_date' => $payment->due_date,
+                        'hour' => $payment->hour,
+                        'sale_id' => $payment->sale_id,
+                        'previous_id' => $payment->id
+                    ]);
             }
         });
 
