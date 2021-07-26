@@ -38,6 +38,15 @@
         heading.className = "h4 text-gray-800";
         heading.innerText = client.name;
         container.appendChild(heading);
+        
+        if(client.address.photo) {
+            const addressImg = document.createElement('img');
+            addressImg.src = `${BASE_URL}/storage/${client.address.photo}`;
+            addressImg.style.width = "200px";
+            addressImg.style.height = "100px";
+            addressImg.style.objectFit = "contain";
+            container.appendChild(addressImg);
+        }
 
         const addressTitle = document.createElement('p');
         addressTitle.className = "mb-0 font-weight-bold"
@@ -123,7 +132,8 @@
                         address: {
                             street: "{{ $client->address->street }}",
                             number: "{{ $client->address->number ?? 'S/N' }}",
-                            indications: "{{ $client->address->indications }}"
+                            indications: "{{ $client->address->indications }}",
+                            photo: "{{ $client->address->photo }}"
                         }
                     })
                 });
