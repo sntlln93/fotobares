@@ -65,7 +65,7 @@ class SellController extends Controller
             ]);
 
             if(array_key_exists('house_photo', $validated)) {
-                $photo_path = $validated['house_photo']->store('addresses');
+                $photo_path = $validated['house_photo']->storePublicly('addresses', 'public');
             }
 
             Address::create([
