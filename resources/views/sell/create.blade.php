@@ -76,7 +76,7 @@
 
                         <div class="form-group">
                             <label for="dni">N° de documento</label>
-                            <input type="text" class="form-control @error('dni') is-invalid @enderror" name="dni"
+                            <input type="number" class="form-control @error('dni') is-invalid @enderror" name="dni"
                                 id="dni" value="{{ old('dni') }}">
                             @error('dni')
                             <small class="text-danger">{{ $message }}</small>
@@ -111,12 +111,12 @@
                                     <td>
                                         <input value="{{ old('phones.0.area_code', '380') }}"
                                             class="form-control @error('phones.0.area_code') is-invalid @enderror"
-                                            id="phones.0.area_code" name="phones[0][area_code]" type="text">
+                                            id="phones.0.area_code" name="phones[0][area_code]" type="number">
                                     </td>
                                     <td>
                                         <input value="{{ old('phones.0.number') }}"
                                             class="form-control w-100 @error('phones.0.number') is-invalid @enderror"
-                                            id="phones.0.number" name="phones[0][number]" type="text">
+                                            id="phones.0.number" name="phones[0][number]" type="number">
 
                                     </td>
                                     <td>
@@ -194,7 +194,7 @@
                                 <label for="address[number]">
                                     Número
                                 </label>
-                                <input type="text" class="form-control @error('address.number') is-invalid @enderror"
+                                <input type="number" class="form-control @error('address.number') is-invalid @enderror"
                                     id="address[number]" name="address[number]" value="{{ old('address.number') }}">
                                 @error('address.number')
                                 <small class="text-danger">{{ $message }}</small>
