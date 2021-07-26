@@ -67,7 +67,6 @@ class SellController extends Controller
             if(array_key_exists('house_photo', $validated)) {
                 $photo_path = $validated['house_photo']->storePublicly('addresses', 'public');
             }
-
             Address::create([
                 'neighborhood' => $validated['address']['neighborhood'],
                 'street' => $validated['address']['street'],
@@ -79,6 +78,7 @@ class SellController extends Controller
                 'photo' => $photo_path ?? null,
                 'client_id' => $client->id
             ]);
+            dd($photo_path);
 
             foreach ($validated['phones'] as $phone) {
                 Phone::create([
