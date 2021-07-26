@@ -235,12 +235,12 @@
                                         (opcional) </small>
                                 </label>
                                 <div class="custom-file">
-                                    <label class="custom-file-label" for="house_photo">
+                                    <label class="custom-file-label" for="photo">
                                         0 fotos seleccionadas
                                     </label>
                                     <input type="file" name="house_photo"
                                         class="custom-file-input @error('house_photo') is-invalid @enderror"
-                                        id="house_photo">
+                                        id="house_photo" accept="image/jpeg, jpg">
                                 </div>
                                 @error('house_photo')
                                 <small class="text-danger">{{ $message }}</small>

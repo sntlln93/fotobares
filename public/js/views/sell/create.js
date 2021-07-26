@@ -243,3 +243,10 @@ onProductChange = (event) => {
 document
     .querySelectorAll(".products")
     .forEach((product) => product.addEventListener("change", onProductChange));
+
+const housePhotoInput = document.getElementById("house_photo");
+
+housePhotoInput.addEventListener("change", () => {
+    const label = document.querySelector("label[for=photo]");
+    label.innerText = `${housePhotoInput.files.length} foto seleccionada`;
+});
