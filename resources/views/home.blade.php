@@ -79,9 +79,9 @@
                 </div>
             </li>
             @empty
-            <div class="h-100 d-flex flex-column justify-content-around align-items-center">
+            <li class="list-group-item">
                 No hay cuotas por cobrar.
-            </div>
+            </li>
             @endforelse
         </ul>
     </div>
