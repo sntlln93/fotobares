@@ -25,6 +25,8 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::share('details_without_photo', (new GetSaleDetailsWithoutPhoto)->get());
+        view()->composer('layouts.header', function ($view) {
+            $view->with('details_without_photo', (new GetSaleDetailsWithoutPhoto)->get()->count());
+        });
     }
 }

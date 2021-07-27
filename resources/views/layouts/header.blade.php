@@ -13,8 +13,7 @@
 
         <li class="nav-item">
             <a class="nav-link" href="{{ route('without-photo.index') }}">
-                <i class="fas fa-image fa-2x"></i><sup
-                    class="badge badge-danger">{{ $details_without_photo->count() }}</sup>
+                <i class="fas fa-image fa-2x"></i><sup class="badge badge-danger">{{ $details_without_photo }}</sup>
             </a>
         </li>
 
