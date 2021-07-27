@@ -12,8 +12,9 @@
     <ul class="navbar-nav ml-auto">
 
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('sales-without-photos') }}" id="userDropdown">
-                <i class="fas fa-image fa-2x"></i><sup class="badge badge-danger">2</sup>
+            <a class="nav-link" href="{{ route('without-photo.index') }}">
+                <i class="fas fa-image fa-2x"></i><sup
+                    class="badge badge-danger">{{ $details_without_photo->count() }}</sup>
             </a>
         </li>
 
