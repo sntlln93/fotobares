@@ -118,7 +118,7 @@
                 Dirección
             </div>
             <div class="card-body">
-                <img src="{{ asset('storage/'.$client->address->photo) }}" alt="">
+                <img class="img-fluid" src="{{ asset('storage/'.$client->address->photo) }}" alt="">
                 <p><b>Localidad:</b> {{ $client->address->city }}</p>
                 <p><b>Barrio:</b> {{ $client->address->neighborhood }}</p>
                 <p><b>Calle:</b> {{ $client->address->street }} al {{ $client->address->number ?? "S/N" }}</p>

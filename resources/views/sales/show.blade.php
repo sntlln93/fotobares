@@ -27,7 +27,9 @@
                             </p>
                             <p><strong>Dirección:</strong>
                                 {{ $sale->client->address->formatted_address }}
-                                <a class="btn btn-sm btn-warning" href=""><i class="fas fa-map-marker"></i></a>
+                                <a class="btn btn-sm btn-warning"
+                                    href="{{ route('map.show', ['client' => $sale->client_id]) }}"><i
+                                        class="fas fa-map-marker"></i></a>
                             </p>
                         </div>
                     </div>
