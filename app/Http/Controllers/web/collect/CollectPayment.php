@@ -47,7 +47,8 @@ class CollectPayment extends Controller
             }
         });
 
-        return redirect()->route('collect', ['sale' => $payment->sale_id]);
+        return redirect()->route('collect', ['sale' => $payment->sale_id])
+            ->with('message', ['type' => 'success', 'content' => '¡Pago guardado con éxito!']);
     }
 
     private function validatePayment($request)

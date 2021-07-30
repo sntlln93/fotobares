@@ -69,6 +69,18 @@
 
   <!-- Custom scripts for all pages-->
   <script src="{{ asset('template/js/sb-admin-2.min.js') }}"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+  <script>
+    @if(Session::get('message'))
+      Swal.fire({
+        icon: "{!! Session::get('message')['type'] !!}",
+        text: "{!! Session::get('message')['content'] !!}",
+        showConfirmButton: false,
+        timer: 3000
+      });
+    @endif
+  </script>
 
   @yield('scripts')
 

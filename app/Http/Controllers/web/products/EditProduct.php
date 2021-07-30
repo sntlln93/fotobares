@@ -39,6 +39,7 @@ class EditProduct extends Controller
                 ]);
             }
         });
-        return redirect()->route('products.index', ['product' => $product->id]);
+        return redirect()->route('products.index', ['product' => $product->id])
+            ->with('message', ['type' => 'success', 'content' => '¡Producto modificado con éxito!']);
     }
 }

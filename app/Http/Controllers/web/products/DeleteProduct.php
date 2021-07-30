@@ -11,6 +11,7 @@ class DeleteProduct extends Controller
     {
         $product->delete();
 
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')
+        ->with('message', ['type' => 'info', 'content' => 'Producto eliminado con éxito!']);
     }
 }

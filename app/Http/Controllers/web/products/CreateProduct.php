@@ -39,6 +39,7 @@ class CreateProduct extends Controller
             }
         });
 
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')
+            ->with('message', ['type' => 'success', 'content' => 'Producto añadido con éxito!']);
     }
 }
