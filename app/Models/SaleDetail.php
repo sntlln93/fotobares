@@ -12,4 +12,14 @@ class SaleDetail extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function photo()
+    {
+        return $this->hasOne(Photo::class);
+    }
+
+    public function sale()
+    {
+        return $this->belongsTo(Sale::class);
+    }
 }
