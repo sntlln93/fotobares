@@ -28,18 +28,25 @@
 <div class="row">
     <div class="card col-lg-6 px-0 mb-2">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h1 class="h6 m-0 font-weight-bold text-primary">Cobrar</h1>
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <button class="btn btn-link nav-link active" id="collectPaymentButton">Cobrar</button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-link nav-link" id="postponePaymentButton">Posponer cobro</button>
+                </li>
+            </ul>
             @if($sale->nextPaymentToCollect)
             <span
                 class="h4 mb-0 badge {{ $sale->nextPaymentToCollect->due_date < Carbon\Carbon::now() ? 'badge-danger' : 'badge-info' }}">
-                Vencimiento
                 {{ $sale->nextPaymentToCollect->due_date->diffForHumans() }}
             </span>
             @endif
         </div>
         <div class="card-body">
             @if($sale->nextPaymentToCollect)
-            <form action="{{ route('collected', ['payment' => $sale->nextPaymentToCollect]) }}" method="POST">
+            <form action="{{ route('collected', ['payment' => $sale->nextPaymentToCollect]) }}" method="POST"
+                id="collectPaymentForm">
                 @csrf @method('PUT')
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -66,6 +73,31 @@
 
                 <div class="d-flex">
                     <button class="btn btn-primary ml-auto mr-0" type="submit">Registrar pago</button>
+                </div>
+            </form>
+
+            <form action="{{ route('postponed', ['payment' => $sale->nextPaymentToCollect]) }}" method="POST"
+                id="postponePaymentForm" class="d-none">
+                @csrf @method('PUT')
+                <div class="form-row">
+                    <div class="form-group col-sm-12">
+                        <label for="amount">Nuevo vencimiento</label>
+                        <input type="date" class="form-control"
+                            value="{{ $sale->nextPaymentToCollect->due_date->format('Y-m-d') }}" name="due_date"
+                            min="{{ $sale->nextPaymentToCollect->due_date->format('Y-m-d') }}">
+                    </div>
+                </div>
+
+                @if($errors->any())
+                <ul class="alert alert-danger">
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+                @endif
+
+                <div class="d-flex">
+                    <button class="btn btn-primary ml-auto mr-0" type="submit">Posponer pago</button>
                 </div>
             </form>
             @else
@@ -122,4 +154,8 @@
         </ul>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/views/payments/collect.js') }}"></script>
 @endsection
