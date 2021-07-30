@@ -14,9 +14,9 @@ return new Class extends Migration
     public function up()
     {
         Schema::table('photos', function (Blueprint $table) {
-            $table->foreignId('sale_detail_id')->constrained();
+            $table->foreignId('sale_detail_id')->constrained()->onDelete('cascade');
             $table->unsignedBigInteger('photographer_id')->nullable();
-            $table->foreign('photographer_id')->references('id')->on('employees');
+            $table->foreign('photographer_id')->references('id')->on('employees')->onDelete('set null');
         });
     }
 

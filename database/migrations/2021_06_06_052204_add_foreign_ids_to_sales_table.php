@@ -14,10 +14,10 @@ return new Class extends Migration
     public function up()
     {
         Schema::table('sales', function (Blueprint $table) {
-            $table->foreignId('client_id')->constrained();
+            $table->foreignId('client_id')->constrained()->onDelete('cascade');
 
-            $table->unsignedBigInteger('seller_id');
-            $table->foreign('seller_id')->references('id')->on('employees');
+            $table->unsignedBigInteger('seller_id')->nullable();
+            $table->foreign('seller_id')->references('id')->on('employees')->onDelete('set null');
         });
     }
 

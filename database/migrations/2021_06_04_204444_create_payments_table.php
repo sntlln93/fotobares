@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('hour')->nullable();
 
             $table->unsignedBigInteger('previous_id')->nullable();
-            $table->foreign('previous_id')->references('id')->on('payments');
+            $table->foreign('previous_id')->references('id')->on('payments')->onDelete('cascade');
 
             $table->timestamps();
         });

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('photo')->nullable();
             $table->string('lat')->nullable();
             $table->string('lon')->nullable();
-            $table->foreignId('client_id')->constrained();
+            $table->foreignId('client_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
