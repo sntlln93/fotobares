@@ -276,7 +276,8 @@
                                     <div class="form-group">
                                         @foreach ($products as $product)
                                         <input type="radio" class="d-none products" name="product_id"
-                                            id="product.{{ $product->id }}" value="{{ $product->id }}">
+                                            id="product.{{ $product->id }}" value="{{ $product->id }}"
+                                            @if(old('product_id')==$product->id) checked @endif>
                                         <label for="product.{{ $product->id }}" class="radio--container">
                                             <p class="my-1 radio--title">
                                                 <strong>{{ $product->name }}</strong>
@@ -295,19 +296,22 @@
                                         <label for="product">Elegí un color</label>
 
                                         <div class="form-group">
-                                            <input type="radio" class="d-none" name="color" id="1" value="AZUL">
+                                            <input type="radio" class="d-none" name="color" id="1" value="AZUL"
+                                                @if(old('color')=="AZUL" ) checked @endif>
                                             <label for="1" class="text-white radio--container"
                                                 style="background-color: #396adb">
                                                 <span class="radio--title">AZUL</span>
                                             </label>
 
-                                            <input type="radio" class="d-none" name="color" id="2" value="NEGRO">
+                                            <input type="radio" class="d-none" name="color" id="2" value="NEGRO"
+                                                @if(old('color')=="NEGRO" ) checked @endif>
                                             <label for="2" class="text-white radio--container"
                                                 style="background-color: #2a2a2b">
                                                 <span class="radio--title">NEGRO</span>
                                             </label>
 
-                                            <input type="radio" class="d-none" name="color" id="3" value="VIOLETA">
+                                            <input type="radio" class="d-none" name="color" id="3" value="VIOLETA"
+                                                @if(old('color')=="VIOLETA" ) checked @endif>
                                             <label for="3" class="text-white radio--container"
                                                 style="background-color: #8e4fab">
                                                 <span class="radio--title">VIOLETA</span>
@@ -361,7 +365,7 @@
                             <div class="col-12 col-md-8">
                                 <label for="quota_id">Cantidad de cuotas</label>
                                 <select class="custom-select @error('quota_id') is-invalid @enderror" id="quota_id"
-                                    name="quota_id" disabled>
+                                    name="quota_id" @if(! old('product_id')) disabled @endif>
                                     <option></option>
                                 </select>
                                 @error('quota_id')

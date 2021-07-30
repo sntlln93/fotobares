@@ -218,10 +218,7 @@ const setBaseUrl = (url) => {
     BASE_URL = url;
 };
 
-onProductChange = (event) => {
-    const productId = event.target.value;
-    console.log(productId, BASE_URL);
-
+getProducts = (productId) => {
     fetch(`${BASE_URL}/sales/product/${productId}/quotas`)
         .then((response) => response.json())
         .then((quotas) => {
@@ -240,6 +237,12 @@ onProductChange = (event) => {
             quotasContainer.disabled = false;
         });
 };
+
+onProductChange = (event) => {
+    const productId = event.target.value;
+    getProducts(productId);
+};
+
 document
     .querySelectorAll(".products")
     .forEach((product) => product.addEventListener("change", onProductChange));
@@ -250,3 +253,10 @@ housePhotoInput.addEventListener("change", () => {
     const label = document.querySelector("label[for=photo]");
     label.innerText = `${housePhotoInput.files.length} foto seleccionada`;
 });
+
+onProductLoaded = () => {
+    const products = document.querySelectorAll("input[name=product_id]");
+    products.forEach((product) => getProducts(product.value));
+};
+
+window.onload = onPageLoad;
