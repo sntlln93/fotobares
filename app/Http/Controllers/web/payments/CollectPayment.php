@@ -19,15 +19,25 @@ class CollectPayment extends Controller
     {
         $this->validatePayment($request);
         
-        DB::transaction(function () use($request, $payment) {
+        $feedback_message = DB::transaction(function () use($request, $payment) {
             $current_payment_amount = $payment->amount;
             $new_payment_amount = floatval($request->amount);
+
+            $feedback_message = "¡Pago guardado con éxito!";
 
             $payment->update([
                 'amount' => $request->amount,
                 'paid_at' => Carbon::now(),
                 'collector_id' => auth()->user()->id
             ]);
+
+            if(! $payment->previous_id) {
+                $payment->sale->update([
+                    'delivered_at' => Carbon::now()
+                ]);
+
+                $feedback_message = "¡Entrega realizada con éxito!";
+            }
             
             if( $current_payment_amount != $new_payment_amount) {
                 $nextPayment = $payment->next;
@@ -45,10 +55,12 @@ class CollectPayment extends Controller
                         'previous_id' => $payment->id
                     ]);
             }
+
+            return $feedback_message;
         });
 
         return redirect()->route('collect', ['sale' => $payment->sale_id])
-            ->with('message', ['type' => 'success', 'content' => '¡Pago guardado con éxito!']);
+            ->with('message', ['type' => 'success', 'content' => $feedback_message]);
     }
 
     private function validatePayment($request)

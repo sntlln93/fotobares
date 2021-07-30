@@ -29,12 +29,22 @@
     <div class="card col-lg-6 px-0 mb-2">
         <div class="card-header d-flex justify-content-between align-items-center">
             <ul class="nav nav-pills">
+                @if($sale->nextPaymentToCollect)
                 <li class="nav-item">
-                    <button class="btn btn-link nav-link active" id="collectPaymentButton">Cobrar</button>
+                    <button class="btn btn-link nav-link active" id="collectPaymentButton">
+                        @if($sale->nextPaymentToCollect->previous_id)
+                        Cobrar
+                        @else
+                        Entregar
+                        @endif
+                    </button>
                 </li>
                 <li class="nav-item">
-                    <button class="btn btn-link nav-link" id="postponePaymentButton">Posponer cobro</button>
+                    <button class="btn btn-link nav-link" id="postponePaymentButton">Posponer</button>
                 </li>
+                @else
+                <button class="btn btn-link nav-link" id="postponePaymentButton" disabled>Cobrar</button>
+                @endif
             </ul>
             @if($sale->nextPaymentToCollect)
             <span
@@ -72,7 +82,13 @@
                 @endif
 
                 <div class="d-flex">
-                    <button class="btn btn-primary ml-auto mr-0" type="submit">Registrar pago</button>
+                    <button class="btn btn-primary ml-auto mr-0" type="submit">
+                        @if($sale->nextPaymentToCollect->previous_id)
+                        Registrar pago
+                        @else
+                        Registrar entrega
+                        @endif
+                    </button>
                 </div>
             </form>
 
