@@ -15,7 +15,7 @@ use App\Http\Requests\SellRequest;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
-class SellController extends Controller
+class SellProduct extends Controller
 {
     public function create()
     {
@@ -95,6 +95,7 @@ class SellController extends Controller
                 ]);
             }
         });
-        return redirect()->route('sales.index');
+        return redirect()->route('sales.index')
+            ->with('message', ['type' => 'success', 'content' => '¡Venta añadida con éxito!']);
     }
 }

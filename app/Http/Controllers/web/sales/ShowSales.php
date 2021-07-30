@@ -5,7 +5,7 @@ namespace App\Http\Controllers\web\sales;
 use App\Models\Sale;
 use App\Http\Controllers\Controller;
 
-class ShowSalesController extends Controller
+class ShowSales extends Controller
 {
     public function index()
     {
