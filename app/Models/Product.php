@@ -12,4 +12,9 @@ class Product extends Model
     {
         return $this->hasMany(Quota::class);
     }
+
+    public function getPriceAttribute()
+    {
+        return $this->quotas->where('quantity', 1)->first()->quota_amount;
+    }
 }
