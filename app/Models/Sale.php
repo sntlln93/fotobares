@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Sale extends Model
 {
@@ -29,9 +30,14 @@ class Sale extends Model
         return $this->hasMany(Payment::class);
     }
 
-    public function getDeliveredAtAttribute($value)
+    public function getFormattedDeliveredAtAttribute()
     {
-        return $value ? $value : false;
+        return $this->delivered_at ? Carbon::parse($this->delivered_at)->isoFormat('D [de] MMMM Y [a las] H:m') : '';
+    }
+
+    public function getFormattedDeliverOnAttribute()
+    {
+        return $this->deliver_on ? Carbon::parse($this->deliver_on)->isoFormat('D [de] MMMM Y') : '';
     }
 
     public function getNextPaymentToCollectAttribute()
