@@ -10,13 +10,11 @@
             <li class="
                         list-group-item
                         d-flex
-                        justify-content-around
+                        justify-content-between
                         align-items-start
                         flex-wrap
                     ">
-                <div class="border rounded shadow-sm mb-4">
-                    <img src="https://via.placeholder.com/350x150" class="rounded img-fluid" alt="quixote" />
-                </div>
+
                 <div class="d-flex flex-column">
                     <p class="mb-0">
                         <b>Cliente:</b>
@@ -93,6 +91,7 @@
         <ul class="list-group">
             @forelse ($sales as $sale)
             <li class="list-group-item d-flex align-items-center flex-wrap">
+
                 <div class="d-flex ml-3 flex-column">
                     <p class="mb-0">
                         <b>Cliente:</b>
