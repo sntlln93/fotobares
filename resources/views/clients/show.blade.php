@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('styles')
-<link rel="stylesheet" href="{{ asset('css/parents.css') }}" />
-@endsection
-
 @section('title', $client->full_name)
 
 @section('content')
@@ -96,8 +92,8 @@
         <div class="card my-4">
             <div class="card-header">
                 Datos personales
-                {{-- <a class="btn btn-link text-warning"
-                    href="{{ url('clients/'.$client->id.'/edit') }}"><i class="fas fa-edit"></i></a> --}}
+                <a class="btn btn-link text-warning" href="{{ route('clients.edit', ['client' => $client->id]) }}"><i
+                        class="fas fa-edit"></i></a>
             </div>
             <div class="card-body">
                 <p><b>Nombres:</b> {{ $client->name }}</p>
