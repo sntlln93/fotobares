@@ -36,7 +36,7 @@ class HomeController extends Controller
             'payments.amount',
             'payments.due_date',
             'payments.hour',
-            DB::raw('concat(phones.area_code, phones.number) as number'),
+            'phones.id as phone_id',
             'phones.has_whatsapp',
             DB::raw('if(addresses.lat is null AND addresses.lon is null, false, true) AS has_location')
         )

@@ -12,8 +12,8 @@
             <i class="fas fa-eye"></i>
         </a>
         @foreach ($sale->client->phones as $phone)
-        <a href="https://api.whatsapp.com/send?phone=54{{ $phone->formatted_number }}&text=Hola%2C%20{{ $sale->client->full_name }}%21&source=&data=&app_absent="
-            class="ml-1 btn btn-sm btn-success" target="_blank">
+        <a href="{{ route('whatsapp.send', ['phone' => $phone->id]) }}" class="ml-1 btn btn-sm btn-success"
+            target="_blank">
             <i class="fab fa-whatsapp"></i>
         </a>
         @endforeach

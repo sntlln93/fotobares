@@ -45,8 +45,8 @@
                                 shadow
                                 animated--grow-in
                             " aria-labelledby="paymentDropdown{{ $payment->id }}">
-                        <a href="https://api.whatsapp.com/send?phone=54{{ $payment->number }}&text=Hola%2C%20{{ $payment->client_name }}%21&source=&data=&app_absent="
-                            class="dropdown-item" target="_blank">
+                        <a href="{{ route('whatsapp.send', ['phone' => $payment->phone_id]) }}" class="dropdown-item"
+                            target="_blank">
                             <div class="btn btn-sm btn-success">
                                 <i class="fab fa-whatsapp"></i>
                             </div>
@@ -60,21 +60,19 @@
                             Ver en mapa
                         </a>
                         @endif
-                        @if ($payment->delivered_at == false)
                         <a href="{{ route('collect', ['sale' => $payment->sale_id]) }}" class="dropdown-item">
+                            @if ($payment->delivered_at == false)
                             <div class="btn btn-sm btn-primary">
                                 <i class="fas fa-dollar-sign"></i>
                             </div>
                             Cobrar
-                        </a>
-                        @else
-                        <a href="{{ route('deliver.form', ['sale' => $payment->sale_id]) }}" class="dropdown-item">
+                            @else
                             <div class="btn btn-sm btn-primary">
                                 <i class="fas fa-box"></i>
                             </div>
                             Entregar
+                            @endif
                         </a>
-                        @endif
                     </div>
                 </div>
             </li>

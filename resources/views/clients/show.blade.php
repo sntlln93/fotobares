@@ -139,8 +139,7 @@
                     <a href="tel:{{ $phone->area_code }}{{ $phone->number }}" class="btn btn-sm btn-primary"><i
                             class="fas fa-phone"></i></a>
                     @if($phone->has_whatsapp)
-                    <a target="_blank"
-                        href="https://api.whatsapp.com/send?phone=54{{ $phone->full_number }}&text=Hola%2C%20{{  $client->name  }}%21&source=&data=&app_absent="
+                    <a target="_blank" href="{{ route('whatsapp.send', ['phone' => $phone->id]) }}"
                         class="btn btn-sm btn-success"><i class="fab fa-whatsapp"></i></a>
                     @endif
                 </p>
