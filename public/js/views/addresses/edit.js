@@ -38,6 +38,5 @@ getLocationBtn.addEventListener("click", (e) => saveCoordinates(e));
 const housePhotoInput = document.getElementById("house_photo");
 housePhotoInput.addEventListener("change", () => {
     const label = document.querySelector("label[for=photo]");
-    console.log(housePhotoInput.files[0]);
     label.innerText = `${housePhotoInput.files.length} foto seleccionada`;
 });
