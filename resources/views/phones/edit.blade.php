@@ -45,7 +45,3 @@
 </div>
 
 @endsection
-
-@section('scripts')
-<script src="{{ asset('js/views/products/create.js') }}"></script>
-@endsection
