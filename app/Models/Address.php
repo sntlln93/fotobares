@@ -17,4 +17,11 @@ class Address extends Model
     {
         return $this->lat and $this->lon ? true : false;
     }
+
+    //relationships
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
 }
