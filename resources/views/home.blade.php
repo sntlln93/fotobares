@@ -92,7 +92,7 @@
             @forelse ($sales as $sale)
             <li class="list-group-item d-flex align-items-center flex-wrap">
 
-                <div class="d-flex ml-3 flex-column">
+                <div class="d-flex flex-column">
                     <p class="mb-0">
                         <b>Cliente:</b>
                         <a
