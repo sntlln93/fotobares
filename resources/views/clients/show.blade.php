@@ -92,7 +92,7 @@
         <div class="card my-4">
             <div class="card-header">
                 Datos personales
-                <a class="btn btn-link text-warning" href="{{ route('clients.edit', ['client' => $client->id]) }}"><i
+                <a class="btn btn-sm btn-warning" href="{{ route('clients.edit', ['client' => $client->id]) }}"><i
                         class="fas fa-edit"></i></a>
             </div>
             <div class="card-body">
@@ -130,18 +130,20 @@
     <div class="col-sm-6">
         <div class="card my-4">
             <div class="card-header">
-                Teléfono
-                {{-- <a class="btn btn-link text-warning" href="{{ url('phone/'.$phone->id.'/edit') }}"><i
-                    class="fas fa-edit"></i></a> --}}
+                Teléfonos
             </div>
             <div class="card-body">
-                <p><b>Número:</b> {{ $phone->formatted_number }}</p>
-                <p><b>Whatsapp:</b> {{ $phone->has_whatsapp ? "Sí" : "No" }}</p>
-                @if($phone->has_whatsapp)
-                <a target="_blank"
-                    href="https://api.whatsapp.com/send?phone=54{{ $phone->full_number }}&text=Hola%2C%20{{  $client->name  }}%21&source=&data=&app_absent="
-                    class="btn btn-primary">Abrir en Whatsapp</a>
-                @endif
+                <p><b>Número:</b> {{ $phone->formatted_number }}
+                    <a href="{{ route('phones.edit', ['phone' => $phone->id]) }}" class="btn btn-sm btn-warning"><i
+                            class="fas fa-edit"></i></a>
+                    <a href="tel:{{ $phone->area_code }}{{ $phone->number }}" class="btn btn-sm btn-primary"><i
+                            class="fas fa-phone"></i></a>
+                    @if($phone->has_whatsapp)
+                    <a target="_blank"
+                        href="https://api.whatsapp.com/send?phone=54{{ $phone->full_number }}&text=Hola%2C%20{{  $client->name  }}%21&source=&data=&app_absent="
+                        class="btn btn-sm btn-success"><i class="fab fa-whatsapp"></i></a>
+                    @endif
+                </p>
             </div>
         </div>
     </div>
