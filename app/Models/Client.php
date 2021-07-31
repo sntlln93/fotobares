@@ -23,15 +23,12 @@ class Client extends Model
         return DB::table('payments')->whereNull('paid_at')->whereIn('sale_id', $salesId)->sum('amount');
     }
 
-    public function getCompletedPaymentsPercentage()
+    public function getCompletedPaymentsPercentageAttribute()
     {
-        $salesId = $this->sales->pluck('id');
+        $total = $this->payments->count();
+        $completed = $this->payments->whereNotNull('paid_at')->count();
 
-        $payments = DB::table('payments')->whereIn('sale_id', $salesId);
-        $completed = $payments->whereNotNull('paid_at')->count();
-        $total = $payments->whereNull('paid_at')->count();
-
-        return $completed * 100 / $total;
+        return number_format($completed * 100 / $total, 1);
     }
 
     public function getFullNameAttribute()
@@ -53,5 +50,10 @@ class Client extends Model
     public function sales()
     {
         return $this->hasMany(Sale::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasManyThrough(Payment::class, Sale::class);
     }
 }
