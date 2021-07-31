@@ -35,7 +35,7 @@
                 @error('dni') <small class="text-danger">{{ $message }}</small> @enderror
             </div>
 
-            <button class="btn btn-primary" type="submit">Guardar producto</button>
+            <button class="btn btn-primary" type="submit">Guardar cambios</button>
         </form>
     </div>
 </div>
