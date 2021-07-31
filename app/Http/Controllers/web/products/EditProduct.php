@@ -31,7 +31,7 @@ class EditProduct extends Controller
 
             $product->quotas()->delete();
 
-            for($i = 0; $i < count($validated['quotas']); $i++) {
+            for ($i = 0; $i < count($validated['quotas']); $i++) {
                 Quota::create([
                     'quantity' => $validated['quotas'][$i]['quantity'],
                     'quota_amount' => $validated['quotas'][$i]['quota_amount'],

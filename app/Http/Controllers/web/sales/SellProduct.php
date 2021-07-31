@@ -69,7 +69,7 @@ class SellProduct extends Controller
                 'sale_id' => $sale->id
             ]);
 
-            if(array_key_exists('house_photo', $validated)) {
+            if (array_key_exists('house_photo', $validated)) {
                 $photo_path = $validated['house_photo']->storePublicly('addresses', 'public');
             }
 

@@ -8,6 +8,7 @@ use Illuminate\Support\Carbon;
 use App\Models\Sale;
 use App\Models\Payment;
 use Illuminate\Support\Facades\DB;
+
 class CollectPayment extends Controller
 {
     public function index(Sale $sale)
@@ -19,7 +20,7 @@ class CollectPayment extends Controller
     {
         $this->validatePayment($request);
         
-        $feedback_message = DB::transaction(function () use($request, $payment) {
+        $feedback_message = DB::transaction(function () use ($request, $payment) {
             $current_payment_amount = $payment->amount;
             $new_payment_amount = floatval($request->amount);
 
@@ -31,7 +32,7 @@ class CollectPayment extends Controller
                 'collector_id' => auth()->user()->id
             ]);
 
-            if(! $payment->previous_id) {
+            if (! $payment->previous_id) {
                 $payment->sale->update([
                     'delivered_at' => Carbon::now()
                 ]);
@@ -39,12 +40,12 @@ class CollectPayment extends Controller
                 $feedback_message = "¡Entrega realizada con éxito!";
             }
             
-            if( $current_payment_amount != $new_payment_amount) {
+            if ($current_payment_amount != $new_payment_amount) {
                 $nextPayment = $payment->next;
                 $balance = $current_payment_amount - $new_payment_amount;
                 
-                $nextPayment 
-                    ? $nextPayment->update([ 
+                $nextPayment
+                    ? $nextPayment->update([
                         'amount' => $nextPayment->amount + $balance,
                     ])
                     : Payment::create([
