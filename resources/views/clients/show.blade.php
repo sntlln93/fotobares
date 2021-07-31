@@ -112,23 +112,29 @@
         <div class="card">
             <div class="card-header">
                 Dirección
+                <a href="{{ route('addresses.edit', ['address' => $client->address->id]) }}"
+                    class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
             </div>
-            <div class="card-body">
-                <img class="img-fluid" src="{{ asset('storage/'.$client->address->photo) }}" alt="">
-                <p><b>Localidad:</b> {{ $client->address->city }}</p>
-                <p><b>Barrio:</b> {{ $client->address->neighborhood }}</p>
-                <p><b>Calle:</b> {{ $client->address->street }} al {{ $client->address->number ?? "S/N" }}</p>
-                @if($client->address->apartment)
-                <p><b>Piso:</b> {{ $client->address->floor }}</p>
-                <p><b>Departamento:</b> {{ $client->address->apartment }}</p>
-                @endif
+            <div class="card-body d-flex d-row">
+                <div>
+                    <p class="mb-0"><b>Localidad</b><br> {{ $client->address->city }}</p>
+                    <p class="mb-0"><b>Barrio</b><br> {{ $client->address->neighborhood }}</p>
+                    <p class="mb-0"><b>Calle</b><br> {{ $client->address->street }} al
+                        {{ $client->address->number ?? "S/N" }}
+                    </p>
+                    <p class="mb-0"><b>Indicaciones</b><br> {{ $client->address->indications }}</p>
+                    <p class="mb-0"><b>Detalles de la casa</b><br> {{ $client->address->details }}</p>
+                </div>
+                <div class="w-50">
+                    <img class="img-fluid" src="{{ asset('storage/'.$client->address->photo) }}" alt="">
+                </div>
             </div>
         </div>
     </div>
 
     @forelse($client->phones as $phone)
     <div class="col-sm-6">
-        <div class="card my-4">
+        <div class="card">
             <div class="card-header">
                 Teléfonos
             </div>
