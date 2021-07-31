@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Name;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SellRequest extends FormRequest
@@ -24,8 +25,8 @@ class SellRequest extends FormRequest
     public function rules()
     {
         return [
-            "lastname" => ['required', 'regex:'.$this->regex()],
-            "name" => ['required', 'regex:'.$this->regex()],
+            "lastname" => ['required', new Name],
+            "name" => ['required', new Name],
             "dni" => ['required', 'numeric'],
 
             "phones" => ['required'],
@@ -82,10 +83,5 @@ class SellRequest extends FormRequest
             "due_date" => 'fecha de pago',
             "hour" => 'hora de visitas',
         ];
-    }
-
-    private function regex()
-    {
-        return '/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$/';
     }
 }
