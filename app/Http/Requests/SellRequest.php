@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Rules\Name;
+use App\Rules\AreaCode;
+use App\Rules\PhoneNumber;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SellRequest extends FormRequest
@@ -30,8 +32,8 @@ class SellRequest extends FormRequest
             "dni" => ['required', 'numeric'],
 
             "phones" => ['required'],
-            "phones.*.area_code" => ['required', 'numeric', 'digits_between:2,4'],
-            "phones.*.number" => ['required', 'numeric', 'digits_between:6,9'],
+            "phones.*.area_code" => ['required', new AreaCode],
+            "phones.*.number" => ['required', new PhoneNumber],
             "phones.*_has_whatsapp" => ['nullable'],
 
             "address" => ['required'],
