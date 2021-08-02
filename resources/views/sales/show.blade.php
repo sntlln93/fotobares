@@ -69,6 +69,32 @@
                             <p class="my-0"><strong>{{ $detail->product->name }}</strong>
                                 [color {{ strtolower($detail->color) }}] -
                                 ${{ number_format($detail->amount, 2, ',', '.') }}
+                                @if($detail->photo)
+                                <button type="button" class="btn btn-sm btn-info" data-toggle="modal"
+                                    data-target="#showPhotoModal{{ $detail->id }}">
+                                    <i class="fas fa-image"></i>
+                                </button>
+                                <div class="modal fade" id="showPhotoModal{{ $detail->id }}" tabindex="-1" role="dialog"
+                                    aria-labelledby="showPhotoModal{{ $detail->id }}Label" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="showPhotoModal{{ $detail->id }}Label">
+                                                    {{ $detail->description }}</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <img class="img-fluid"
+                                                    src="{{ asset('storage/'.$detail->photo->path) }}"
+                                                    alt="{{ $detail->description }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
                             </p>
                             @endforeach
                         </div>
