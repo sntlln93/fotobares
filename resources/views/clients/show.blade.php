@@ -122,8 +122,12 @@
                     <p class="mb-0"><b>Calle</b><br> {{ $client->address->street }} al
                         {{ $client->address->number ?? "S/N" }}
                     </p>
+                    @if($client->address->indications)
                     <p class="mb-0"><b>Indicaciones</b><br> {{ $client->address->indications }}</p>
+                    @endif
+                    @if($client->address->details)
                     <p class="mb-0"><b>Detalles de la casa</b><br> {{ $client->address->details }}</p>
+                    @endif
                 </div>
                 <div class="w-50">
                     <img class="img-fluid" src="{{ asset('storage/'.$client->address->photo) }}" alt="">
