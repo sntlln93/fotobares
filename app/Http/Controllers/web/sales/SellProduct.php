@@ -66,7 +66,8 @@ class SellProduct extends Controller
                 'amount' => $quota->quota_amount * $quota->quantity,
                 'color' => $validated['color'],
                 'product_id' => $product->id,
-                'sale_id' => $sale->id
+                'sale_id' => $sale->id,
+                'description' => $validated['description'],
             ]);
 
             if (array_key_exists('house_photo', $validated)) {

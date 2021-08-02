@@ -313,8 +313,8 @@
                                             <input type="radio" class="d-none" name="color" id="3" value="VIOLETA"
                                                 @if(old('color')=="VIOLETA" ) checked @endif>
                                             <label for="3" class="text-white radio--container"
-                                                style="background-color: #8e4fab">
-                                                <span class="radio--title">VIOLETA</span>
+                                                style="background-color: #e069e0">
+                                                <span class="radio--title">ROSADO</span>
                                             </label>
 
                                             @error('color')
@@ -323,15 +323,24 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="form-group">
-                                            <div class="form-check form-check-inline">
-                                                <input @if (old('is_reproduction')=='on' ) checked @endif
-                                                    class="form-check-input @error('is_reproduction') is-invalid @enderror"
-                                                    type="checkbox" id="is_reproduction" name="is_reproduction">
-                                                <label class="form-check-label" for="is_reproduction">Es
-                                                    reproducción</label>
-                                            </div>
+                                        <label>Es reproducción</label>
+                                        <div class="form-check">
+                                            <input @if (old('is_reproduction')=='on' ) checked @endif
+                                                class="form-check-input @error('is_reproduction') is-invalid @enderror"
+                                                type="checkbox" id="is_reproduction" name="is_reproduction">
+                                            <label class="form-check-label" for="is_reproduction">Sí</label>
                                         </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="description">Descripción de la foto que irá en el
+                                            mural <small>(opcional)</small></label>
+                                        <input type="text"
+                                            class="form-control @error('description') is-invalid @enderror"
+                                            name="description" id="description" value="{{ old('description') }}">
+                                        @error('description')
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -380,7 +389,7 @@
 
                             <div class="col-12">
                                 <label for="payment_description">Descripción
-                                    <i><small>(OPCIONAL)</small></i></label>
+                                    <small>(opcional)</small></label>
                                 <input type="text"
                                     class="form-control @error('payment_description') is-invalid @enderror"
                                     id="payment_description" name="payment_description"
@@ -402,7 +411,7 @@
                             </div>
 
                             <div class="col-12 col-md-6">
-                                <label for="hourValidation">Hora aproximada <i><small>(OPCIONAL)</small></i></label>
+                                <label for="hourValidation">Hora aproximada <small>(opcional)</small></label>
                                 <input type="text" class="form-control @error('hour') is-invalid @enderror"
                                     id="hourValidation" name="hour"
                                     placeholder="La hora a la que más probablemente encuentres a tu cliente en casa">

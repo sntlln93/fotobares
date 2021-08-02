@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\web\sales;
 
-use App\Http\Controllers\Controller;
-use App\Services\GetSaleDetailsWithoutPhoto;
-use Illuminate\Http\Request;
 use App\Models\Sale;
 use App\Models\Photo;
 use App\Models\SaleDetail;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Services\GetSaleDetailsWithoutPhoto;
 
 class AddImageToSoldProduct extends Controller
 {
@@ -35,16 +36,22 @@ class AddImageToSoldProduct extends Controller
     {
         $request->validate([
             'photo' => ['required', 'mimes:png,jpg'],
-            'photo' => ['required']
+            'description' => ['nullable'],
+            
         ]);
 
-        $photo_path = $request->photo->storePublicly('sold', 'public');
+        DB::transaction(function () use ($request, $detail) {
+            $photo_path = $request->photo->storePublicly('sold', 'public');
 
-        Photo::create([
-            'path' => $photo_path,
-            'description' => $request->description,
-            'sale_detail_id' => $detail->id
-        ]);
+            Photo::create([
+                'path' => $photo_path,
+                'sale_detail_id' => $detail->id
+            ]);
+
+            $detail->update([
+                'description' => $request->description
+            ]);
+        });
 
         return redirect()
             ->route('sales.show', ['sale' => $detail->sale_id])

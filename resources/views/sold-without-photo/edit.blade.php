@@ -31,11 +31,14 @@
                 </div>
             </div>
 
-            <div class="form-row">
-                <div class="form-group col-sm-12">
-                    <label for="description">Descripción</label>
-                    <input type="text" class="form-control" id="description" name="description">
-                </div>
+            <div class="form-group">
+                <label for="description">Descripción de la foto que irá en el
+                    mural <small>(opcional)</small></label>
+                <input type="text" class="form-control @error('description') is-invalid @enderror" name="description"
+                    id="description" value="{{ old('description', $detail->description) }}">
+                @error('description')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
             </div>
 
             <button class="btn btn-primary" type="submit">Agregar foto</button>
