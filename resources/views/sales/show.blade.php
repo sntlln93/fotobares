@@ -16,7 +16,9 @@
                         <h5 class="card-title">Cliente</h5>
                         <hr>
                         <div class="card-text">
-                            <p><strong>Apellido y nombre:</strong> {{ $sale->client->full_name }}</p>
+                            <p><strong>Apellido y nombre:</strong> <a
+                                    href="{{ route('clients.show', ['client' => $sale->client_id]) }}">{{ $sale->client->full_name }}</a>
+                            </p>
                             <p><strong>DNI:</strong> {{ $sale->client->dni }}</p>
                             <p><strong>Teléfonos:</strong>
                                 @foreach ($sale->client->phones as $phone)
