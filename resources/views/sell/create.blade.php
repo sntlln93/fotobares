@@ -310,7 +310,7 @@
                                                 <span class="radio--title">NEGRO</span>
                                             </label>
 
-                                            <input type="radio" class="d-none" name="color" id="3" value="VIOLETA"
+                                            <input type="radio" class="d-none" name="color" id="3" value="ROSADO"
                                                 @if(old('color')=="ROSADO" ) checked @endif>
                                             <label for="3" class="text-white radio--container"
                                                 style="background-color: #e069e0">
