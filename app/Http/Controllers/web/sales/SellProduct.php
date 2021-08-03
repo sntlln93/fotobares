@@ -47,13 +47,13 @@ class SellProduct extends Controller
             $deliver_on = Carbon::parse($validated['deliver_date']);
             
             $previous_payment = null;
+
             for ($i = 0; $i < $quota->quantity; $i++) {
                 $hour = array_key_exists('hour', $validated) ? $validated['hour'] : null;
-                $due_date = $deliver_on->addMonth($i)->format('Y-m-d');
                 
                 $payment = Payment::create([
                     'amount' => $quota->quota_amount,
-                    'due_date' => $due_date,
+                    'due_date' => $deliver_on->addMonth(1)->format('Y-m-d'),
                     'hour' => $hour,
                     'sale_id' => $sale->id,
                     'previous_id' => $previous_payment
