@@ -138,16 +138,8 @@
                     })
                 });
 
-                let userInfoWindow = new google.maps.InfoWindow({
-                    content: '<h5 class="h4 text-gray-800">Estás acá</h5>'
-                });
-
                 clientMarker.addListener('click', () => {
                     clientInfoWindow.open(map, clientMarker);
-                });
-
-                userMarker.addListener('click', () => {
-                    userInfoWindow.open(map, userMarker);
                 });
 
                 clientInfoWindow.open(map, clientMarker);

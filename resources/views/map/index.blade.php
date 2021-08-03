@@ -127,16 +127,6 @@
                     map: map
                 });
 
-                userMarker.addListener('click', () => {
-                    userInfoWindow.open(map, userMarker);
-                });
-                
-                let userInfoWindow = new google.maps.InfoWindow({
-                    content: '<h5 class="h4 text-gray-800">Estás acá</h5>'
-                });
-                
-                userInfoWindow.open(map, userMarker);
-
                 clients.forEach(client => {
                     let clientMarker = new google.maps.Marker({
                     position: {
