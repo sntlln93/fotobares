@@ -355,21 +355,7 @@
                         <h1 class="h4 text-gray-800">Pago</h1>
                     </div>
                     <div class="card-body">
-                        <h1 class="h4 text-gray-800">Entrega</h1>
-                        <div class="form-row mb-2">
-                            <div class="col-12 col-md-6">
-                                <label for="deliver_date">Día de entrega</label>
-                                <input type="date" class="form-control @error('deliver_date') is-invalid @enderror"
-                                    id="deliver_date" name="deliver_date"
-                                    placeholder="Indicá qué fecha realizas la entrega"
-                                    min="{{ Carbon\Carbon::tomorrow()->format('Y-m-d') }}">
-                                @error('deliver_date')
-                                <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <h1 class="h4 mt-5 text-gray-800">Pago</h1>
+                        <h1 class="h4 text-gray-800">Pago</h1>
                         <div class="form-row mb-2">
                             <div class="col-12 col-md-8">
                                 <label for="quota_id">Cantidad de cuotas</label>
@@ -397,18 +383,19 @@
                             </div>
                         </div>
 
-                        <h1 class="h4 mt-5 text-gray-800">Días de cobro</h1>
+                        <h1 class="h4 mt-5 text-gray-800">Fechas</h1>
                         <div class="form-row mb-2">
                             <div class="col-12 col-md-6">
-                                <label for="dateValidation">Día aproximado de cobro</label>
-                                <input type="number" class="form-control @error('due_date') is-invalid @enderror"
-                                    id="dateValidation" name="due_date"
-                                    placeholder="Indicá, aproximadamente, qué día del mes tenés que pasar a cobrar"
-                                    min="1" max="28">
-                                @error('due_date')
+                                <label for="deliver_date">Día de entrega</label>
+                                <input type="date" class="form-control @error('deliver_date') is-invalid @enderror"
+                                    id="deliver_date" name="deliver_date"
+                                    placeholder="Indicá qué fecha realizas la entrega"
+                                    min="{{ Carbon\Carbon::tomorrow()->format('Y-m-d') }}">
+                                @error('deliver_date')
                                 <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
+
 
                             <div class="col-12 col-md-6">
                                 <label for="hourValidation">Hora aproximada <small>(opcional)</small></label>

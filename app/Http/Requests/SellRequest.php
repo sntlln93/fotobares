@@ -53,7 +53,6 @@ class SellRequest extends FormRequest
             "deliver_date" => ['required', 'date'],
             "quota_id" => ['required'],
             "payment_description" => ['nullable'],
-            "due_date" => ['required'],
             "hour" => ['nullable'],
         ];
     }

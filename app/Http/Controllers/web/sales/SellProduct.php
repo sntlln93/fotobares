@@ -49,7 +49,7 @@ class SellProduct extends Controller
             $previous_payment = null;
             for ($i = 0; $i < $quota->quantity; $i++) {
                 $hour = array_key_exists('hour', $validated) ? $validated['hour'] : null;
-                $due_date = $i == 0 ? $deliver_on->format('Y-m-d') : $deliver_on->year . '-' . $deliver_on->addMonth($i)->month . '-' . $validated['due_date'];
+                $due_date = $deliver_on->addMonth($i)->format('Y-m-d');
                 
                 $payment = Payment::create([
                     'amount' => $quota->quota_amount,
