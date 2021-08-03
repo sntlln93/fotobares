@@ -6,7 +6,7 @@
             <h6 class="h6 m-0 font-weight-bold text-primary">Cuotas por vencer</h6>
         </div>
         <ul class="list-group">
-            @forelse ($payments as $payment)
+            @forelse ($sales as $sale)
             <li class="
                         list-group-item
                         d-flex
@@ -18,21 +18,27 @@
                 <div class="d-flex flex-column">
                     <p class="mb-0">
                         <b>Cliente:</b>
-                        <a
-                            href="{{ route('clients.show', ['client'=> $payment->client_id]) }}">{{ $payment->client_name }}</a>
+                        <a href="{{ route('clients.show', ['client'=> $sale->id]) }}">{{ $sale->client->full_name }}</a>
                     </p>
-                    <p class="mb-0"><b>Cuota: </b> ${{ $payment->amount }}</p>
+                    <p class="mb-0"><b>Cuota: </b> ${{ $sale->nextPaymentToCollect->amount }}</p>
                     <p class="mb-0">
                         <b>Vencimiento:</b>
-                        {{ $payment->due_date }}
+                        {{ $sale->nextPaymentToCollect->formatted_due_date }}
                     </p>
-                    <p class="mb-2">
+                    <p class="mb-0">
                         <b>Hora:</b>
-                        {{ $payment->hour}}
+                        {{ $sale->nextPaymentToCollect->hour}}
+                    </p>
+
+                    <p class="mb-2">
+                        <b>Producto (descripción):</b>
+                        @foreach ($sale->details as $detail)
+                        <span class="badge badge-info">{{ $detail->product->name }} ({{ $detail->description }})</span>
+                        @endforeach
                     </p>
                 </div>
                 <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" id="paymentDropdown{{ $payment->sale_id }}" role="button"
+                    <a class="dropdown-toggle" href="#" id="paymentDropdown{{ $sale->id }}" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-ellipsis-v"></i>
                     </a>
@@ -42,24 +48,26 @@
                                 dropdown-menu dropdown-menu-right
                                 shadow
                                 animated--grow-in
-                            " aria-labelledby="paymentDropdown{{ $payment->id }}">
-                        <a href="{{ route('whatsapp.send', ['phone' => $payment->phone_id]) }}" class="dropdown-item"
+                            " aria-labelledby="paymentDropdown{{ $sale->nextPaymentToCollect->id }}">
+                        @foreach ($sale->client->phones as $phone)
+                        <a href="{{ route('whatsapp.send', ['phone' => $phone->id]) }}" class="dropdown-item"
                             target="_blank">
                             <div class="btn btn-sm btn-success">
                                 <i class="fab fa-whatsapp"></i>
                             </div>
                             Enviar whatsapp
                         </a>
-                        @if ($payment->has_location)
-                        <a href="{{ url('map/' . $payment->sale_id) }}" class="dropdown-item">
+                        @endforeach
+                        @if ($sale->client->address->has_location)
+                        <a href="{{ url('map/' . $sale->id) }}" class="dropdown-item">
                             <div class="btn btn-sm btn-warning">
                                 <i class="fas fa-map-marker"></i>
                             </div>
                             Ver en mapa
                         </a>
                         @endif
-                        <a href="{{ route('collect', ['sale' => $payment->sale_id]) }}" class="dropdown-item">
-                            @if ($payment->delivered_at == false)
+                        <a href="{{ route('collect', ['sale' => $sale->id]) }}" class="dropdown-item">
+                            @if ($sale->delivered_at)
                             <div class="btn btn-sm btn-primary">
                                 <i class="fas fa-dollar-sign"></i>
                             </div>
@@ -96,19 +104,17 @@
                     <p class="mb-0">
                         <b>Cliente:</b>
                         <a
-                            href="{{ route('clients.show', ['client' => $sale->client->id]) }}">{{ $sale->client->full_name }}</a>
+                            href="{{ route('clients.show', ['client' => $sale->client_id]) }}">{{ $sale->client->full_name }}</a>
                     </p>
                     <p class="mb-0">
                         <b>Producto:</b>
                         @foreach ($sale->details as $detail)
-                        <span class="badge badge-info">
-                            {{ $detail->product->name }}
-                        </span>
+                        <span class="badge badge-info">{{ $detail->product->name }} ({{ $detail->description }})</span>
                         @endforeach
                     </p>
                     <p class="mb-2">
                         <b>Fecha:</b>
-                        {{ Carbon\Carbon::parse($sale->created_at)->diffForHumans() }}
+                        {{ $sale->created_at->diffForHumans() }}
                     </p>
                 </div>
                 <div class="
@@ -120,7 +126,7 @@
                             rounded
                         ">
                     <p class="text-white my-auto">
-                        <b>${{ $sale->details_sum_amount }}</b>
+                        <b>${{ $sale->details->sum('amount') }}</b>
                     </p>
                 </div>
             </li>

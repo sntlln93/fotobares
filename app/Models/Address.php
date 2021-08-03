@@ -15,7 +15,7 @@ class Address extends Model
 
     public function getHasLocationAttribute()
     {
-        return $this->lat and $this->lon ? true : false;
+        return $this->lat && $this->lon ? true : false;
     }
 
     //relationships
