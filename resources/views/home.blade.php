@@ -59,7 +59,7 @@
                         </a>
                         @endforeach
                         @if ($sale->client->address->has_location)
-                        <a href="{{ url('map/' . $sale->id) }}" class="dropdown-item">
+                        <a href="{{ url('map/' . $sale->client_id) }}" class="dropdown-item">
                             <div class="btn btn-sm btn-warning">
                                 <i class="fas fa-map-marker"></i>
                             </div>
