@@ -96,11 +96,22 @@
                 <div class="col form-group">
                     <label for="location">Ubicación de la casa</label><br>
                     <div id="location w-100">
-                        <input type="hidden" name="lat" id="latInput">
-                        <input type="hidden" name="lon" id="lonInput">
-                        <button class="btn btn-info mb-1" id="btnLocation">Guardar ubicación
-                            (opcional)</button><br>
-                        <span id="locationFeedback"></span>
+                        <input type="hidden" name="lat" id="latInput" value="{{ old('lat', $address->lat) }}">
+                        <input type="hidden" name="lon" id="lonInput" value="{{ old('lon', $address->lon) }}">
+                        <button class="btn btn-info mb-1" id="btnLocation">
+                            @if(old('lat') || old('lon') || $address->has_location)
+                            Actualizar ubicación
+                            @else
+                            Guardar ubicación
+                            @endif
+                            (opcional)
+                        </button><br>
+                        <span id="locationFeedback">
+                            @if(old('lat') || old('lon') || $address->has_location)
+                            Existe una ubicación guardada.
+                            <i class="fas fa-check-circle"></i>
+                            @endif
+                        </span>
                     </div>
                 </div>
             </div>
