@@ -45,8 +45,8 @@
         });
     @endforeach
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key={{ env('MAP_KEY') }}&callback=initMap" async defer></script>
 @if($clients->count() > 0)
 <script src="{{ asset('js/views/map/map.js') }}"></script>
 @endif
+<script src="https://maps.googleapis.com/maps/api/js?key={{ env('MAP_KEY') }}&callback=initMap" async defer></script>
 @endsection
