@@ -126,8 +126,8 @@
                     </p>
                     <p class="mb-0">
                         <b>Producto:</b>
-                        @foreach ($payment->details as $detail)
-                        <span class="badge text-white {{ $detail->color }}">{{ $detail->product_name }}
+                        @foreach ($sale->details as $detail)
+                        <span class="badge text-white {{ $detail->color }}">{{ $detail->product->name }}
                             {{ $detail->description ? '('.$detail->description.')' : '(-)'}}</span>
                         @endforeach
                     </p>
