@@ -30,7 +30,7 @@ class HomeController extends Controller
                     'has_location' => $sale->client->address->has_location,
                 ],
                 'amount' => $sale->nextPaymentToCollect->amount,
-                'formatted_due_date' => $sale->nextPaymentToCollect->formatted_due_date,
+                'due_date' => $sale->nextPaymentToCollect->due_date,
                 'hour' => $sale->nextPaymentToCollect->hour,
                 'details' => $sale->details->map(function ($detail) {
                     return (object)[
@@ -44,7 +44,7 @@ class HomeController extends Controller
                 }),
                 'delivered_at' => $sale->delivered_at,
             ];
-        })->sortByDesc('formatted_due_date')
+        })->sortBy('due_date')
         ->take(10);
     }
 }

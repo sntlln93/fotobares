@@ -40,7 +40,7 @@
                     <p class="mb-0"><b>Cuota: </b> ${{ $payment->amount }}</p>
                     <p class="mb-0">
                         <b>Vencimiento:</b>
-                        {{ $payment->formatted_due_date }}
+                        {{ $payment->due_date->isoFormat('D [de] MMMM Y') }}
                     </p>
                     <p class="mb-0">
                         <b>Hora:</b>
