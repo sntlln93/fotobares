@@ -10,13 +10,16 @@ class PostponePayment extends Controller
 {
     public function update(Request $request, Payment $payment)
     {
-        $request->validate([
-            'due_date' => ['required', 'date']
+        $validated=$request->validate([
+            'due_date' => ['required', 'date'],
+            'hour' => ['nullable']
         ]);
 
-        $payment->update([
-            'due_date' => $request->due_date
-        ]);
+        if ($payment->hour === 'Sin hora de visita registrada' || $validated['hour'] === null) {
+            $validated['hour'] = 'Sin hora de visita registrada';
+        }
+
+        $payment->update($validated);
 
         return redirect()->back()->with('message', ['type' => 'info', 'content' => 'Pago pospuesto al '. $payment->due_date->format('d/m/Y'). ' con éxito.']);
     }

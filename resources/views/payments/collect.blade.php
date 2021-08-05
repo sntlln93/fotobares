@@ -96,11 +96,17 @@
                 id="postponePaymentForm" class="d-none">
                 @csrf @method('PUT')
                 <div class="form-row">
-                    <div class="form-group col-sm-12">
+                    <div class="form-group col-sm-12 col-md-6">
                         <label for="amount">Nuevo vencimiento</label>
                         <input type="date" class="form-control"
                             value="{{ $sale->nextPaymentToCollect->due_date->format('Y-m-d') }}" name="due_date"
                             min="{{ $sale->nextPaymentToCollect->due_date->format('Y-m-d') }}">
+                    </div>
+                    <div class="form-group col-sm-12 col-md-6">
+                        <label for="hourValidation">Hora aproximada <small>(opcional)</small></label>
+                        <input type="text" class="form-control @error('hour') is-invalid @enderror" id="hourValidation"
+                            name="hour" value="{{ old('hour', $sale->nextPaymentToCollect->hour) }}"
+                            placeholder="La hora a la que más probablemente encuentres a tu cliente en casa">
                     </div>
                 </div>
 
