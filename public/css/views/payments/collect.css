@@ -1,0 +1,9 @@
+.gallery__element {
+    width: 100%;
+}
+
+@media only screen and (min-width: 767px) {
+    .gallery__element {
+        width: 50%;
+    }
+}

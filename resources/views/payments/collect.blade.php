@@ -2,6 +2,10 @@
 
 @section('title', 'Cobrar')
 
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/views/payments/collect.css') }}">
+@endsection
+
 @section('content')
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -9,7 +13,7 @@
 
     <div>
         <a href="{{ route('clients.show', ['client' => $sale->client_id]) }}" class="ml-1 btn btn-sm btn-primary">
-            <i class="fas fa-eye"></i>
+            <i class="fas fa-user"></i>
         </a>
         @foreach ($sale->client->phones as $phone)
         <a href="{{ route('whatsapp.send', ['phone' => $phone->id]) }}" class="ml-1 btn btn-sm btn-success"
@@ -22,6 +26,36 @@
             <i class="fas fa-map-marker"></i>
         </a>
         @endif
+
+        <button type="button" class="btn btn-sm btn-info" data-toggle="modal"
+            data-target="#showPhotoModal{{ $sale->id }}">
+            <i class="fas fa-image"></i>
+        </button>
+        <div class="modal fade" id="showPhotoModal{{ $sale->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="showPhotoModal{{ $sale->id }}Label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="showPhotoModal{{ $sale->id }}Label">
+                            Fotos de esta venta
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body row">
+                        @foreach ($sale->details as $detail)
+                        @if($detail->photo)
+                        <div class="gallery__element p-2">
+                            <img class="img-fluid" src="{{ asset('storage/'.$detail->photo->path) }}"
+                                alt="{{ $detail->description }}">
+                        </div>
+                        @endif
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
