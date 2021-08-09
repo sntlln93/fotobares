@@ -379,7 +379,8 @@
                                 <input type="text"
                                     class="form-control @error('payment_description') is-invalid @enderror"
                                     id="payment_description" name="payment_description"
-                                    placeholder="Ingresá información referida a los pagos">
+                                    placeholder="Ingresá información referida a los pagos"
+                                    value="{{ old('payment_description') }}">
                             </div>
                         </div>
 
@@ -390,7 +391,8 @@
                                 <input type="date" class="form-control @error('deliver_date') is-invalid @enderror"
                                     id="deliver_date" name="deliver_date"
                                     placeholder="Indicá qué fecha realizas la entrega"
-                                    min="{{ Carbon\Carbon::tomorrow()->format('Y-m-d') }}">
+                                    min="{{ Carbon\Carbon::tomorrow()->format('Y-m-d') }}"
+                                    value="{{ old('deliver_date') }}">
                                 @error('deliver_date')
                                 <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -401,7 +403,8 @@
                                 <label for="hourValidation">Hora aproximada <small>(opcional)</small></label>
                                 <input type="text" class="form-control @error('hour') is-invalid @enderror"
                                     id="hourValidation" name="hour"
-                                    placeholder="La hora a la que más probablemente encuentres a tu cliente en casa">
+                                    placeholder="La hora a la que más probablemente encuentres a tu cliente en casa"
+                                    value="{{ old('hour') }}">
                             </div>
                         </div>
                     </div>
@@ -425,6 +428,11 @@
 @endsection
 
 @section('scripts')
+@if(old('quota_id'))
+<script>
+    const quotaId = {{ old('quota_id') }};
+</script>
+@endif
 <script src="{{ asset('js/utils/bs-stepper.min.js') }}"></script>
 <script src="{{ asset('js/views/sell/create.js') }}"></script>
 <script>

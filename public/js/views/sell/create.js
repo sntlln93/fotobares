@@ -218,7 +218,7 @@ const setBaseUrl = (url) => {
     BASE_URL = url;
 };
 
-getProducts = (productId) => {
+getProducts = (productId, quotaId = null) => {
     fetch(`${BASE_URL}/sales/product/${productId}/quotas`)
         .then((response) => response.json())
         .then((quotas) => {
@@ -227,6 +227,7 @@ getProducts = (productId) => {
             quotas.forEach((quota) => {
                 const option = document.createElement("option");
                 option.value = quota.id;
+                option.selected = quotaId === quota.id;
                 option.setAttribute("data-quota", quota.quantity);
                 option.setAttribute("data-price", quota.quota_amount);
                 option.innerText = `${quota.quantity} cuotas | Valor de la cuota: ${quota.quota_amount}`;
@@ -256,7 +257,9 @@ housePhotoInput.addEventListener("change", () => {
 
 onProductLoaded = () => {
     const products = document.querySelectorAll("input[name=product_id]");
-    products.forEach((product) => getProducts(product.value));
+    products.forEach((product) => {
+        if (product.checked) getProducts(product.value, quotaId);
+    });
 };
 
-window.onload = onPageLoad;
+window.onload = onProductLoaded;
