@@ -252,7 +252,26 @@ const housePhotoInput = document.getElementById("house_photo");
 
 housePhotoInput.addEventListener("change", () => {
     const label = document.querySelector("label[for=photo]");
+    const preview = document.querySelector(".img-fluid");
+    const file = housePhotoInput.files[0];
     label.innerText = `${housePhotoInput.files.length} foto seleccionada`;
+
+    const reader = new FileReader();
+
+    reader.addEventListener(
+        "load",
+        function () {
+            // convert image file to base64 string
+            preview.src = reader.result;
+            document.querySelector("input[name=house_photo]").value =
+                reader.result;
+        },
+        false
+    );
+
+    if (file) {
+        reader.readAsDataURL(file);
+    }
 });
 
 onProductLoaded = () => {

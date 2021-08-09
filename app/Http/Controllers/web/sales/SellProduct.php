@@ -4,13 +4,14 @@ namespace App\Http\Controllers\web\sales;
 
 use App\Models\Sale;
 use App\Models\Phone;
+use App\Models\Quota;
 use App\Models\Client;
 use App\Models\Address;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\SaleDetail;
-use App\Models\Quota;
 use Illuminate\Support\Carbon;
+use App\Services\StoreFromBase64;
 use App\Http\Requests\SellRequest;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -23,11 +24,11 @@ class SellProduct extends Controller
         return view('sell.create')->with('products', $products);
     }
 
-    public function store(SellRequest $request)
+    public function store(SellRequest $request, StoreFromBase64 $service)
     {
         $validated = $request->validated();
 
-        DB::transaction(function () use ($validated) {
+        DB::transaction(function () use ($validated, $service) {
             $client = Client::create([
                 'name' => $validated['name'],
                 'lastname' => $validated['lastname'],
@@ -70,8 +71,8 @@ class SellProduct extends Controller
                 'description' => $validated['description'],
             ]);
 
-            if (array_key_exists('house_photo', $validated)) {
-                $photo_path = $validated['house_photo']->storePublicly('addresses', 'public');
+            if (array_key_exists('house_photo', $validated) && $validated['house_photo'] != null) {
+                $photo_path = $service->store($validated['house_photo']);
             }
 
             Address::create([

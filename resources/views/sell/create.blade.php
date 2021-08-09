@@ -238,10 +238,12 @@
                                     <label class="custom-file-label" for="photo">
                                         0 fotos seleccionadas
                                     </label>
-                                    <input type="file" name="house_photo"
+                                    <input type="file"
                                         class="custom-file-input @error('house_photo') is-invalid @enderror"
                                         id="house_photo" accept="image/jpeg, jpg" capture="camera">
                                 </div>
+                                <img src="" alt="" class="img-fluid">
+                                <input type="hidden" name="house_photo" value="">
                                 @error('house_photo')
                                 <small class="text-danger">{{ $message }}</small>
                                 @enderror
