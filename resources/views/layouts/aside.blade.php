@@ -28,9 +28,11 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
+            @can('see-sales')
             <a href="{{ route('sales.index') }}" class="collapse-item">
               Ver ventas
             </a>
+            @endcan
             <a href="{{ route('sales.create') }}" class="collapse-item">
               Vender
             </a>
@@ -44,11 +46,13 @@
           <span>Mapa</span></a>
       </li>
 
+      @can('see-employees')
       <li class="{{ Str::contains(Route::currentRouteName(), 'employees') ? 'nav-item active' : 'nav-item'  }}">
         <a class="nav-link" href="{{ route('employees.index') }}">
           <i class="fas fa-user"></i>
           <span>Empleados</span></a>
       </li>
+      @endcan
     </div>
   </div>
 

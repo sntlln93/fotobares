@@ -43,7 +43,7 @@ class SellProduct extends Controller
             ]);
 
             $product = Product::find($validated['product_id']);
-            $quota =   Quota::find($validated['quota_id']);
+            $quota = Quota::find($validated['quota_id']);
 
             $deliver_on = Carbon::parse($validated['deliver_date']);
             
