@@ -22,7 +22,7 @@ class FirstUserSeeder extends Seeder
             'password' => Hash::make('contrasena')
         ]);
 
-        $user->roles()->attach(Role::first());
+        $user->roles()->attach(Role::find(1));
 
         Employee::create([
             'name' => 'Gabriela',
@@ -35,7 +35,7 @@ class FirstUserSeeder extends Seeder
             'password' => Hash::make('contrasena')
         ]);
 
-        $user->roles()->attach(Role::first());
+        $user->roles()->attach(Role::find(2));
 
         Employee::create([
             'name' => 'Florencia',
@@ -48,7 +48,7 @@ class FirstUserSeeder extends Seeder
             'password' => Hash::make('contrasena')
         ]);
 
-        $user->roles()->attach(Role::first());
+        $user->roles()->attach(Role::find(2));
 
         Employee::create([
             'name' => 'Brenda',
