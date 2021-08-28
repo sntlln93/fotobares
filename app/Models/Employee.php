@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model
 {
+    protected $guarded = [];
+
     public function getFullNameAttribute()
     {
         return $this->lastname . ' ' . $this->name;
