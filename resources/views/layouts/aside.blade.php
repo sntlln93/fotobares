@@ -38,10 +38,16 @@
         </div>
       </li>
 
-      <li class="{{ Route::currentRouteName() ==  'map' ? 'nav-item active' : 'nav-item'  }}">
+      <li class="{{ Str::contains(Route::currentRouteName(), 'map') ? 'nav-item active' : 'nav-item'  }}">
         <a class="nav-link" href="{{ route('map.index') }}">
           <i class="fas fa-map"></i>
           <span>Mapa</span></a>
+      </li>
+
+      <li class="{{ Str::contains(Route::currentRouteName(), 'employees') ? 'nav-item active' : 'nav-item'  }}">
+        <a class="nav-link" href="{{ route('employees.index') }}">
+          <i class="fas fa-user"></i>
+          <span>Empleados</span></a>
       </li>
     </div>
   </div>
