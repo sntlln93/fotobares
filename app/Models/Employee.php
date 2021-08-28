@@ -10,4 +10,14 @@ class Employee extends Model
     {
         return $this->lastname . ' ' . $this->name;
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class, 'seller_id');
+    }
 }
