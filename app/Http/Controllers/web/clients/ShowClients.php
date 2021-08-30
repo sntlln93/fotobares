@@ -9,7 +9,7 @@ class ShowClients extends Controller
 {
     public function index()
     {
-        $clients = Client::all();
+        $clients = Client::with('phones', 'address')->get();
         
         return view('clients.index')->with('clients', $clients);
     }
