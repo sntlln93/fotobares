@@ -8,6 +8,7 @@ use App\Models\Quota;
 use App\Models\Client;
 use App\Models\Address;
 use App\Models\Payment;
+use App\Models\Presale;
 use App\Models\Product;
 use App\Models\SaleDetail;
 use Illuminate\Support\Carbon;
@@ -29,6 +30,10 @@ class SellProduct extends Controller
         $validated = $request->validated();
 
         DB::transaction(function () use ($validated, $service) {
+            if (array_key_exists('presale_id', $validated)) {
+                Presale::find($validated['presale_id'])->delete();
+            }
+
             $client = Client::create([
                 'name' => $validated['name'],
                 'lastname' => $validated['lastname'],

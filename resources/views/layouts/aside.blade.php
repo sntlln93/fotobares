@@ -40,6 +40,12 @@
         </div>
       </li>
 
+      <li class="{{ Str::contains(Route::currentRouteName(), 'presale') ? 'nav-item active' : 'nav-item'  }}">
+        <a class="nav-link" href="{{ route('presale.index') }}">
+          <i class="fas fa-users"></i>
+          <span>Preventas</span></a>
+      </li>
+
       <li class="{{ Str::contains(Route::currentRouteName(), 'map') ? 'nav-item active' : 'nav-item'  }}">
         <a class="nav-link" href="{{ route('map.index') }}">
           <i class="fas fa-map"></i>

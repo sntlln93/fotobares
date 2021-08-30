@@ -282,3 +282,24 @@ onProductLoaded = () => {
 };
 
 window.onload = onProductLoaded;
+
+const sellBtn = document.getElementById("sellBtn");
+const toConfirmSaleBtn = document.getElementById("toConfirmSaleBtn");
+
+const sellForm = document.getElementById("sellForm");
+const toConfirmSaleForm = document.getElementById("toConfirmSaleForm");
+
+sellBtn.addEventListener("click", () => {
+    toConfirmSaleForm.classList.add("d-none");
+    toConfirmSaleBtn.classList.remove("active");
+
+    sellForm.classList.remove("d-none");
+    sellBtn.classList.add("active");
+});
+toConfirmSaleBtn.addEventListener("click", () => {
+    toConfirmSaleForm.classList.remove("d-none");
+    toConfirmSaleBtn.classList.add("active");
+
+    sellForm.classList.add("d-none");
+    sellBtn.classList.remove("active");
+});

@@ -10,7 +10,7 @@
             <button id="sellBtn" class="btn btn-link nav-link active">Vender</button>
         </li>
         <li class="nav-item">
-            <button id="toConfirmSaleBtn" class="btn btn-link nav-link">Guardar datos</button>
+            <button id="toConfirmSaleBtn" disabled class="btn btn-link nav-link">Guardar datos</button>
         </li>
     </ul>
     <div id="sellForm" class="bs-stepper card-body">
@@ -55,6 +55,7 @@
         </div>
         <form action="{{ route('sales.store') }}" method="POST" enctype="multipart/form-data" novalidate>
             @csrf
+            <input type="hidden" name="presale_id" value="{{ $presale->id }}">
             <div class="bs-stepper-content">
                 <div id="client-part" class="content" role="tabpanel" aria-labelledby="client-part-trigger">
                     <h1 class="h4 text-gray-800">Datos del cliente</h1>
@@ -62,7 +63,7 @@
                     <div class="form-group">
                         <label for="lastname">Apellido</label>
                         <input type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname"
-                            id="lastname" value="{{ old('lastname') }}">
+                            id="lastname" value="{{ old('lastname', $presale->lastname) }}">
                         @error('lastname')
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -71,7 +72,7 @@
                     <div class="form-group">
                         <label for="name">Nombre</label>
                         <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
-                            id="name" value="{{ old('name') }}">
+                            id="name" value="{{ old('name', $presale->name) }}">
                         @error('name')
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -107,21 +108,22 @@
                             <tbody id="phonesContainer">
                                 <tr>
                                     <td>
-                                        <input value="{{ old('phones.0.area_code', '380') }}"
+                                        <input value="{{ old('phones.0.area_code', $presale->area_code) }}"
                                             class="form-control @error('phones.0.area_code') is-invalid @enderror"
                                             id="phones.0.area_code" name="phones[0][area_code]" type="number">
                                     </td>
                                     <td>
-                                        <input value="{{ old('phones.0.number') }}"
+                                        <input value="{{ old('phones.0.number', $presale->number) }}"
                                             class="form-control w-100 @error('phones.0.number') is-invalid @enderror"
                                             id="phones.0.number" name="phones[0][number]" type="number">
 
                                     </td>
                                     <td>
                                         <div class="custom-control custom-switch h5">
-                                            <input @if(old('phones.0.has_whatsapp')=='on' ) checked @endif
-                                                class="custom-control-input" id="phones.0.has_whatsapp"
-                                                name="phones[0][has_whatsapp]" type="checkbox">
+                                            <input @if(old('phones.0.has_whatsapp')=='on' || $presale->has_whatsapp ==
+                                            true) checked @endif
+                                            class="custom-control-input" id="phones.0.has_whatsapp"
+                                            name="phones[0][has_whatsapp]" type="checkbox">
                                             <label class="custom-control-label" for="phones.0.has_whatsapp"></label>
                                         </div>
                                     </td>

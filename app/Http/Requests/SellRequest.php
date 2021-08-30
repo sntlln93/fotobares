@@ -54,6 +54,8 @@ class SellRequest extends FormRequest
             "quota_id" => ['required'],
             "payment_description" => ['nullable'],
             "hour" => ['nullable'],
+
+            "presale_id" => ['nullable']
         ];
     }
 
