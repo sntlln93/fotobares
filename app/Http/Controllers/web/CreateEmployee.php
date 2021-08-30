@@ -42,6 +42,7 @@ class CreateEmployee extends Controller
             $user->roles()->sync($validated['roles']);
         });
 
-        return redirect()->route('employees.index');
+        return redirect()->route('employees.index')
+            ->with('message', ['type' => 'success', 'content' => 'Empleado añadido con éxito!']);
     }
 }

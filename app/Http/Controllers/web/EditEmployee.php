@@ -40,6 +40,7 @@ class EditEmployee extends Controller
             $employee->user->roles()->sync($validated['roles']);
         });
 
-        return redirect()->route('employees.index');
+        return redirect()->route('employees.index')
+            ->with('message', ['type' => 'success', 'content' => "Datos de $employee->full_name modificado con éxito!"]);
     }
 }
