@@ -30,6 +30,11 @@ class AuthServiceProvider extends ServiceProvider
             return in_array("admin", $user_roles);
         });
 
+        Gate::define('see-sales-with-no-photo', function (\App\Models\User $user) {
+            $user_roles = $user->roles->pluck('name')->toArray();
+            return in_array("admin", $user_roles);
+        });
+
         Gate::define('see-products', function (\App\Models\User $user) {
             $user_roles = $user->roles->pluck('name')->toArray();
             return in_array("admin", $user_roles);

@@ -11,6 +11,7 @@
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
 
+        @can('see-sales-with-no-photo')
         <li class="nav-item">
             <a class="nav-link" href="{{ route('without-photo.index') }}">
                 <i class="fas fa-image fa-2x"></i>
@@ -19,6 +20,7 @@
             </a>
 
         </li>
+        @endcan
         <div class="topbar-divider d-none d-sm-block"></div>
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
