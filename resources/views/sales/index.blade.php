@@ -19,7 +19,9 @@
                         <th>Entregado</th>
                         <th>Vendedor</th>
                         <th>Fecha venta</th>
+                        @can('perform-action-on-sale')
                         <th>Acciones</th>
+                        @endcan
                     </tr>
                 </thead>
                 <tbody>

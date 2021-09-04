@@ -9,7 +9,20 @@ class ShowSales extends Controller
 {
     public function index()
     {
-        $sales = Sale::with('seller', 'client')->orderBy('id', 'desc')->paginate(20);
+        $roles = auth()->user()->roles->pluck('name')->toArray();
+
+        if (array_search('admin', $roles) !== false) {
+            $sales = Sale::with('seller', 'client')
+                ->orderBy('id', 'desc')
+                ->paginate(20);
+        } else {
+            $sales = Sale::with('seller', 'client')
+                ->where('seller_id', auth()->user()->id)
+                ->orderBy('id', 'desc')
+                ->paginate(20);
+        }
+
+
 
         return view('sales.index')->with('sales', $sales);
     }

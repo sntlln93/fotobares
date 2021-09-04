@@ -42,6 +42,11 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('see-sales', function (\App\Models\User $user) {
             $user_roles = $user->roles->pluck('name')->toArray();
+            return in_array("admin", $user_roles) || in_array("seller", $user_roles);
+        });
+
+        Gate::define('perform-action-on-sale', function (\App\Models\User $user) {
+            $user_roles = $user->roles->pluck('name')->toArray();
             return in_array("admin", $user_roles);
         });
     }
