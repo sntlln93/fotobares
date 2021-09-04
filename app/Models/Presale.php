@@ -17,4 +17,9 @@ class Presale extends Model
     {
         return '(' . $this->area_code . ') ' . $this->number;
     }
+
+    public function seller()
+    {
+        return $this->belongsTo(Employee::class);
+    }
 }

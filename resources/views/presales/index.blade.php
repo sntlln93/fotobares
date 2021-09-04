@@ -17,6 +17,7 @@
                         <th>Teléfono</th>
                         <th>Información adicional</th>
                         <th>Fecha añadido</th>
+                        <th>Preventista</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -28,6 +29,7 @@
                         <td>{{ $presale->formatted_number }}</td>
                         <td>{{ $presale->information }}</td>
                         <td>{{ $presale->created_at->diffForHumans() }}</td>
+                        <td>{{ $presale->seller->full_name }}</td>
                         <td>
                             <a href="tel:{{ $presale->area_code }}{{ $presale->number }}"
                                 class="btn btn-sm btn-primary"><i class="fas fa-phone"></i></a>
