@@ -19,8 +19,9 @@ class CreatePresale extends Controller
             "information" => ['nullable'],
         ]);
 
-        $validated['has_whatsapp'] = $validated['has_whatsapp'] ? true : false;
-
+        $validated['has_whatsapp'] = array_key_exists('has_whatsapp', $validated) ? true : false;
+        $validated['seller_id'] = auth()->user()->id;
+        
         Presale::create($validated);
 
         return redirect()->route('sales.create')

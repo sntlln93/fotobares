@@ -20,6 +20,10 @@ return new class extends Migration {
             $table->string("number");
             $table->boolean("has_whatsapp")->default(false);
             $table->string("information")->nullable();
+
+            $table->unsignedBigInteger('seller_id')->nullable();
+            $table->foreign('seller_id')->references('id')->on('employees')->onDelete('set null');
+
             $table->timestamps();
         });
     }
