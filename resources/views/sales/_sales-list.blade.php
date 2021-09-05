@@ -14,6 +14,10 @@
                 {{ $detail->description ? '('.$detail->description.')' : '(-)'}}</span>
             @endforeach
         </p>
+        <p class="mb-0">
+            <b>Vendedor:</b>
+            {{ $sale->seller->full_name }}
+        </p>
         <p class="mb-2">
             <b>Fecha:</b>
             {{ $sale->created_at->diffForHumans() }}

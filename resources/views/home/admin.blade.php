@@ -1,21 +1,5 @@
 @extends('layouts.app') @section('title', 'Inicio') @section('content')
 
-@section('styles')
-<style>
-    .ROSADO {
-        background-color: #e069e0 !important;
-    }
-
-    .AZUL {
-        background-color: #396adb !important;
-    }
-
-    .NEGRO {
-        background-color: #2a2a2b !important;
-    }
-</style>
-@endsection
-
 <div class="row">
     <div class="col-lg-6 px-0 mb-2">
         <div class="card-header px-0">
@@ -115,7 +99,7 @@
             <h6 class="h6 m-0 font-weight-bold text-primary">Últimas ventas</h6>
         </div>
         <ul class="list-group">
-            @include('home._sales')
+            @include('sales._sales-list')
         </ul>
     </div>
 </div>

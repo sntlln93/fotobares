@@ -19,6 +19,19 @@
 
   <!-- Custom styles for this template-->
   <link href="{{ asset('template/css/sb-admin-2.min.css') }}" rel="stylesheet">
+  <style>
+    .ROSADO {
+      background-color: #e069e0 !important;
+    }
+
+    .AZUL {
+      background-color: #396adb !important;
+    }
+
+    .NEGRO {
+      background-color: #2a2a2b !important;
+    }
+  </style>
   @yield('styles')
 </head>
 

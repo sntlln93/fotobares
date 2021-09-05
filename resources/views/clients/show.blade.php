@@ -88,7 +88,7 @@
 
 <div class="row px-2 mb-4">
 
-    <div class="col-sm-12">
+    <div class="col-sm-12 col-md-6">
         <div class="card my-4">
             <div class="card-header">
                 Datos personales
@@ -100,6 +100,17 @@
                 <p><b>Apellidos:</b> {{ $client->lastname }}</p>
                 <p><b>DNI:</b> {{ $client->dni }}</p>
             </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-6">
+        <div class="card my-4">
+            <div class="card-header">
+                Compras
+            </div>
+            <ul class="list-group">
+                @include('sales._sales-list')
+            </ul>
         </div>
     </div>
 

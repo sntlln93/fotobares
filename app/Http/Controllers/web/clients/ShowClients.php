@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\web\clients;
 
+use App\Models\Sale;
 use App\Models\Client;
 use App\Http\Controllers\Controller;
 
@@ -16,6 +17,10 @@ class ShowClients extends Controller
 
     public function show(Client $client)
     {
-        return view('clients.show')->with('client', $client);
+        $sales = Sale::where('client_id', $client->id)->get();
+
+        return view('clients.show')
+            ->with('client', $client)
+            ->with('sales', $sales);
     }
 }
