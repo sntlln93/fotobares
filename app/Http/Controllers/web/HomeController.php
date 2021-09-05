@@ -3,17 +3,47 @@
 namespace App\Http\Controllers\web;
 
 use App\Models\Sale;
+use App\Models\Presale;
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
     public function home()
     {
-        $sales = Sale::with('payments', 'client.phones', 'client.address', 'details.product')->get();
+        $roles = auth()->user()->roles->pluck('name')->toArray();
+
+        if (array_search('admin', $roles) !== false) {
+            return $this->homeForAdmins();
+        }
+
+        if (array_search('seller', $roles) !== false) {
+            return $this->homeForSellers();
+        }
+    }
+
+    private function homeForSellers()
+    {
+        $sales = Sale::query()
+            ->with('payments', 'client.phones', 'client.address', 'details.product')
+            ->where('seller_id', auth()->user()->id)
+            ->get();
+
+        $presales = Presale::query()
+            ->where('seller_id', auth()->user()->id)
+            ->get();
+
+        return view('home.seller')->with('sales', $sales)->with('presales', $presales);
+    }
+
+    private function homeForAdmins()
+    {
+        $sales = Sale::query()
+            ->with('payments', 'client.phones', 'client.address', 'details.product')
+            ->get();
         
         $payments = $this->getPayments($sales);
 
-        return view('home')->with('sales', $sales)->with('payments', $payments);
+        return view('home.admin')->with('sales', $sales)->with('payments', $payments);
     }
 
     private function getPayments($sales)

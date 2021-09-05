@@ -13,6 +13,11 @@ class Presale extends Model
         return $this->lastname . ' ' . $this->name;
     }
 
+    public function getFullNumberAttribute()
+    {
+        return $this->area_code.$this->number;
+    }
+    
     public function getFormattedNumberAttribute()
     {
         return '(' . $this->area_code . ') ' . $this->number;
