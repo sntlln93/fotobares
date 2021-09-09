@@ -34,6 +34,7 @@
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
 
                 @can('see-products')
+		<p class="dropdown-item">Quedan <strong>{{ Carbon\Carbon::parse('2022-09-08')->diffInDays(Carbon\Carbon::parse('2021-09-08') }} días </strong> de servicio </p>
                 <h6 class="dropdown-header">Productos</h6>
                 <a class="dropdown-item" href="{{ route('products.index') }}">
                     <i class="fas fa-boxes fa-sm fa-fw mr-2 text-gray-400"></i>
