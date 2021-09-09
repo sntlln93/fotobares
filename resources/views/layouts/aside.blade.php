@@ -46,6 +46,12 @@
           <span>Preventas</span></a>
       </li>
 
+      <li class="{{ Str::contains(Route::currentRouteName(), 'clients') ? 'nav-item active' : 'nav-item'  }}">
+        <a class="nav-link" href="{{ route('clients.index') }}">
+          <i class="fas fa-user-friends"></i>
+          <span>Clientes</span></a>
+      </li>
+
       <li class="{{ Str::contains(Route::currentRouteName(), 'map') ? 'nav-item active' : 'nav-item'  }}">
         <a class="nav-link" href="{{ route('map.index') }}">
           <i class="fas fa-map"></i>
