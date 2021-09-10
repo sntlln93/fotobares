@@ -39,7 +39,7 @@
                         {{ Carbon\Carbon::parse('2022-09-08')->diffInDays(Carbon\Carbon::now()) }}
                         días </strong> de servicio
                 </p>
-                <hr>
+                <div class="dropdown-divider"></div>
                 <h6 class="dropdown-header">Productos</h6>
                 <a class="dropdown-item" href="{{ route('products.index') }}">
                     <i class="fas fa-boxes fa-sm fa-fw mr-2 text-gray-400"></i>
