@@ -108,19 +108,20 @@
                             <tbody id="phonesContainer">
                                 <tr>
                                     <td>
-                                        <input value="{{ old('phones.0.area_code', $presale->area_code) }}"
+                                        <input value="{{ old('phones.0.area_code', $presale->phone->area_code) }}"
                                             class="form-control @error('phones.0.area_code') is-invalid @enderror"
                                             id="phones.0.area_code" name="phones[0][area_code]" type="number">
                                     </td>
                                     <td>
-                                        <input value="{{ old('phones.0.number', $presale->number) }}"
+                                        <input value="{{ old('phones.0.number', $presale->phone->number) }}"
                                             class="form-control w-100 @error('phones.0.number') is-invalid @enderror"
                                             id="phones.0.number" name="phones[0][number]" type="number">
 
                                     </td>
                                     <td>
                                         <div class="custom-control custom-switch h5">
-                                            <input @if(old('phones.0.has_whatsapp')=='on' || $presale->has_whatsapp ==
+                                            <input @if(old('phones.0.has_whatsapp')=='on' ||
+                                                $presale->phone->has_whatsapp ==
                                             true) checked @endif
                                             class="custom-control-input" id="phones.0.has_whatsapp"
                                             name="phones[0][has_whatsapp]" type="checkbox">

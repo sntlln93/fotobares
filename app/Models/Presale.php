@@ -6,25 +6,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class Presale extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        "lastname",
+        "name",
+        "information",
+        'seller_id'
+    ];
 
     public function getFullNameAttribute()
     {
         return $this->lastname . ' ' . $this->name;
     }
 
-    public function getFullNumberAttribute()
-    {
-        return $this->area_code.$this->number;
-    }
-    
-    public function getFormattedNumberAttribute()
-    {
-        return '(' . $this->area_code . ') ' . $this->number;
-    }
-
     public function seller()
     {
         return $this->belongsTo(Employee::class);
+    }
+
+    public function phone()
+    {
+        return $this->morphOne(Phone::class, 'phoneable');
     }
 }

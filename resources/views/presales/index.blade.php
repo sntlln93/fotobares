@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Ventas')
+@section('title', 'Preventas')
 
 @section('content')
 
 <div class="card">
     <div class="card-header">
-        <h6 class="m-0 font-weight-bold text-primary">Ventas</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Preventas</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -26,15 +26,23 @@
                     <tr>
                         <td>{{ $presale->full_name }}</a>
                         </td>
-                        <td>{{ $presale->formatted_number }}</td>
+                        <td>{{ $presale->phone->formatted_number }}</td>
                         <td>{{ $presale->information }}</td>
                         <td>{{ $presale->created_at->diffForHumans() }}</td>
                         <td>{{ $presale->seller->full_name }}</td>
                         <td>
-                            <a href="tel:{{ $presale->area_code }}{{ $presale->number }}"
-                                class="btn btn-sm btn-primary"><i class="fas fa-phone"></i></a>
                             <a href="{{ route('presale.create', ['presale' => $presale->id]) }}"
                                 class="btn btn-sm btn-success"><i class="fas fa-dollar-sign"></i></a>
+                            @if($presale->phone)
+                            <a href="tel:{{ $presale->phone->area_code.$presale->phone->number }}"
+                                class="ml-1 btn btn-sm btn-primary" target="_blank">
+                                <i class="fas fa-phone"></i>
+                            </a>
+                            <a href="{{ route('whatsapp.send', ['phone' => $presale->phone]) }}"
+                                class="btn btn-sm btn-success" target="_blank">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            @endif
                         </td>
                     </tr>
                     @endforeach

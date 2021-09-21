@@ -16,9 +16,6 @@ return new class extends Migration {
             $table->id();
             $table->string("lastname");
             $table->string("name");
-            $table->string("area_code");
-            $table->string("number");
-            $table->boolean("has_whatsapp")->default(false);
             $table->string("information")->nullable();
 
             $table->unsignedBigInteger('seller_id')->nullable();
