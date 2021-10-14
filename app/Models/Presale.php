@@ -10,8 +10,11 @@ class Presale extends Model
         "lastname",
         "name",
         "information",
-        'seller_id'
+        'seller_id',
+        'contact_date'
     ];
+
+    protected $dates = ['contact_date'];
 
     public function getFullNameAttribute()
     {

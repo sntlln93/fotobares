@@ -17,6 +17,7 @@
                         <th>Teléfono</th>
                         <th>Información adicional</th>
                         <th>Fecha añadido</th>
+                        <th>Fecha de contacto</th>
                         <th>Preventista</th>
                         <th>Acciones</th>
                     </tr>
@@ -29,6 +30,7 @@
                         <td>{{ $presale->phone->formatted_number }}</td>
                         <td>{{ $presale->information }}</td>
                         <td>{{ $presale->created_at->diffForHumans() }}</td>
+                        <td>{{ $presale->contact_date?->isoFormat('D [de] MMMM [de] Y') }}</td>
                         <td>{{ $presale->seller->full_name }}</td>
                         <td>
                             <a href="{{ route('presale.create', ['presale' => $presale->id]) }}"
@@ -43,6 +45,9 @@
                                 <i class="fab fa-whatsapp"></i>
                             </a>
                             @endif
+                            <a href="#" class="btn btn-sm btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </a>
                         </td>
                     </tr>
                     @endforeach

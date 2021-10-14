@@ -17,7 +17,8 @@ return new class extends Migration {
             $table->string("lastname");
             $table->string("name");
             $table->string("information")->nullable();
-
+            $table->date('contact_date')->nullable();
+            
             $table->unsignedBigInteger('seller_id')->nullable();
             $table->foreign('seller_id')->references('id')->on('employees')->onDelete('set null');
 

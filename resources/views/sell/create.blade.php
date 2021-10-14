@@ -449,7 +449,17 @@
                     @enderror
                 </div>
 
-                <div class="form-group col-sm-12">
+                <div class="form-group col-sm-4">
+                    <label for="contact_date">Llamar el día <small><em>(OPCIONAL)</em></small></label>
+                    <input type="date" name="contact_date"
+                        class="form-control @error('contact_date') is-invalid @enderror"
+                        value="{{ old('contact_date') }}">
+                    @error('contact_date')
+                    <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                <div class="form-group col-sm-8">
                     <label for="information">Información adicional</label>
                     <textarea name="information" rows="2"
                         class="form-control @error('information') is-invalid @enderror">{{ old('information') }}</textarea>

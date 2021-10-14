@@ -15,6 +15,7 @@ class CreatePresale extends Controller
             "lastname" => ['required'],
             "name" => ['required'],
             "area_code" => ['required'],
+            "contact_date" => ['nullable'],
             "number" => ['required'],
             "has_whatsapp" => ['nullable'],
             "information" => ['nullable'],
