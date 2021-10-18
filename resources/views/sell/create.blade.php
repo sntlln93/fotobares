@@ -304,6 +304,13 @@
                                             <span class="radio--title">ROSADO</span>
                                         </label>
 
+                                        <input type="radio" class="d-none" name="color" id="4" value="BLANCO"
+                                            @if(old('color')=="BLANCO" ) checked @endif>
+                                        <label for="4" class="text-white radio--container"
+                                            style="background-color: #fafafa">
+                                            <span class="radio--title" style="color: #363636">BLANCO</span>
+                                        </label>
+
                                         @error('color')
                                         <small class="text-danger">{{ $message }}</small>
                                         @enderror

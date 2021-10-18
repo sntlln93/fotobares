@@ -31,6 +31,11 @@
     .NEGRO {
       background-color: #2a2a2b !important;
     }
+
+    .BLANCO {
+      color: #2a2a2b !important;
+      border: 1px solid rgba(0, 0, 0, .3);
+    }
   </style>
   @yield('styles')
 </head>
