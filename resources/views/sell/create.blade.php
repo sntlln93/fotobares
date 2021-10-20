@@ -173,10 +173,11 @@
                     </div>
 
                     <div class="col-md-5 form-group">
-                        <label for="address[street]">Calle</label>
-                        <input type="text" class="form-control @error('address.street') is-invalid @enderror"
-                            id="address[street]" name="address[street]" value="{{ old('address.street') }}">
-                        @error('address.street')
+                        <label for="address[address_street]">Calle</label>
+                        <input type="text" class="form-control @error('address.address_street') is-invalid @enderror"
+                            id="address[address_street]" name="address[address_street]"
+                            value="{{ old('address.address_street') }}">
+                        @error('address.address_street')
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
@@ -453,28 +454,30 @@
             </div>
 
             <div class="form-group col-md-6">
-                <label for="street">Calle <small><em>(OPCIONAL)</em></small></label>
-                <input type="text" name="street" class="form-control @error('street') is-invalid @enderror"
-                    value="{{ old('street') }}">
-                @error('street')
+                <label for="address_street">Calle <small><em>(OPCIONAL)</em></small></label>
+                <input type="text" name="address_street"
+                    class="form-control @error('address_street') is-invalid @enderror"
+                    value="{{ old('address_street') }}">
+                @error('address_street')
                 <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
 
             <div class="form-group col-md-6">
-                <label for="neighborhood">Barrio <small><em>(OPCIONAL)</em></small></label>
-                <input type="text" name="neighborhood" class="form-control @error('neighborhood') is-invalid @enderror"
-                    value="{{ old('neighborhood') }}">
-                @error('neighborhood')
+                <label for="address_neighborhood">Barrio <small><em>(OPCIONAL)</em></small></label>
+                <input type="text" name="address_neighborhood"
+                    class="form-control @error('address_neighborhood') is-invalid @enderror"
+                    value="{{ old('address_neighborhood') }}">
+                @error('address_neighborhood')
                 <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
 
             <div class="form-group col-md-6">
-                <label for="number">Número de casa <small><em>(OPCIONAL)</em></small></label>
-                <input type="number" min="0" name="number" class="form-control @error('number') is-invalid @enderror"
-                    value="{{ old('number') }}">
-                @error('number')
+                <label for="address_number">Número de casa <small><em>(OPCIONAL)</em></small></label>
+                <input type="number" min="0" name="address_number"
+                    class="form-control @error('address_number') is-invalid @enderror" value="{{ old('number') }}">
+                @error('address_number')
                 <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>

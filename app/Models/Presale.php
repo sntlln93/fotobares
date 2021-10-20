@@ -12,9 +12,9 @@ class Presale extends Model
         "information",
         'seller_id',
         'contact_date',
-        'street',
-        'neighborhood',
-        'number'
+        'address_street',
+        'address_neighborhood',
+        'address_number'
     ];
 
     protected $dates = ['contact_date'];
@@ -26,7 +26,7 @@ class Presale extends Model
 
     public function getFullAddressAttribute()
     {
-        return $this->neighborhood. ', ' . $this->street. 'N° ' . $this->number;
+        return $this->address_neighborhood. ', ' . $this->address_street. 'N° ' . $this->address_number;
     }
 
     public function seller()

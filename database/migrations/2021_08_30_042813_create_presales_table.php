@@ -18,9 +18,9 @@ return new class extends Migration {
             $table->string("name");
             $table->string("information")->nullable();
 
-            $table->string('neighborhood')->nullable();
-            $table->string('street')->nullable();
-            $table->string('number')->nullable();
+            $table->string('address_neighborhood')->nullable();
+            $table->string('address_street')->nullable();
+            $table->string('address_number')->nullable();
             
             $table->date('contact_date')->nullable();
             $table->string('declined_because')->nullable();

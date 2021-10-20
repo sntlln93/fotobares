@@ -18,9 +18,9 @@ class CreatePresale extends Controller
             "contact_date" => ['nullable'],
             "number" => ['required'],
             "has_whatsapp" => ['nullable'],
-            'street' => ['nullable'],
-            'neighborhood' => ['nullable'],
-            'number' => ['nullable'],
+            'address_street' => ['nullable'],
+            'address_neighborhood' => ['nullable'],
+            'address_number' => ['nullable'],
             "information" => ['nullable'],
         ]);
 
