@@ -16,6 +16,7 @@
                         <th>Apellido y nombre</th>
                         <th>Teléfono</th>
                         <th>Información adicional</th>
+                        <th>Dirección</th>
                         <th>Fecha añadido</th>
                         <th>Fecha de contacto</th>
                         <th>Preventista</th>
@@ -29,6 +30,7 @@
                         </td>
                         <td>{{ $presale->phone->formatted_number }}</td>
                         <td>{{ $presale->information }}</td>
+                        <td>{{ $presale->full_address }}</td>
                         <td>{{ $presale->created_at->diffForHumans() }}</td>
                         <td>{{ $presale->contact_date?->isoFormat('D [de] MMMM [de] Y') }}</td>
                         <td>{{ $presale->seller->full_name }}</td>

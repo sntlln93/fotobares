@@ -170,7 +170,7 @@
                             <label for="address[neighborhood]">Barrio</label>
                             <input type="text" class="form-control @error('address.neighborhood') is-invalid @enderror"
                                 id="address[neighborhood]" name="address[neighborhood]"
-                                value="{{ old('address.neighborhood') }}">
+                                value="{{ old('address.neighborhood', $presale->neighborhood) }}">
                             @error('address.neighborhood')
                             <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -179,7 +179,8 @@
                         <div class="col-md-5 form-group">
                             <label for="address[street]">Calle</label>
                             <input type="text" class="form-control @error('address.street') is-invalid @enderror"
-                                id="address[street]" name="address[street]" value="{{ old('address.street') }}">
+                                id="address[street]" name="address[street]"
+                                value="{{ old('address.street', $presale->street) }}">
                             @error('address.street')
                             <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -190,7 +191,8 @@
                                 Número
                             </label>
                             <input type="number" class="form-control @error('address.number') is-invalid @enderror"
-                                id="address[number]" name="address[number]" value="{{ old('address.number') }}">
+                                id="address[number]" name="address[number]"
+                                value="{{ old('address.number', $presale->number) }}">
                             @error('address.number')
                             <small class="text-danger">{{ $message }}</small>
                             @enderror
