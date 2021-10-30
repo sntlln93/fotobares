@@ -173,11 +173,10 @@
                     </div>
 
                     <div class="col-md-5 form-group">
-                        <label for="address[address_street]">Calle</label>
-                        <input type="text" class="form-control @error('address.address_street') is-invalid @enderror"
-                            id="address[address_street]" name="address[address_street]"
-                            value="{{ old('address.address_street') }}">
-                        @error('address.address_street')
+                        <label for="address[street]">Calle</label>
+                        <input type="text" class="form-control @error('address.street') is-invalid @enderror"
+                            id="address[street]" name="address[street]" value="{{ old('address.street') }}">
+                        @error('address.street')
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
@@ -399,13 +398,13 @@
         </div>
     </form>
     @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
     @endif
 </div>
 

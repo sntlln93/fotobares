@@ -28,7 +28,6 @@ class SellProduct extends Controller
     public function store(SellRequest $request, StoreFromBase64 $service)
     {
         $validated = $request->validated();
-
         DB::transaction(function () use ($validated, $service) {
             if (array_key_exists('presale_id', $validated)) {
                 Presale::find($validated['presale_id'])->delete();
