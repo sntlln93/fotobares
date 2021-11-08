@@ -38,12 +38,12 @@ class HomeController extends Controller
     private function homeForAdmins()
     {
         $sales = Sale::query()
-            ->with('payments', 'client.phones', 'client.address', 'details.product')
-            ->get();
+            ->with('payments', 'client.phones', 'client.address', 'details.product');
         
-        $payments = $this->getPayments($sales);
-
-        return view('home.admin')->with('sales', $sales)->with('payments', $payments);
+        $payments = $this->getPayments($sales->get());
+        $deliveries = $sales->whereNull('delivered_at')->orderBy('deliver_on')->take(10)->get();
+        
+        return view('home.admin')->with('deliveries', $deliveries)->with('payments', $payments);
     }
 
     private function getPayments($sales)
