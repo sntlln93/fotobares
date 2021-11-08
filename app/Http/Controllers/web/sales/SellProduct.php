@@ -58,7 +58,7 @@ class SellProduct extends Controller
                 
                 $payment = Payment::create([
                     'amount' => $quota->quota_amount,
-                    'due_date' => $deliver_on->addMonth(1)->format('Y-m-d'),
+                    'due_date' => $deliver_on->addMonth($i)->format('Y-m-d'),
                     'hour' => $hour,
                     'sale_id' => $sale->id,
                     'previous_id' => $previous_payment
