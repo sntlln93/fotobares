@@ -17,8 +17,7 @@
         <div class="card-header px-0">
             <h6 class="h6 m-0 font-weight-bold text-primary">
                 Cuotas por vencer
-                <button class="btn btn-sm rounded-lg bg-secondary text-white border" id="togglePaymentsBtn"><i
-                        class="fas fa-eye"></i></button>
+                <button class="btn btn-sm btn-info" id="togglePaymentsBtn"><i class="fas fa-eye"></i></button>
             </h6>
         </div>
         <ul class="list-group" id="paymentsList">
@@ -83,8 +82,7 @@
         <div class="px-0 card-header d-flex">
             <h6 class="h6 m-0 font-weight-bold text-primary">
                 Próximas entregas
-                <button class="btn btn-sm rounded-lg bg-secondary text-white border" id="toggleDeliveriesBtn"><i
-                        class="fas fa-eye"></i></button>
+                <button class="btn btn-sm btn-info" id="toggleDeliveriesBtn"><i class="fas fa-eye"></i></button>
             </h6>
         </div>
         <ul class="list-group" id="deliveriesList">
@@ -136,11 +134,19 @@
 @section('scripts')
 <script>
     document.addEventListener('click', (event) => {
-        if(event.target.id === 'togglePaymentsBtn'){
+        const element  = event.target;
+        if(element.id === 'togglePaymentsBtn'){
+            element.innerHTML = element.innerHTML === '<i class="fas fa-eye"></i>' ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+            //toggle replace class btn-info for btn-warning
+            element.classList.toggle('btn-info');
+            element.classList.toggle('btn-secondary');
             document.getElementById('paymentsList').classList.toggle('d-none');
         }
 
-        if(event.target.id === 'toggleDeliveriesBtn'){
+        if(element.id === 'toggleDeliveriesBtn'){
+            element.innerHTML = element.innerHTML === '<i class="fas fa-eye"></i>' ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+            element.classList.toggle('btn-info');
+            element.classList.toggle('btn-secondary');
             document.getElementById('deliveriesList').classList.toggle('d-none');
         }
     })
