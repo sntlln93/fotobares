@@ -1,6 +1,5 @@
 @forelse ($sales as $sale)
 <li class="list-group-item d-flex align-items-center flex-wrap">
-
     <div class="d-flex flex-column">
         <p class="mb-0">
             <b>Cliente:</b>
@@ -12,6 +11,9 @@
             @foreach ($sale->details as $detail)
             <span class="badge text-white {{ $detail->color }}">{{ $detail->product->name }}
                 {{ $detail->description ? '('.$detail->description.')' : '(-)'}}</span>
+            <a class="btn btn-sm btn-primary" href="{{ route('sales.show', ['sale' => $sale]) }}"><i
+                    class="fas fa-eye"></i>
+            </a>
             @endforeach
         </p>
         <p class="mb-0">
