@@ -83,6 +83,8 @@
             <h6 class="h6 m-0 font-weight-bold text-primary">
                 Próximas entregas
                 <button class="btn btn-sm btn-info" id="toggleDeliveriesBtn"><i class="fas fa-eye"></i></button>
+                <a href="{{ route('deliveries.index') }}" class="btn btn-sm btn-primary"><i class="fas fa-box"></i> Ver
+                    todas</a>
             </h6>
         </div>
         <ul class="list-group" id="deliveriesList">
