@@ -22,6 +22,8 @@
     @foreach ($sales as $sale)
     <div class="card col-md-6 col-lg-4 card-max-width p-0">
         <div class="card-header text-right">
+            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                data-target="#photo{{ $sale->id }}"><i class="fas fa-image"></i></button>
             <a class="btn btn-sm btn-warning" href="{{ url('map/' . $sale->client_id) }}">
                 <i class="fas fa-map-marker"></i>
             </a>
@@ -34,6 +36,29 @@
             <a href="{{ route('sales.show', ['sale' => $sale->id]) }}" class="text-uppercase btn btn-sm btn-info"><i
                     class="fas fa-eye"></i> Ver</a>
         </div>
+
+        <div class="modal fade" id="photo{{$sale->id}}" tabindex="-1" aria-labelledby="photo{{$sale->id}}Label"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="photo{{$sale->id}}Label">Fotos</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @foreach ($sale->details as $detail)
+                        <img src="{{ asset('storage/'.$detail->photo?->path) }}" alt="" class="img-fluid">
+                        @endforeach
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="card-body">
             <p class="mb-0">
                 <b>Cliente:</b>
