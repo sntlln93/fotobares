@@ -147,13 +147,13 @@
         </div>
     </div>
 
-    @forelse($client->phones as $phone)
     <div class="col-sm-6">
         <div class="card">
             <div class="card-header">
                 Teléfonos
             </div>
             <div class="card-body">
+                @foreach($client->phones as $phone)
                 <p><b>Número:</b> {{ $phone->formatted_number }}
                     <a href="{{ route('phones.edit', ['phone' => $phone->id]) }}" class="btn btn-sm btn-warning"><i
                             class="fas fa-edit"></i></a>
@@ -164,24 +164,11 @@
                         class="btn btn-sm btn-success"><i class="fab fa-whatsapp"></i></a>
                     @endif
                 </p>
+                @endforeach
             </div>
         </div>
     </div>
-    @empty
-    <div class="col-sm-6">
-        <div class="card my-4">
-            <div class="card-header">
-                Teléfono
-                <a class="btn btn-link text-primary"
-                    href="{{ url('phone/'.$client->photos->first()->id.'/create') }}"><i class="fas fa-plus"></i></a>
 
-            </div>
-            <div class="card-body">
-                No hay un teléfono registrado para este cliente
-            </div>
-        </div>
-    </div>
-    @endforelse
 
 
 </div>
