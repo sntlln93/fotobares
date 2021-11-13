@@ -33,7 +33,7 @@ class SellProduct extends Controller
                 Presale::find($validated['presale_id'])->delete();
             }
 
-            $client = Client::create([
+            $client = Client::firstOrCreate(['dni' => $validated['dni']], [
                 'name' => $validated['name'],
                 'lastname' => $validated['lastname'],
                 'dni' => $validated['dni'],
