@@ -110,7 +110,8 @@
 <script>
     const sales = @json($sales);
     const tableBody = document.querySelector('tbody');
-    const showBaseUrl = '{{ route('sales.show', ':sale') }}';
+    const showSaleBaseUrl = '{{ route('sales.show', ':sale') }}';
+    const showClientBaseUrl = '{{ route('clients.show', ':client') }}';
 
     const renderSales = (salesToRender) => {
         tableBody.innerHTML = '';
@@ -121,14 +122,16 @@
 
             tr.innerHTML = `
                 <td>${sale.id}</td>
-                <td>${sale.client.name}</td>
+                <td>
+                    <a href="${showClientBaseUrl.replace(':client', sale.client.id)}">${sale.client.name} ${sale.client.lastname}</a>
+                </td>
                 <td>${getFormatedDate(sale.deliver_on)}</td>
                 <td>${sale.delivered_at ? getFormatedDate(sale.delivered_at) : 'No'}</td>
                 <td>${codes}</td>
                 <td>${sale.seller.name}</td>
                 <td>${getTimeAgo(new Date(sale.created_at))}</td>
                 <td>
-                    <a href="${showBaseUrl.replace(':sale', sale.id)}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
+                    <a href="${showSaleBaseUrl.replace(':sale', sale.id)}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
                 </td>
             `;
             tableBody.appendChild(tr);
