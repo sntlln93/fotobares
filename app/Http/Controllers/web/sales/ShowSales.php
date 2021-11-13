@@ -14,15 +14,13 @@ class ShowSales extends Controller
         if (array_search('admin', $roles) !== false) {
             $sales = Sale::with('seller', 'client')
                 ->orderBy('id', 'desc')
-                ->paginate(20);
+                ->get();
         } else {
             $sales = Sale::with('seller', 'client')
                 ->where('seller_id', auth()->user()->id)
                 ->orderBy('id', 'desc')
-                ->paginate(20);
+                ->get();
         }
-
-
 
         return view('sales.index')->with('sales', $sales);
     }
