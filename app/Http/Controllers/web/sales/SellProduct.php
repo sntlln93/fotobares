@@ -72,6 +72,7 @@ class SellProduct extends Controller
                 'color' => $validated['color'],
                 'product_id' => $product->id,
                 'sale_id' => $sale->id,
+                'code' => $validated['code'],
                 'description' => $validated['description'],
             ]);
 

@@ -47,6 +47,7 @@ class SellRequest extends FormRequest
             "house_photo" => ['nullable'],
 
             "description" => ['nullable'],
+            "code" => ['nullable'],
             "product_id" => ['required', 'numeric'],
             "color" => ['required', 'alpha'],
             "is_reproduction" => ['nullable'],

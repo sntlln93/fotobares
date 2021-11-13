@@ -37,7 +37,7 @@
     <table class="table table-bordered bg-white">
         <thead>
             <tr class="card-header">
-                <th colspan="7">
+                <th colspan="8">
                     <div class="py-2">
                         <h6 class="m-0 font-weight-bold text-primary">Ventas</h6>
                     </div>
@@ -48,6 +48,7 @@
                 <th>Cliente</th>
                 <th>Entrega programada</th>
                 <th>Entregado</th>
+                <th>Códigos</th>
                 <th>Vendedor</th>
                 <th>Fecha venta</th>
                 @can('perform-action-on-sale')
@@ -57,7 +58,7 @@
         </thead>
         <tbody>
             <tr>
-                <td colspan="7" class="text-center">
+                <td colspan="8" class="text-center">
                     <div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>
                 </td>
             </tr>
@@ -116,11 +117,14 @@
 
         salesToRender.forEach(sale => {
             const tr = document.createElement('tr');
+            const codes = sale.details.map(detail => detail.code && `<span class="badge badge-sm badge-info">${detail.code}</span>`).join(', ');
+
             tr.innerHTML = `
                 <td>${sale.id}</td>
                 <td>${sale.client.name}</td>
                 <td>${getFormatedDate(sale.deliver_on)}</td>
                 <td>${sale.delivered_at ? getFormatedDate(sale.delivered_at) : 'No'}</td>
+                <td>${codes}</td>
                 <td>${sale.seller.name}</td>
                 <td>${getTimeAgo(new Date(sale.created_at))}</td>
                 <td>
@@ -169,7 +173,7 @@
     }
 
     const applyFilters = (filterName) => {       
-        tableBody.innerHTML = '<tr><td colspan="7" class="text-center"><div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div></td></tr>';
+        tableBody.innerHTML = '<tr><td colspan="8" class="text-center"><div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div></td></tr>';
         
         let toRender = sales;
             
@@ -185,7 +189,7 @@
 
         toRender.length > 0 
         ? renderSales(toRender)
-        : tableBody.innerHTML = '<tr><td colspan="7" class="text-center">No hay ventas</td></tr>';
+        : tableBody.innerHTML = '<tr><td colspan="8" class="text-center">No hay ventas</td></tr>';
     }
 
     deliveredFilterBtn.addEventListener('click', () => applyFilters('onlyDelivered'));

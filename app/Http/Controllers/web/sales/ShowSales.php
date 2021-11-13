@@ -11,16 +11,13 @@ class ShowSales extends Controller
     {
         $roles = auth()->user()->roles->pluck('name')->toArray();
 
-        if (array_search('admin', $roles) !== false) {
-            $sales = Sale::with('seller', 'client')
-                ->orderBy('id', 'desc')
-                ->get();
-        } else {
-            $sales = Sale::with('seller', 'client')
-                ->where('seller_id', auth()->user()->id)
-                ->orderBy('id', 'desc')
-                ->get();
+        $sales = Sale::with('seller', 'client', 'details');
+        
+        if (array_search('admin', $roles) === false) {
+            $sales = $sales->where('seller_id', auth()->user()->id);
         }
+
+        $sales = $sales->orderBy('id', 'desc')->get();
 
         return view('sales.index')->with('sales', $sales);
     }

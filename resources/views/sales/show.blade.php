@@ -79,7 +79,10 @@
                         <div class="card-text">
                             @foreach ($sale->details as $detail)
                             <p class="my-0"><strong>{{ $detail->product->name }}</strong>
-                                [color {{ strtolower($detail->color) }}] -
+                                [color {{ strtolower($detail->color) }}]
+                                @if($detail->code)
+                                <span class="badge badge-info">{{ strtoupper($detail->code) }}</span>
+                                @endif -
                                 ${{ number_format($detail->amount, 2, ',', '.') }}
                                 @if($detail->photo)
                                 <button type="button" class="btn btn-sm btn-info" data-toggle="modal"
