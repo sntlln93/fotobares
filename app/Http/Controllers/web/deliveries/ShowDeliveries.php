@@ -11,6 +11,7 @@ class ShowDeliveries extends Controller
     {
         $sales = Sale::query()
             ->with('payments', 'client.phones', 'client.address', 'details.product')
+            ->whereHas('details', fn ($query) => $query->whereNotNull('edited_at'))
             ->whereNull('delivered_at')
             ->orderBy('deliver_on')
             ->get();

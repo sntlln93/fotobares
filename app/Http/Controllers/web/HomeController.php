@@ -41,8 +41,13 @@ class HomeController extends Controller
             ->with('payments', 'client.phones', 'client.address', 'details.product');
         
         $payments = $this->getPayments($sales->get());
-        $deliveries = $sales->whereNull('delivered_at')->orderBy('deliver_on')->take(10)->get();
-        
+        $deliveries = $sales
+            ->whereHas('details', fn ($query) => $query->whereNotNull('edited_at'))
+            ->whereNull('delivered_at')
+            ->orderBy('deliver_on')
+            ->take(10)
+            ->get();
+
         return view('home.admin')->with('deliveries', $deliveries)->with('payments', $payments);
     }
 

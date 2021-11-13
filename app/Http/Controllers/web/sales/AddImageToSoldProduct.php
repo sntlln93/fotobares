@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\web\sales;
 
-use App\Models\Sale;
 use App\Models\Photo;
 use App\Models\SaleDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Services\GetSaleDetailsWithoutPhoto;
@@ -49,7 +49,8 @@ class AddImageToSoldProduct extends Controller
             ]);
 
             $detail->update([
-                'description' => $request->description
+                'description' => $request->description,
+                'edited_at' => Carbon::now()
             ]);
         });
 
