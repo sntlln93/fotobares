@@ -33,6 +33,8 @@
             </a>
             <a href="tel:{{ $phone->full_number }}" class="btn btn-sm btn-primary"><i class="fas fa-phone"></i></a>
             @endforeach
+            <a href="{{ route('recalculate.form', ['sale' => $sale->id]) }}" class="btn btn-sm btn-dark"><i
+                    class="fas fa-credit-card"></i></a>
             <a href="{{ route('sales.show', ['sale' => $sale->id]) }}" class="text-uppercase btn btn-sm btn-info"><i
                     class="fas fa-eye"></i> Ver</a>
         </div>
