@@ -60,7 +60,7 @@ class CollectPayment extends Controller
             return $feedback_message;
         });
 
-        return redirect()->route('collect', ['sale' => $payment->sale_id])
+        return redirect()->route('home')
             ->with('message', ['type' => 'success', 'content' => $feedback_message]);
     }
 
