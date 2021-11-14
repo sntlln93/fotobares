@@ -39,7 +39,7 @@
     const render = (details) => {
         detailsContainer.innerHTML = '';
         
-        details.forEach(detail => {
+        details.forEach((detail, index) => {
             const markAsManufacturedUrl = detail.manufactured_at ? "{{ route('manufacture.undo', ':detail') }}" : "{{ route('manufacture.update', ':detail') }}";
             console.log(markAsManufacturedUrl);
 
@@ -60,7 +60,7 @@
             const card = document.createElement('div');
             card.classList.add('card', 'col-md-6', 'col-lg-4', 'card-max-width', 'p-0');
             card.innerHTML = `
-                <img src="${baseURL}/storage/${detail.photo.path}" class="card-img-top" alt="${detail.description}">
+                <img loading="${index < 3 ? 'lazy' : 'eager'}" src="${baseURL}/storage/${detail.photo.path}" class="card-img-top" alt="${detail.description}">
                 <div class="card-body">
                     <h5 class="card-title">
                         [${detail.sale_id}] ${detail.product.name} <i
