@@ -36,6 +36,34 @@
       color: #2a2a2b !important;
       border: 1px solid rgba(0, 0, 0, .3);
     }
+
+    .ROSADO-text {
+      border-radius: 50%;
+      color: #e069e0 !important;
+      background-color: #e069e0 !important;
+      border: 1px solid rgba(0, 0, 0, .4);
+    }
+
+    .AZUL-text {
+      border-radius: 50%;
+      color: #396adb !important;
+      background-color: #396adb !important;
+      border: 1px solid rgba(0, 0, 0, .4);
+    }
+
+    .NEGRO-text {
+      border-radius: 50%;
+      color: #2a2a2b !important;
+      background-color: #2a2a2b !important;
+      border: 1px solid rgba(0, 0, 0, .4);
+    }
+
+    .BLANCO-text {
+      border-radius: 50%;
+      color: #fafafa !important;
+      background-color: #fafafa !important;
+      border: 1px solid rgba(0, 0, 0, .4);
+    }
   </style>
   @yield('styles')
 </head>

@@ -65,6 +65,14 @@
           <span>Empleados</span></a>
       </li>
       @endcan
+
+      @can('manufacture')
+      <li class="{{ Str::contains(Route::currentRouteName(), 'manufacture') ? 'nav-item active' : 'nav-item'  }}">
+        <a class="nav-link" href="{{ route('manufacture.index') }}">
+          <i class="fas fa-tools"></i>
+          <span>Fabricación</span></a>
+      </li>
+      @endcan
     </div>
   </div>
 
