@@ -40,7 +40,8 @@
         detailsContainer.innerHTML = '';
         
         details.forEach(detail => {
-        const markAsManufacturedUrl = "{{ route('manufacture.update', ':detail') }}";
+            const markAsManufacturedUrl = detail.manufactured_at ? "{{ route('manufacture.undo', ':detail') }}" : "{{ route('manufacture.update', ':detail') }}";
+            console.log(markAsManufacturedUrl);
 
         const submitBtnContent = detail.manufactured_at
         ? `<i class="fas fa-exclamation-circle"></i> Desmarcar como fabricado`

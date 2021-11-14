@@ -10,6 +10,7 @@ Route::put('/without-photo/{detail}', [App\Http\Controllers\web\sales\AddImageTo
 
 Route::get('/manufacture', [App\Http\Controllers\web\sales\MarkAsManufactured::class, 'index'])->name('manufacture.index');
 Route::put('mark-as-manufatured/{detail}', [App\Http\Controllers\web\sales\MarkAsManufactured::class, 'update'])->name('manufacture.update');
+Route::put('mark-as-not-manufatured/{detail}', [App\Http\Controllers\web\sales\MarkAsManufactured::class, 'undo'])->name('manufacture.undo');
 
 Route::get('/create', [App\Http\Controllers\web\sales\SellProduct::class, 'create'])->name('sales.create');
 Route::post('/', [App\Http\Controllers\web\sales\SellProduct::class, 'store'])->name('sales.store');

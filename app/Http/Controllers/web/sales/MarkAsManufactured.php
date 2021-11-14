@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\web\sales;
 
 use App\Models\SaleDetail;
-use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 
 class MarkAsManufactured extends Controller
@@ -12,10 +12,13 @@ class MarkAsManufactured extends Controller
     {
         $details = SaleDetail::query()
         ->with('sale', 'photo', 'product')
-            ->has('photo')
-            ->whereNull('manufactured_at')
-            ->get();
-
+            ->whereNotNull('edited_at')
+            ->where(function ($query) {
+                $query
+                ->where('manufactured_at', '>=', Carbon::now()->subDays(7))
+                ->orWhereNull('manufactured_at');
+            })->get();
+        
         return view('manufacture.index')->with('details', $details);
     }
 
@@ -27,5 +30,15 @@ class MarkAsManufactured extends Controller
 
         return redirect()->back()
         ->with('message', ['type' => 'success', 'content' => $detail->product->name." registrado como fabricado"]);
+    }
+
+    public function undo(SaleDetail $detail)
+    {
+        $detail->update([
+            'manufactured_at' => null,
+        ]);
+
+        return redirect()->back()
+        ->with('message', ['type' => 'error', 'content' => $detail->product->name." registrado como no fabricado"]);
     }
 }
