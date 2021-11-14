@@ -8,20 +8,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Services\GetSaleDetailsWithoutPhoto;
 
 class AddImageToSoldProduct extends Controller
 {
-    public function __construct(GetSaleDetailsWithoutPhoto $service)
-    {
-        $this->service = $service;
-    }
     public function index()
     {
-        $details = $this
-            ->service
-            ->get()
-            ->with('sale.client', 'photo', 'product')
+        $details = SaleDetail::query()
+            ->doesntHave('photo')
+            ->with('sale.client', 'product')
             ->paginate(20);
 
         return view('sold-without-photo.index')->with('details', $details);

@@ -2,9 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\View;
+use App\Models\SaleDetail;
 use Illuminate\Support\ServiceProvider;
-use App\Services\GetSaleDetailsWithoutPhoto;
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -26,7 +25,7 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('layouts.header', function ($view) {
-            $view->with('details_without_photo', (new GetSaleDetailsWithoutPhoto)->get()->count());
+            $view->with('details_without_photo', SaleDetail::doesntHave('photo')->count());
         });
     }
 }
