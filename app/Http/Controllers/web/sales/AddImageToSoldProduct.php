@@ -16,7 +16,7 @@ class AddImageToSoldProduct extends Controller
         $details = SaleDetail::query()
             ->doesntHave('photo')
             ->with('sale.client', 'product')
-            ->paginate(20);
+            ->get();
 
         return view('sold-without-photo.index')->with('details', $details);
     }
