@@ -42,7 +42,7 @@
                     <p class="mb-2">
                         <b>Producto (descripción):</b>
                         @foreach ($payment->details as $detail)
-                        <span class="badge text-white {{ $detail->color }}">{{ $detail->product_name }}
+                        <span class="badge text-white text-wrap {{ $detail->color }}">{{ $detail->product_name }}
                             {{ $detail->description ? '('.$detail->description.')' : '(-)'}}</span>
                         @endforeach
                     </p>
@@ -60,11 +60,7 @@
                     </a>
                     @endif
                     <a class="btn btn-sm btn-primary ml-1" href="{{ route('collect', ['sale' => $payment->sale_id]) }}">
-                        @if ($payment->delivered_at)
                         <i class="fas fa-dollar-sign"></i>
-                        @else
-                        <i class="fas fa-box"></i>
-                        @endif
                     </a>
                 </div>
             </li>

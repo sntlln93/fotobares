@@ -38,7 +38,8 @@ class HomeController extends Controller
     private function homeForAdmins()
     {
         $sales = Sale::query()
-            ->with('payments', 'client.phones', 'client.address', 'details.product');
+            ->with('payments', 'client.phones', 'client.address', 'details.product')
+            ->whereNotNull('delivered_at');
         
         $payments = $this->getPayments($sales->get());
         $deliveries = $sales
@@ -77,7 +78,6 @@ class HomeController extends Controller
                 'phones' => $sale->client->phones->map(function ($phone) {
                     return $phone->id;
                 }),
-                'delivered_at' => $sale->delivered_at,
             ];
         })->sortBy('due_date')
         ->take(10);
