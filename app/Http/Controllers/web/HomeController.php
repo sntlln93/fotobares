@@ -37,12 +37,10 @@ class HomeController extends Controller
 
     private function homeForAdmins()
     {
-        $sales = Sale::query()
+        $payments = $this->getPayments();
+
+        $deliveries = Sale::query()
             ->with('payments', 'client.phones', 'client.address', 'details.product')
-            ->whereNotNull('delivered_at');
-        
-        $payments = $this->getPayments($sales->get());
-        $deliveries = $sales
             ->whereHas('details', fn ($query) => $query->whereNotNull('edited_at')->whereNotNull('manufactured_at'))
             ->whereNull('delivered_at')
             ->orderBy('deliver_on')
@@ -52,34 +50,37 @@ class HomeController extends Controller
         return view('home.admin')->with('deliveries', $deliveries)->with('payments', $payments);
     }
 
-    private function getPayments($sales)
+    private function getPayments()
     {
-        return $sales->filter(function ($sale) {
-            return $sale->nextPaymentToCollect;
-        })->map(function ($sale) {
-            return (object)[
-                'id' => $sale->nextPaymentToCollect->id,
-                'sale_id' => $sale->id,
-                'client' => (object)[
-                    'id' => $sale->client_id,
-                    'full_name' => $sale->client->full_name,
-                    'has_location' => $sale->client->address->has_location,
-                ],
-                'amount' => $sale->nextPaymentToCollect->amount,
-                'due_date' => $sale->nextPaymentToCollect->due_date,
-                'hour' => $sale->nextPaymentToCollect->hour,
-                'details' => $sale->details->map(function ($detail) {
-                    return (object)[
-                        'color' => $detail->color,
-                        'product_name' => $detail->product->name,
-                        'description' => $detail->description,
-                    ];
-                }),
-                'phones' => $sale->client->phones->map(function ($phone) {
-                    return $phone->id;
-                }),
-            ];
-        })->sortBy('due_date')
-        ->take(10);
+        return Sale::query()
+            ->with('payments', 'client.phones', 'client.address', 'details.product')
+            ->whereNotNull('delivered_at')
+            ->get()
+            ->filter(fn ($sale) => $sale->nextPaymentToCollect)
+            ->map(function ($sale) {
+                return (object)[
+                    'id' => $sale->nextPaymentToCollect->id,
+                    'sale_id' => $sale->id,
+                    'client' => (object)[
+                        'id' => $sale->client_id,
+                        'full_name' => $sale->client->full_name,
+                        'has_location' => $sale->client->address->has_location,
+                    ],
+                    'amount' => $sale->nextPaymentToCollect->amount,
+                    'due_date' => $sale->nextPaymentToCollect->due_date,
+                    'hour' => $sale->nextPaymentToCollect->hour,
+                    'details' => $sale->details->map(function ($detail) {
+                        return (object)[
+                            'color' => $detail->color,
+                            'product_name' => $detail->product->name,
+                            'description' => $detail->description,
+                        ];
+                    }),
+                    'phones' => $sale->client->phones->map(function ($phone) {
+                        return $phone->id;
+                    }),
+                ];
+            })->sortBy('due_date')
+            ->take(10);
     }
 }
