@@ -14,7 +14,7 @@ class ShowEmployees extends Controller
             abort(403);
         }
 
-        $employees = Employee::all();
+        $employees = Employee::whereNotNull('user_id')->get();
 
         return view('employees.index')->with('employees', $employees);
     }
