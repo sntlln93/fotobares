@@ -73,6 +73,22 @@
           <span>Fabricación</span></a>
       </li>
       @endcan
+
+      @can('deliver')
+      <li class="{{ Str::contains(Route::currentRouteName(), 'deliveries.index') ? 'nav-item active' : 'nav-item'  }}">
+        <a class="nav-link" href="{{ route('deliveries.index') }}">
+          <i class="fas fa-box"></i>
+          <span>Entregar</span></a>
+      </li>
+      @endcan
+
+      @can('collect')
+      <li class="{{ Str::contains(Route::currentRouteName(), 'payments.index') ? 'nav-item active' : 'nav-item'  }}">
+        <a class="nav-link" href="{{ route('payments.index') }}">
+          <i class="fas fa-hand-holding-usd"></i>
+          <span>Cobrar</span></a>
+      </li>
+      @endcan
     </div>
   </div>
 

@@ -19,7 +19,7 @@
                 Cuotas por vencer
                 <button class="btn btn-sm btn-info" id="togglePaymentsBtn"><i class="fas fa-eye"></i></button>
                 <a href="{{ route('payments.index') }}" class="btn btn-sm btn-primary"><i
-                        class="fas fa-dollar-sign"></i> Ver
+                        class="fas fa-hand-holding-usd"></i> Ver
                     todas</a>
             </h6>
         </div>
