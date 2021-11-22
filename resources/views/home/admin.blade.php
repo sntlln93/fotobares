@@ -18,6 +18,9 @@
             <h6 class="h6 m-0 font-weight-bold text-primary">
                 Cuotas por vencer
                 <button class="btn btn-sm btn-info" id="togglePaymentsBtn"><i class="fas fa-eye"></i></button>
+                <a href="{{ route('payments.index') }}" class="btn btn-sm btn-primary"><i
+                        class="fas fa-dollar-sign"></i> Ver
+                    todas</a>
             </h6>
         </div>
         <ul class="list-group" id="paymentsList">
