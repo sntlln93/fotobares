@@ -28,9 +28,6 @@
             <span class="input-group-text"><i class="fas fa-search"></i></span>
         </div>
     </div>
-    <div class="col-sm-12 col-md-6">
-        <button id="deliveredFilterBtn" class="btn btn-light border"><i class="fas fa-box"></i></button>
-    </div>
 </div>
 
 <div class="table-responsive">
@@ -46,8 +43,18 @@
             <tr>
                 <th>#</th>
                 <th>Cliente</th>
-                <th>Entrega programada</th>
-                <th>Entregado</th>
+                <th>
+                    Entrega programada
+                    <button id="orderByDeliverOnBtn" class="btn btn-sm btn-light border">
+                        <i class="fas fa-sort"></i>
+                    </button>
+                </th>
+                <th>
+                    Entregado
+                    <button id="deliveredFilterBtn" class="btn btn-sm btn-light border">
+                        <i class="fas fa-filter"></i>
+                    </button>
+                </th>
                 <th>Códigos</th>
                 <th>Vendedor</th>
                 <th>Fecha venta</th>
@@ -108,11 +115,13 @@
 
 <script>
     const deliveredFilterBtn = document.querySelector('#deliveredFilterBtn');
+    const orderByDeliverOnBtn = document.querySelector('#orderByDeliverOnBtn');
     const searchInput = document.querySelector('#searchInput');
 
     const filters = {
         onlyDelivered: false,
-        search: false
+        search: false,
+        orderByDeliverOn: 0
     };
 
     const flattenObj = (obj, parent, res = {}) => {
@@ -134,11 +143,28 @@
 
     const toggleOnlyDelivered = () => {
         deliveredFilterBtn.classList.toggle('filter--active')
-        filters.onlyDelivered
-            ? deliveredFilterBtn.innerHTML = '<i class="fas fa-box-open"></i>'
-            : deliveredFilterBtn.innerHTML = '<i class="fas fa-box"></i>';
-
+        
         return filters.onlyDelivered ? sales.filter(sale => sale.delivered_at !== null) : sales;
+    }
+
+    const orderByDeliverOn = () => {
+        let orderedSales = sales;
+
+        switch(filters.orderByDeliverOn){
+            case -1:
+                orderByDeliverOnBtn.classList.contains('filter--active') ? null : orderByDeliverOnBtn.classList.add('filter--active');
+                orderedSales = sales.sort((a, b) => Date.parse(a.deliver_on) - Date.parse(b.deliver_on));
+                break;
+            case 0:
+                orderByDeliverOnBtn.classList.contains('filter--active') ? orderByDeliverOnBtn.classList.remove('filter--active') : null;
+                break;
+            case 1:
+                orderByDeliverOnBtn.classList.contains('filter--active') ? null : orderByDeliverOnBtn.classList.add('filter--active');
+                orderedSales = sales.sort((a, b) => Date.parse(b.deliver_on) - Date.parse(a.deliver_on));
+                break;
+            }
+
+        return orderedSales;
     }
 
     const applyFilters = (filterName) => {       
@@ -156,12 +182,28 @@
             toRender = searchOnSales();
         }
 
+        if(filterName === 'orderByDeliverOn') {
+            switch(filters[filterName]) {
+                case -1:
+                    filters[filterName] = 0;
+                    break;
+                case 0:
+                    filters[filterName] = 1;
+                    break;
+                case 1:
+                    filters[filterName] = -1;
+                    break;
+            }
+            toRender = orderByDeliverOn();
+        }
+
         toRender.length > 0 
         ? renderSales(toRender)
         : tableBody.innerHTML = '<tr><td colspan="8" class="text-center">No hay ventas</td></tr>';
     }
 
     deliveredFilterBtn.addEventListener('click', () => applyFilters('onlyDelivered'));
+    orderByDeliverOnBtn.addEventListener('click', () => applyFilters('orderByDeliverOn'));
     searchInput.addEventListener('input', () => applyFilters('search'));
 
 </script>
