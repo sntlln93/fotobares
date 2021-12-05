@@ -21,7 +21,7 @@ class SellProduct extends Controller
 {
     public function create()
     {
-        $products = Product::all();
+        $products = Product::with('quotas')->get();
         return view('sell.create')->with('products', $products);
     }
 

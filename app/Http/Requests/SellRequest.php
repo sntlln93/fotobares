@@ -49,7 +49,7 @@ class SellRequest extends FormRequest
             "description" => ['nullable'],
             "code" => ['nullable'],
             "product_id" => ['required', 'numeric'],
-            "color" => ['required', 'alpha'],
+            "color" => ['required'],
             "is_reproduction" => ['nullable'],
             "deliver_date" => ['required', 'date'],
             "quota_id" => ['required'],

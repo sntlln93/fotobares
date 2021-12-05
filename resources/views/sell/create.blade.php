@@ -259,90 +259,51 @@
                         <div class="form-group radio--select">
                             <label for="product">Elegí un producto</label>
 
-                            <div class="form-group">
-                                @foreach ($products as $product)
-                                <input type="radio" class="d-none products" name="product_id"
-                                    id="product.{{ $product->id }}" value="{{ $product->id }}"
-                                    @if(old('product_id')==$product->id) checked @endif>
-                                <label for="product.{{ $product->id }}" class="radio--container">
-                                    <p class="my-1 radio--title">
-                                        <strong>{{ $product->name }}</strong>
-                                    </p>
-                                    <p class="my-1 radio--info">
-                                        ${{ number_format($product->price, 2, ',', '.') }}</p>
-                                </label>
-                                @endforeach
+                            <div class="form-group" style="gap: .5rem;" id="products">
 
-                                @error('product_id')
+                            </div>
+                            @error('product_id')
+                            <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group radio--select d-none" id="color-picker">
+                            <label for="product">Elegí un color</label>
+
+                            <div class="form-group d-flex" style="gap: .5rem;" id="colors">
+
+                            </div>
+                            @error('color')
+                            <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Es reproducción</label>
+                            <div class="form-check">
+                                <input @if (old('is_reproduction')=='on' ) checked @endif
+                                    class="form-check-input @error('is_reproduction') is-invalid @enderror"
+                                    type="checkbox" id="is_reproduction" name="is_reproduction">
+                                <label class="form-check-label" for="is_reproduction">Sí</label>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="description">Descripción de la foto que irá en el
+                                    mural <small>(opcional)</small></label>
+                                <input type="text" class="form-control @error('description') is-invalid @enderror"
+                                    name="description" id="description" value="{{ old('description') }}">
+                                @error('description')
                                 <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
-
-                            <div class="form-group radio--select">
-                                <label for="product">Elegí un color</label>
-
-                                <div class="form-group">
-                                    <input type="radio" class="d-none" name="color" id="1" value="AZUL"
-                                        @if(old('color')=="AZUL" ) checked @endif>
-                                    <label for="1" class="text-white radio--container"
-                                        style="background-color: #396adb">
-                                        <span class="radio--title">AZUL</span>
-                                    </label>
-
-                                    <input type="radio" class="d-none" name="color" id="2" value="NEGRO"
-                                        @if(old('color')=="NEGRO" ) checked @endif>
-                                    <label for="2" class="text-white radio--container"
-                                        style="background-color: #2a2a2b">
-                                        <span class="radio--title">NEGRO</span>
-                                    </label>
-
-                                    <input type="radio" class="d-none" name="color" id="3" value="ROSADO"
-                                        @if(old('color')=="ROSADO" ) checked @endif>
-                                    <label for="3" class="text-white radio--container"
-                                        style="background-color: #e069e0">
-                                        <span class="radio--title">ROSADO</span>
-                                    </label>
-
-                                    <input type="radio" class="d-none" name="color" id="4" value="BLANCO"
-                                        @if(old('color')=="BLANCO" ) checked @endif>
-                                    <label for="4" class="text-white radio--container"
-                                        style="background-color: #fafafa">
-                                        <span class="radio--title" style="color: #363636">BLANCO</span>
-                                    </label>
-
-                                    @error('color')
-                                    <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Es reproducción</label>
-                                <div class="form-check">
-                                    <input @if (old('is_reproduction')=='on' ) checked @endif
-                                        class="form-check-input @error('is_reproduction') is-invalid @enderror"
-                                        type="checkbox" id="is_reproduction" name="is_reproduction">
-                                    <label class="form-check-label" for="is_reproduction">Sí</label>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="description">Descripción de la foto que irá en el
-                                        mural <small>(opcional)</small></label>
-                                    <input type="text" class="form-control @error('description') is-invalid @enderror"
-                                        name="description" id="description" value="{{ old('description') }}">
-                                    @error('description')
-                                    <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="code">Código <small>(opcional)</small></label>
-                                    <input type="text" class="form-control @error('code') is-invalid @enderror"
-                                        name="code" id="code" value="{{ old('code') }}">
-                                    @error('code')
-                                    <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
+                            <div class="form-group col-md-6">
+                                <label for="code">Código <small>(opcional)</small></label>
+                                <input type="text" class="form-control @error('code') is-invalid @enderror" name="code"
+                                    id="code" value="{{ old('code') }}">
+                                @error('code')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -532,14 +493,10 @@
 @endsection
 
 @section('scripts')
-@if(old('quota_id'))
-<script>
-    const quotaId = {{ old('quota_id') }};
-</script>
-@endif
 <script src="{{ asset('js/utils/bs-stepper.min.js') }}"></script>
-<script src="{{ asset('js/views/sell/create.js') }}"></script>
 <script>
-    setBaseUrl("{{ env('APP_URL') }}");
+    const products = @json($products);
+    const oldInput = @json(old());
 </script>
+<script src="{{ asset('js/views/sell/create.js') }}"></script>
 @endsection
