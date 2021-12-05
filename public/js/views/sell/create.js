@@ -242,7 +242,6 @@ const renderProducts = (products, oldProduct) => {
 
 const renderQuotas = (quotas) => {
   const oldQuota = oldInput.quota_id;
-  console.log(oldInput);
 
   quotasContainer.innerHTML = '<option></option>';
 
@@ -262,7 +261,6 @@ const renderQuotas = (quotas) => {
 
 const renderColorPicker = (colors) => {
   const oldColor = oldInput.color;
-  console.log(oldInput);
 
   const colorPickerContainer = document.getElementById('colors');
   const colorPickerContainerParent = document.getElementById('color-picker');
