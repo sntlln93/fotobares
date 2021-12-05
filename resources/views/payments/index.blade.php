@@ -56,8 +56,7 @@
             <p class="mb-2">
                 <b>Producto (descripción):</b>
                 @foreach ($payment->details as $detail)
-                <span class="badge text-white text-wrap {{ $detail->color }}">{{ $detail->product_name }}
-                    {{ $detail->description ? '('.$detail->description.')' : '(-)'}}</span>
+                @include('_partials.detail')
                 @endforeach
             </p>
         </div>

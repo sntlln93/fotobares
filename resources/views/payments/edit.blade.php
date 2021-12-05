@@ -17,8 +17,7 @@
             @foreach ($sale->details as $detail)
             <div class="form-row mb-2">
                 <div class="col-sm-12">
-                    <span class="badge text-white {{ $detail->color }}">{{ $detail->product->name }}
-                        {{ $detail->description ? '('.$detail->description.')' : '(-)'}}</span>
+                    @include('_partials.detail')
                 </div>
             </div>
             @endforeach

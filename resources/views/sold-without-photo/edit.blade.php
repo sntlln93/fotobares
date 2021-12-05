@@ -16,8 +16,8 @@
 
             <div class="form-row">
                 <div class="form-group col-sm-12">
-                    <label for="">Elija una foto para este mural [{{ $detail->product->name }} -
-                        {{ $detail->color }}]</label>
+                    <label for="">Elija una foto para este mural [{{ $detail->product->name }}
+                        @include('_partials.color')]</label>
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="photo" name="photo">
                         <label class="custom-file-label" for="photo">Choose file</label>

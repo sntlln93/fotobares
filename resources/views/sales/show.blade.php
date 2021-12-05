@@ -79,7 +79,7 @@
                         <div class="card-text">
                             @foreach ($sale->details as $detail)
                             <p class="my-0"><strong>{{ $detail->product->name }}</strong>
-                                [color {{ strtolower($detail->color) }}]
+                                @include('_partials.color')
                                 @if($detail->code)
                                 <span class="badge badge-info">{{ strtoupper($detail->code) }}</span>
                                 @endif -

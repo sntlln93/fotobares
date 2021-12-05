@@ -33,6 +33,15 @@
       max-width: 35px;
       padding: .2em;
     }
+
+    .border--transparent {
+      border: 1px solid rgba(0, 0, 0, .3) !important;
+    }
+
+    .color-indicator {
+      border: 2px solid rgba(0, 0, 0, 0.3);
+      border-radius: 50%;
+    }
   </style>
   @yield('styles')
 </head>

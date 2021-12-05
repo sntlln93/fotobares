@@ -33,29 +33,7 @@
             </tr>
         </thead>
         <tbody class="bg-white">
-            @foreach ($details as $detail)
-            <tr>
-                <td>{{ $detail->id }}</td>
-                <td><a href="{{ route('clients.show', ['client' => $detail->sale->client->id]) }}">{{
-                        $detail->sale->client->full_name }}</a>
-                </td>
-                <td>{{ $detail->description }}</td>
-                <td>{{ $detail->sale->deliver_on->format('d/m/Y') }}</td>
-                <td>{{ $detail->sale->created_at->diffForHumans() }}</td>
-                <td>
-                    <p class="my-0"><strong>{{ $detail->product->name }}</strong>
-                        [color {{ strtolower($detail->color) }}]
-                        @if($detail->code) [{{ $detail->code }}] @endif
-                    </p>
-                </td>
-                <td>
-                    <a href="{{ route('without-photo.edit', ['detail' => $detail->id]) }}"
-                        class="btn btn-sm btn-info"><i class="fas fa-plus"></i>
-                        Agregar foto
-                    </a>
-                </td>
-            </tr>
-            @endforeach
+
         </tbody>
     </table>
 </div>
@@ -66,7 +44,6 @@
 
 <script>
     const sales = @json($details);
-    console.log(sales);
     const tableBody = document.querySelector('tbody');
     const addPhotoUrl = "{{ route('without-photo.edit', ['detail' => ':detail']) }}";
     const showClientBaseUrl = '{{ route('clients.show', ':client') }}';
@@ -85,7 +62,9 @@
                 <td>${getTimeAgo(new Date(detail.sale.created_at))}</td>
                 <td>
                     <p class="my-0"><strong>${detail.product.name}</strong>
-                        [color ${detail.color}]
+                        <i class="fas fa-circle color-indicator"
+                            style="color: ${detail.color}; background-color: ${detail.color}">
+                        </i>
                         ${detail.code ? `[${detail.code}]` : ''}
                     </p>
                 </td>

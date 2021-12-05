@@ -9,11 +9,7 @@
         <p class="mb-0">
             <b>Producto:</b>
             @foreach ($sale->details as $detail)
-            <span class="badge text-white {{ $detail->color }}">{{ $detail->product->name }}
-                {{ $detail->description ? '('.$detail->description.')' : '(-)'}}</span>
-            <a class="btn btn-sm btn-primary" href="{{ route('sales.show', ['sale' => $sale]) }}"><i
-                    class="fas fa-eye"></i>
-            </a>
+            @include('_partials.detail')
             @endforeach
         </p>
         <p class="mb-0">
