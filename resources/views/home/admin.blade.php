@@ -1,15 +1,5 @@
 @extends('layouts.app') @section('title', 'Inicio')
 
-@section('styles')
-<style>
-    .fas,
-    .fas {
-        pointer-events: none;
-    }
-</style>
-@endsection
-
-
 @section('content')
 
 <div class="row">

@@ -20,49 +20,18 @@
   <!-- Custom styles for this template-->
   <link href="{{ asset('template/css/sb-admin-2.min.css') }}" rel="stylesheet">
   <style>
-    .ROSADO {
-      background-color: #e069e0 !important;
+    .fab,
+    .fas {
+      pointer-events: none;
     }
 
-    .AZUL {
-      background-color: #396adb !important;
+    .color-picker--row {
+      gap: 1rem;
     }
 
-    .NEGRO {
-      background-color: #2a2a2b !important;
-    }
-
-    .BLANCO {
-      color: #2a2a2b !important;
-      border: 1px solid rgba(0, 0, 0, .3);
-    }
-
-    .ROSADO-text {
-      border-radius: 50%;
-      color: #e069e0 !important;
-      background-color: #e069e0 !important;
-      border: 1px solid rgba(0, 0, 0, .4);
-    }
-
-    .AZUL-text {
-      border-radius: 50%;
-      color: #396adb !important;
-      background-color: #396adb !important;
-      border: 1px solid rgba(0, 0, 0, .4);
-    }
-
-    .NEGRO-text {
-      border-radius: 50%;
-      color: #2a2a2b !important;
-      background-color: #2a2a2b !important;
-      border: 1px solid rgba(0, 0, 0, .4);
-    }
-
-    .BLANCO-text {
-      border-radius: 50%;
-      color: #fafafa !important;
-      background-color: #fafafa !important;
-      border: 1px solid rgba(0, 0, 0, .4);
+    .color-picker {
+      max-width: 35px;
+      padding: .2em;
     }
   </style>
   @yield('styles')
