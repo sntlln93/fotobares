@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $guarded = [];
+    protected $casts = [
+        'colors' => 'array',
+        'frames' => 'array',
+    ];
 
     public function quotas()
     {
