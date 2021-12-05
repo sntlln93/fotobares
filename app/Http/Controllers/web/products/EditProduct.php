@@ -22,11 +22,13 @@ class EditProduct extends Controller
             'quotas' => ['required'],
             'quotas.*.quantity' => ['required'],
             'quotas.*.quota_amount' => ['required'],
+            'colors' => ['required'],
         ]);
 
         DB::transaction(function () use ($validated, $product) {
             $product->update([
                 'name' => $validated['name'],
+                'colors' => $validated['colors'],
             ]);
 
             $product->quotas()->delete();

@@ -23,11 +23,13 @@ class CreateProduct extends Controller
             'quotas' => ['required'],
             'quotas.*.quantity' => ['required'],
             'quotas.*.quota_amount' => ['required'],
+            'colors' => ['required'],
         ]);
 
         DB::transaction(function () use ($validated) {
             $product = Product::create([
-                'name' => $validated['name']
+                'name' => $validated['name'],
+                'colors' => json_encode($validated['colors']),
             ]);
 
             for ($i = 0; $i < count($validated['quotas']); $i++) {

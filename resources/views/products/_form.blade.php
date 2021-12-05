@@ -6,13 +6,23 @@
 </div>
 <div class="form-row">
     <label for="quotas">Cantidad de cuotas</label>
-    <input type="number" id="quotas" class="form-control @error('quotas') is-invalid @enderror" min="1"
+    <input type="number" value="1" id="quotas" class="form-control @error('quotas') is-invalid @enderror" min="1"
         value="{{ count(old('quotas', $product->quotas)) }}">
     @error('quotas') <small class="text-danger">{{ $message }}</small> @enderror
 </div>
 
-<br>
-<h1 class="h4 text-gray-800">Valor de las cuotas</h1>
+<h1 class="h4 text-gray-800 mt-5">Colores</h1>
+<div class="form-row color-picker--row">
+    @forelse (old('colors', $product->colors) as $color)
+    <input type="color" name="colors[]" class="form-control color-picker" value="{{ $color }}">
+    @empty
+    <input type="color" name="colors[]" class="form-control color-picker">
+    @endforelse
+    <button id="addColorPicker" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i></button>
+    <button id="removeColorPicker" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+</div>
+
+<h1 class="h4 text-gray-800 mt-5">Valor de las cuotas</h1>
 <div class="table-responsive">
     <table class="table table-bordered">
         <thead>
