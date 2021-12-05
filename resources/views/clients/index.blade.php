@@ -2,14 +2,6 @@
 
 @section('title', 'Clientes')
 
-@section('styles')
-<style>
-    td {
-        white-space: nowrap;
-    }
-</style>
-@endsection
-
 @section('content')
 <div class="input-group mb-2">
     <input type="text" class="form-control" id="searchInput">

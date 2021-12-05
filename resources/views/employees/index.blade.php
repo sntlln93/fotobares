@@ -2,14 +2,6 @@
 
 @section('title', 'Empleados')
 
-@section('styles')
-<style>
-    td {
-        white-space: nowrap;
-    }
-</style>
-@endsection
-
 @section('content')
 
 <div class="table-responsive">

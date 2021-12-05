@@ -20,6 +20,21 @@
   <!-- Custom styles for this template-->
   <link href="{{ asset('template/css/sb-admin-2.min.css') }}" rel="stylesheet">
   <style>
+    td {
+      white-space: nowrap;
+    }
+
+    .filter--active {
+      background-color: var(--primary);
+      color: #FFF;
+    }
+
+    .filter--active:hover {
+      color: #fff;
+      background-color: #2e59d9;
+      border-color: #2653d4;
+    }
+
     .fab,
     .fas {
       pointer-events: none;

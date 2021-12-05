@@ -1,13 +1,6 @@
 @extends('layouts.app')
 
 @section('title', 'Preventas')
-@section('styles')
-<style>
-    td {
-        white-space: nowrap;
-    }
-</style>
-@endsection
 
 @section('content')
 

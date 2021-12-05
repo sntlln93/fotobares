@@ -1,24 +1,6 @@
 @extends('layouts.app')
 
 @section('title', 'Ventas')
-@section('styles')
-<style>
-    td {
-        white-space: nowrap;
-    }
-
-    .filter--active {
-        background-color: var(--primary);
-        color: #FFF;
-    }
-
-    .filter--active:hover {
-        color: #fff;
-        background-color: #2e59d9;
-        border-color: #2653d4;
-    }
-</style>
-@endsection
 
 @section('content')
 <div class="row">
