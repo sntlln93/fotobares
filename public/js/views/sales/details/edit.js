@@ -16,7 +16,7 @@ const renderProducts = (products, oldProduct) => {
     checked && renderAll(product);
 
     productElement.innerHTML = `
-          <input type="radio" class="d-none products" name="product_d" id="product.${product.id}" value="${product.id}" ${checked}>
+          <input type="radio" class="d-none products" name="product_id" id="product.${product.id}" value="${product.id}" ${checked}>
           <label for="product.${product.id}" class="radio--container">
           <p class="my-1 radio--title">
               <strong>${product.name}</strong>

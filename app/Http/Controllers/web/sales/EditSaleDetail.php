@@ -35,7 +35,8 @@ class EditSaleDetail extends Controller
         }
 
         $validated = $request->validate([
-            'color' => ['required'],
+            'product_id' => ['required'],
+            'color' => ['nullable'],
             'description' => ['nullable'],
             'code' => ['nullable'],
         ]);

@@ -20,12 +20,11 @@
                 <h1 class="h4 text-gray-800">Producto</h1>
                 <div class="w-100">
                     <label for="product">Elegí un producto</label>
-                    <small>Si cambia el producto el precio cambiará, recuerde modificar los pagos si
-                        corresponde.</small>
                     <div class="form-group radio--select">
                         <div class="form-group" id="products">
 
                         </div>
+                        <small>Recuerde modificar los pagos si corresponde.</small>
                         @error('product_id')
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
