@@ -14,7 +14,7 @@ class RecalculatePayments extends Controller
 {
     public function edit(Sale $sale)
     {
-        $quotas = $sale->details->first()->product->quotas;
+        $quotas = $sale->details->first()->product->quotas; //first?
 
         return view('payments.edit')->with('sale', $sale)->with('quotas', $quotas);
     }
@@ -37,6 +37,9 @@ class RecalculatePayments extends Controller
             $sale->payments()->delete();
             
             $quota = Quota::find($validated['quota_id']);
+            
+            //first?
+            $sale->details->first()->update(['amount' => $quota->quota_amount * $quota->quantity]);
 
             $deliver_on = $sale->deliver_on;
             

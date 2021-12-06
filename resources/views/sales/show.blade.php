@@ -74,7 +74,9 @@
             <div class="col-lg-3">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Detalles</h5>
+                        <h5 class="card-title">
+                            Detalles
+                        </h5>
                         <hr>
                         <div class="card-text">
                             @foreach ($sale->details as $detail)
@@ -84,6 +86,10 @@
                                 <span class="badge badge-info">{{ strtoupper($detail->code) }}</span>
                                 @endif -
                                 ${{ number_format($detail->amount, 2, ',', '.') }}
+                                @if($detail->sale->delivered_at === null)
+                                <a href="{{ route('saleDetail.edit', ['saleDetail' => $detail->id]) }}"
+                                    class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                                @endif
                                 @if($detail->photo)
                                 <button type="button" class="btn btn-sm btn-info" data-toggle="modal"
                                     data-target="#showPhotoModal{{ $detail->id }}">
