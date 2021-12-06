@@ -71,7 +71,7 @@
 @endsection
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/views/sell/create.css') }}">
+<link rel="stylesheet" href="{{ asset('css/views/sell/create.css') }}?ts={{ env('APP_ASSET_VERSIONING') }}">
 @endsection
 
 @section('scripts')
@@ -80,5 +80,5 @@
     const currentDetail = @json($detail);
     const oldInput = @json(old());
 </script>
-<script src="{{ asset('js/views/sales/details/edit.js') }}"></script>
+<script src="{{ asset('js/views/sales/details/edit.js') }}?ts={{ env('APP_ASSET_VERSIONING') }}"></script>
 @endsection

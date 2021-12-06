@@ -125,5 +125,5 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('js/views/addresses/edit.js') }}"></script>
+<script src="{{ asset('js/views/addresses/edit.js') }}?ts={{ env('APP_ASSET_VERSIONING') }}"></script>
 @endsection

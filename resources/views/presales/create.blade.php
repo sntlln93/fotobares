@@ -473,8 +473,8 @@
 @endsection
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/utils/bs-stepper.min.css') }}">
-<link rel="stylesheet" href="{{ asset('css/views/sell/create.css') }}">
+<link rel="stylesheet" href="{{ asset('css/utils/bs-stepper.min.css') }}?ts={{ env('APP_ASSET_VERSIONING') }}">
+<link rel="stylesheet" href="{{ asset('css/views/sell/create.css') }}?ts={{ env('APP_ASSET_VERSIONING') }}">
 @endsection
 
 @section('scripts')
@@ -483,8 +483,8 @@
     const quotaId = {{ old('quota_id') }};
 </script>
 @endif
-<script src="{{ asset('js/utils/bs-stepper.min.js') }}"></script>
-<script src="{{ asset('js/views/sell/create.js') }}"></script>
+<script src="{{ asset('js/utils/bs-stepper.min.js') }}?ts={{ env('APP_ASSET_VERSIONING') }}"></script>
+<script src="{{ asset('js/views/sell/create.js') }}?ts={{ env('APP_ASSET_VERSIONING') }}"></script>
 <script>
     setBaseUrl("{{ env('APP_URL') }}");
 </script>

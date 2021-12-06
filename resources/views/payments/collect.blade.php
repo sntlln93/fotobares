@@ -3,7 +3,7 @@
 @section('title', 'Cobrar')
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/views/payments/collect.css') }}">
+<link rel="stylesheet" href="{{ asset('css/views/payments/collect.css') }}?ts={{ env('APP_ASSET_VERSIONING') }}">
 @endsection
 
 @section('content')
@@ -213,5 +213,5 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('js/views/payments/collect.js') }}"></script>
+<script src="{{ asset('js/views/payments/collect.js') }}?ts={{ env('APP_ASSET_VERSIONING') }}"></script>
 @endsection

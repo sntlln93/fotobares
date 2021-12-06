@@ -49,5 +49,5 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('js/views/sold-without-photo/edit.js') }}"></script>
+<script src="{{ asset('js/views/sold-without-photo/edit.js') }}?ts={{ env('APP_ASSET_VERSIONING') }}"></script>
 @endsection

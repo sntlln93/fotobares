@@ -67,15 +67,15 @@
 @endsection
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/utils/bs-stepper.min.css') }}">
-<link rel="stylesheet" href="{{ asset('css/views/sell/create.css') }}">
+<link rel="stylesheet" href="{{ asset('css/utils/bs-stepper.min.css') }}?ts={{ env('APP_ASSET_VERSIONING') }}">
+<link rel="stylesheet" href="{{ asset('css/views/sell/create.css') }}?ts={{ env('APP_ASSET_VERSIONING') }}">
 @endsection
 
 @section('scripts')
-<script src="{{ asset('js/utils/bs-stepper.min.js') }}"></script>
+<script src="{{ asset('js/utils/bs-stepper.min.js') }}?ts={{ env('APP_ASSET_VERSIONING') }}"></script>
 <script>
     const products = @json($products);
     const oldInput = @json(old());
 </script>
-<script src="{{ asset('js/views/sell/create.js') }}"></script>
+<script src="{{ asset('js/views/sell/create.js') }}?ts={{ env('APP_ASSET_VERSIONING') }}"></script>
 @endsection

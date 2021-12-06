@@ -43,5 +43,5 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('js/views/products/create.js') }}"></script>
+<script src="{{ asset('js/views/products/create.js') }}?ts={{ env('APP_ASSET_VERSIONING') }}"></script>
 @endsection

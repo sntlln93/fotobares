@@ -42,5 +42,5 @@
         }];
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{ env('MAP_KEY') }}&callback=initMap" async defer></script>
-<script src="{{ asset('js/views/map/map.js') }}"></script>
+<script src="{{ asset('js/views/map/map.js') }}?ts={{ env('APP_ASSET_VERSIONING') }}"></script>
 @endsection

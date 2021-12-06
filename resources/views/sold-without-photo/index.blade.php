@@ -40,7 +40,7 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('js/utils/time.js') }}"></script>
+<script src="{{ asset('js/utils/time.js') }}?ts={{ env('APP_ASSET_VERSIONING') }}"></script>
 
 <script>
     const sales = @json($details);

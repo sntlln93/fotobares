@@ -46,7 +46,7 @@
     @endforeach
 </script>
 @if($clients->count() > 0)
-<script src="{{ asset('js/views/map/map.js') }}"></script>
+<script src="{{ asset('js/views/map/map.js') }}?ts={{ env('APP_ASSET_VERSIONING') }}"></script>
 @else
 <script>
     initMap = () => {
