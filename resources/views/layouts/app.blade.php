@@ -20,6 +20,26 @@
   <!-- Custom styles for this template-->
   <link href="{{ asset('template/css/sb-admin-2.min.css') }}" rel="stylesheet">
   <style>
+    .gap-1 {
+      gap: .5rem !important;
+    }
+
+    .gap-2 {
+      gap: 1rem !important;
+    }
+
+    .gap-3 {
+      gap: 1.5rem !important;
+    }
+
+    .gap-4 {
+      gap: 2rem !important;
+    }
+
+    .gap-5 {
+      gap: 2.5rem !important;
+    }
+
     td {
       white-space: nowrap;
     }
