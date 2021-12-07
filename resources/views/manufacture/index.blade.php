@@ -41,7 +41,6 @@
         
         details.forEach((detail, index) => {
             const markAsManufacturedUrl = detail.manufactured_at ? "{{ route('manufacture.undo', ':detail') }}" : "{{ route('manufacture.update', ':detail') }}";
-            console.log(markAsManufacturedUrl);
 
         const submitBtnContent = detail.manufactured_at
         ? `<i class="fas fa-exclamation-circle"></i> Desmarcar como fabricado`
@@ -62,9 +61,10 @@
             card.innerHTML = `
                 <img loading="${index < 3 ? 'lazy' : 'eager'}" src="${baseURL}/storage/${detail.photo.path}" class="card-img-top" alt="${detail.description}">
                 <div class="card-body">
-                    <h5 class="card-title">
-                        [${detail.sale_id}] ${detail.product.name} <i
-                            class="fas fa-circle ${detail.color}-text"></i>
+                    <h5 class="card-title"></h5>
+                        [${detail.sale_id}] ${detail.product.name}
+                        <i class="fas fa-circle color-indicator" style="color: ${detail.color}; background-color: ${detail.color}">
+</i>
                     </h5>
                     <p class="card-text mb-0"><strong>Descripción: </strong>${detail.description}</p>
                     <p class="card-text mb-0"><strong>Color: </strong>${detail.color}</p>
