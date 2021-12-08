@@ -19,3 +19,4 @@ Route::get('/', [App\Http\Controllers\web\sales\ShowSales::class, 'index'])->nam
 Route::get('/{sale}', [App\Http\Controllers\web\sales\ShowSales::class, 'show'])->name('sales.show');
 Route::get('/{saleDetail}/edit', [App\Http\Controllers\web\sales\EditSaleDetail::class, 'edit'])->name('saleDetail.edit');
 Route::put('/{saleDetail}', [App\Http\Controllers\web\sales\EditSaleDetail::class, 'update'])->name('saleDetail.update');
+Route::delete('/{sale}', [App\Http\Controllers\web\sales\DeleteSale::class, 'destroy'])->name('sales.destroy');

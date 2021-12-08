@@ -5,7 +5,14 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h6 class="m-0 font-weight-bold text-primary">Venta</h6>
+        <h6 class="m-0 font-weight-bold text-primary">
+            Venta
+            @can('delete-sales')
+            <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteSale">
+                <i class="fas fa-trash"></i>
+            </button>
+            @endcan
+        </h6>
     </div>
     <div class="card-body">
         <div class="row g-5">
@@ -151,4 +158,33 @@
             </div>
         </div>
     </div>
+
+
+    @can('delete-sales')
+    <div class="modal fade" id="deleteSale" tabindex="-1" aria-labelledby="deleteSaleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteSaleModalLabel">Eliminar venta #{{ $sale->id }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ¿Está seguro de eliminar la venta #{{ $sale->id }} de {{ $sale->client->full_name }}?
+                    <p>Esta acción <b>no se puede deshacer</b>.</p>
+                </div>
+                <form action="{{ route('sales.destroy', ['sale' => $sale->id]) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @endcan
+
     @endsection
