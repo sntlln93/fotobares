@@ -7,11 +7,13 @@
     <div class="card-header">
         <h6 class="m-0 font-weight-bold text-primary">
             Venta
+            @if(!$sale->delivered_at)
             @can('delete-sales')
             <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteSale">
                 <i class="fas fa-trash"></i>
             </button>
             @endcan
+            @endif
         </h6>
     </div>
     <div class="card-body">
@@ -130,8 +132,14 @@
             <div class="col-lg-3">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Pagos <a href="{{ route('recalculate.form', ['sale' => $sale->id]) }}"
-                                class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a></h5>
+                        <h5 class="card-title">
+                            Pagos
+                            <a href="{{ route('recalculate.form', ['sale' => $sale->id]) }}"
+                                class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                            @can('collect')
+                            @include('payments._collect-button', ['saleId' => $sale->id])
+                            @endcan
+                        </h5>
                         @foreach ($sale->payments as $payment)
                         <hr>
                         <div class="card-text">
@@ -159,7 +167,7 @@
         </div>
     </div>
 
-
+    @if(!$sale->delivered_at)
     @can('delete-sales')
     <div class="modal fade" id="deleteSale" tabindex="-1" aria-labelledby="deleteSaleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -186,5 +194,6 @@
         </div>
     </div>
     @endcan
+    @endif
 
     @endsection
