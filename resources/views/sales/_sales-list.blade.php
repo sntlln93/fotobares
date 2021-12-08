@@ -2,9 +2,7 @@
 <li class="list-group-item ">
     <div class="d-flex justify-content-end gap-1">
         @can('collect')
-        <a href="{{ route('collect', ['sale' => $sale->id]) }}" class="btn btn-sm btn-info">
-            <i class="fas fa-hand-holding-usd"></i>
-        </a>
+        @include('payments._collect-button', ['saleId' => $sale->id])
         @endcan
         <a href="{{ route('sales.show', ['sale' => $sale->id]) }}" class="btn btn-sm btn-primary"><i
                 class="fas fa-eye"></i></a>
