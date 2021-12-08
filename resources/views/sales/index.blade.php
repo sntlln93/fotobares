@@ -40,9 +40,7 @@
                 <th>Códigos</th>
                 <th>Vendedor</th>
                 <th>Fecha venta</th>
-                @can('perform-action-on-sale')
                 <th>Acciones</th>
-                @endcan
             </tr>
         </thead>
         <tbody>
@@ -67,6 +65,7 @@
     const tableBody = document.querySelector('tbody');
     const showSaleBaseUrl = '{{ route('sales.show', ':sale') }}';
     const showClientBaseUrl = '{{ route('clients.show', ':client') }}';
+    const postponeBaseUrl = '{{ route('postpone.form', ':sale') }}';
 
     const renderSales = (salesToRender) => {
         tableBody.innerHTML = '';
@@ -87,6 +86,7 @@
                 <td>${getTimeAgo(new Date(sale.created_at))}</td>
                 <td>
                     <a href="${showSaleBaseUrl.replace(':sale', sale.id)}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
+                    <a href="${postponeBaseUrl.replace(':sale', sale.id)}" class="btn btn-warning btn-sm"><i class="fas fa-clock"></i></a>
                 </td>
             `;
             tableBody.appendChild(tr);
