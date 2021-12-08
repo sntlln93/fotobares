@@ -25,8 +25,10 @@ class PostponePayment extends Controller
             $deliver_on = Carbon::parse($validated['due_date']);
             
             foreach ($payment->sale->payments as $p) {
-                $due_date = $p->id === $payment->id ? $deliver_on : $deliver_on->addMonth()->format('Y-m-d');
-                $p->update(['due_date' => $due_date]);
+                if ($p->paid_at === null) {
+                    $due_date = $p->id === $payment->id ? $deliver_on : $deliver_on->addMonth()->format('Y-m-d');
+                    $p->update(['due_date' => $due_date]);
+                }
             }
         } else {
             $payment->update($validated);

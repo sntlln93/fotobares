@@ -153,6 +153,7 @@
                             <label class="form-check-label" for="update_deliver_on">Actualizar fecha de entrega</label>
                         </div>
                         @endif
+                        @if($sale->delivered_at === null)
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="update_following_payments"
                                 name="update_following_payments" value="true" checked>
@@ -161,6 +162,7 @@
                                 siguientes
                                 pagos</label>
                         </div>
+                        @endif
                     </div>
                 </div>
 
