@@ -33,8 +33,11 @@
                 <i class="fas fa-map-marker"></i>
             </a>
             @endif
-            <a class="btn btn-sm btn-primary ml-1" href="{{ route('collect', ['sale' => $payment->sale_id]) }}">
+            <a class="btn btn-sm btn-primary ml-1" href="{{ route('sales.show', ['sale' => $payment->sale_id]) }}">
                 <i class="fas fa-dollar-sign"></i>
+            </a>
+            <a class="btn btn-sm btn-info ml-1" href="{{ route('collect', ['sale' => $payment->sale_id]) }}">
+                <i class="fas fa-hand-holding-usd"></i>
             </a>
         </div>
         <div class="card-body">
