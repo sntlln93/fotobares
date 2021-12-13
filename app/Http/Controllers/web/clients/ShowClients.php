@@ -10,7 +10,14 @@ class ShowClients extends Controller
 {
     public function index()
     {
-        $clients = Client::with('phones', 'address')->get();
+        $roles = auth()->user()->roles->pluck('name')->toArray();
+
+        if (array_search('admin', $roles) !== false) {
+            $clients = Client::with('phones', 'address')->get();
+        } elseif (array_search('seller', $roles) !== false) {
+            $clients = Client::with('phones', 'address')->where('seller_id', auth()->user->id)->get();
+        }
+
         
         return view('clients.index')->with('clients', $clients);
     }
