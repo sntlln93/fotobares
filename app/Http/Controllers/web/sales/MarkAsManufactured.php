@@ -15,7 +15,7 @@ class MarkAsManufactured extends Controller
             ->whereNotNull('edited_at')
             ->where(function ($query) {
                 $query
-                ->where('manufactured_at', '>=', Carbon::now()->subDays(7))
+                ->where('manufactured_at', '>=', Carbon::now()->subDays(1))
                 ->orWhereNull('manufactured_at');
             })->get();
         
