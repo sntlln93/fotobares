@@ -33,10 +33,9 @@
                     </p>
 
                     <p class="mb-2">
-                        <b>Producto (descripción):</b>
-                        @foreach ($payment->details as $detail)
-                        @include('_partials.detail')
-                        @endforeach
+                        <b>Dirección:</b>
+                        {{ $payment->client->address }}
+                    </p>
 
                 </div>
                 <div class="d-flex justify-content-end">

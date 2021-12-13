@@ -21,6 +21,7 @@ class PaymentsToCollect
                         'id' => $sale->client_id,
                         'full_name' => $sale->client->full_name,
                         'has_location' => $sale->client->address->has_location,
+                        'address' => $sale->client->address->formatted_address,
                     ],
                     'amount' => $sale->nextPaymentToCollect->amount,
                     'due_date' => $sale->nextPaymentToCollect->due_date,
