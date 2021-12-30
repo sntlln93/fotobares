@@ -3,7 +3,7 @@
     @endif
 
     <span class="badge badge-light border--transparent">{{
-        $detail->product_name }}
+        $detail->product->name }}
         {{ $detail->description ? '('.$detail->description.')' : '(-)'}}
         @include('_partials.color')
     </span>
