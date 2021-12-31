@@ -11,13 +11,17 @@ class ShowSales extends Controller
     {
         $roles = auth()->user()->roles->pluck('name')->toArray();
 
-        $sales = Sale::with('seller', 'client', 'details');
+        $sales = Sale::with('seller', 'client', 'details', 'payments');
         
         if (array_search('admin', $roles) === false) {
             $sales = $sales->where('seller_id', auth()->user()->id);
         }
 
-        $sales = $sales->orderBy('id', 'desc')->get();
+        $sales = $sales->get();
+
+        if (request()->has('active') && request()->get('active') == 1) {
+            $sales = $sales->filter(fn ($sale) => $sale->payments->last()->paid_at === null);
+        }
 
         return view('sales.index')->with('sales', $sales);
     }

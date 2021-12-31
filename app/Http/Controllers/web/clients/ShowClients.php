@@ -13,10 +13,25 @@ class ShowClients extends Controller
         $roles = auth()->user()->roles->pluck('name')->toArray();
 
         if (array_search('admin', $roles) !== false) {
-            $clients = Client::with('phones', 'address')->get();
+            $clients = Client::with('phones', 'address', 'sales')->get();
         } elseif (array_search('seller', $roles) !== false) {
-            $clients = Client::with('phones', 'address')->where('seller_id', auth()->user->id)->get();
+            $clients = Client::with('phones', 'address', 'sales')->where('seller_id', auth()->user->id)->get();
         }
+
+        if (request()->has('active') && request()->get('active') == 1) {
+            $clients = $clients->filter(fn ($client) => $client->sales->whereNull('delivered_at')->count() > 0);
+        }
+
+        $clients = $clients->map(function ($client) {
+            return (object)[
+                'id' => $client->id,
+                'dni' => $client->dni,
+                'fullName' => $client->full_name,
+                'phones' => $client->phones,
+                'address' => $client->address->formatted_address,
+                'createdAt' => $client->created_at->diffForHumans(),
+            ];
+        });
 
         
         return view('clients.index')->with('clients', $clients);

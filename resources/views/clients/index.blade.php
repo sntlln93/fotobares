@@ -2,11 +2,25 @@
 
 @section('title', 'Clientes')
 
+@php
+$activeOnly = Str::contains(url()->full(), 'active=1');
+@endphp
+
 @section('content')
-<div class="input-group mb-2">
-    <input type="text" class="form-control" id="searchInput">
-    <div class="input-group-append">
-        <span class="input-group-text"><i class="fas fa-search"></i></span>
+<div class="row">
+    <div class="input-group col-sm-12 col-md-6 mb-2">
+        <input type="text" class="form-control" id="searchInput">
+        <div class="input-group-append">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 mb-2">
+        <button class="btn btn-sm btn-light border h-100 {{ $activeOnly ? 'filter--active' : '' }}">
+            <a class="btn btn-sm {{ $activeOnly ? 'text-white' : 'text-dark'}}" href=" {{ $activeOnly ? route('clients.index') : route('clients.index',
+                ['active' => true]) }}">
+                <span class="d-sm-none d-md-inline">Con entregas pendientes</span>
+                <i class="fas fa-box"></i>
+            </a></button>
     </div>
 </div>
 <div class="table-responsive">
@@ -31,50 +45,7 @@
                 <th>Acciones</th>
             </tr>
         </thead>
-        <tbody>
-            @foreach ($clients as $client)
-            <tr>
-                <td>{{ $client->id }}</td>
-                <td>
-                    <a href="{{ route('clients.show', ['client' => $client->id]) }}">
-                        {{ $client->full_name }}
-                    </a>
-                </td>
-                <td>
-                    @foreach ($client->phones as $phone)
-                    <span class="badge badge-primary">{{ $phone->formatted_number }}</span>
-                    @endforeach
-                </td>
-                <td>{{ $client->address->formatted_address }}</td>
-                <td>{{ $client->created_at->diffForHumans() }}</td>
-                <td>
-
-                    @foreach ($client->phones as $phone)
-                    @if($phone->has_whatsapp)
-                    <a href="{{ route('whatsapp.send', ['phone' => $phone->id]) }}" class="ml-1 btn btn-sm btn-success"
-                        target="_blank">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                    @endif
-                    <a href="tel:{{ $phone->area_code.$phone->number }}" class="ml-1 btn btn-sm btn-primary"
-                        target="_blank">
-                        <i class="fas fa-phone"></i>
-                    </a>
-                    @endforeach
-                    @if ($client->address->has_location)
-                    <a href="{{ route('map.show', ['client' => $client->id]) }}" class="ml-1 btn btn-sm btn-warning">
-                        <i class="fas fa-map-marker"></i>
-                    </a>
-                    @endif
-
-                    <a href="{{ route('clients.show', ['client' => $client->id]) }}" class="btn btn-sm btn-info"><i
-                            class="fas fa-eye"></i></a>
-                    <a href="{{ route('clients.edit', ['client' => $client->id]) }}" class="btn btn-sm btn-warning"><i
-                            class="fas fa-edit"></i></a>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
+        <tbody></tbody>
     </table>
 </div>
 
@@ -82,30 +53,94 @@
 
 @section('scripts')
 <script>
-    const searchInput = document.getElementById('searchInput');
+    const clients = Object.values(@json($clients));
+    const tableBody = document.querySelector('tbody');
+    const routes = {
+        show: '{{ route('clients.show', ':client') }}',
+        edit: '{{ route('clients.edit', ':client') }}',
+        map: '{{ route('map.show', ':client') }}',
+        call: 'tel::number',
+        whatsapp: '{{ route('whatsapp.send', ':phone') }}'
+    }
 
-    const filter = () => {
-        const params = searchInput.value.toLowerCase();
-        const searchables = document.querySelectorAll('.table-bordered tbody tr');
-        
-        if(!params) {
-            searchables.forEach(searchable => searchable.classList.remove('d-none'));
-        }
+    const renderClients = (clientsToRender) => {
+        tableBody.innerHTML = '';
 
-        searchables.forEach(searchable => {
-            searchable.classList.add('d-none');
+        clientsToRender
+        .sort((c1, c2) => c2.id - c1.id)
+        .forEach(client => {
+            const tr = document.createElement('tr');
 
-            const containsId = searchable.querySelectorAll('td')[0].innerText.trim().toLowerCase().includes(params);
-            const containsFullName = searchable.querySelectorAll('td')[1].innerText.trim().toLowerCase().includes(params);
-            const containsPhone = searchable.querySelectorAll('td')[2].innerText.trim().toLowerCase().includes(params);
-            const containsAddress = searchable.querySelectorAll('td')[3].innerText.trim().toLowerCase().includes(params);
+            const whatsappBtns = client.phones.reduce((acc, phone) => acc += `<a href="${ routes.whatsapp.replace(':phone', phone.id) }" class="ml-1 btn btn-sm btn-success"
+                        target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>`, '');
+
+            const callBtns = client.phones.reduce((acc, phone) => acc += `<a href="${ routes.call.replace(':number', phone.area_code + phone.number) }" class="ml-1 btn btn-sm btn-primary"
+                target="_blank">
+                <i class="fas fa-phone"></i>
+            </a>`, '');
             
-            if(containsId || containsFullName || containsPhone || containsAddress) {
-                searchable.classList.remove('d-none');
-            }
+
+            const phones = client.phones.reduce((acc, phone) => acc += `<span class="badge badge-primary mr-1">${ phone.area_code + ' ' + phone.number }</span>`, '');
+
+            tr.innerHTML = `
+            <tr>
+                <td>${ client.id }</td>
+                <td>
+                    <a href="${ routes.show.replace(':client', client.id) }">
+                        ${ client.fullName }
+                    </a>
+                </td>
+                <td>${ phones }</td>
+                <td>${ client.address }</td>
+                <td>${ client.createdAt }</td>
+                <td>
+                    ${ callBtns }
+                    ${ whatsappBtns }
+                    <a href="${ routes.map.replace(':client', client.id)}" class="ml-1 btn btn-sm btn-warning">
+                        <i class="fas fa-map-marker"></i>
+                    </a>
+
+                    <a href="${ routes.show.replace(':client', client.id) }" class="btn btn-sm btn-info"><i
+                            class="fas fa-eye"></i></a>
+
+                    <a href="${ routes.edit.replace(':client', client.id) }" class="btn btn-sm btn-warning"><i
+                            class="fas fa-edit"></i></a>
+                </td>
+            </tr>
+            `;
+            tableBody.appendChild(tr);
         });
     }
 
-    searchInput.addEventListener('input', filter);
+    renderClients(clients);
+</script>
+<script>
+    const searchInput = document.querySelector('#searchInput');
+
+    const flattenObj = (obj, parent, res = {}) => {
+        for(let key in obj){
+            let propName = parent ? parent + '_' + key : key;
+            if(typeof obj[key] == 'object'){
+                flattenObj(obj[key], propName, res);
+            } else {
+                res[propName] = obj[key];
+            }
+        }
+        return res;
+    }
+
+    const searchOnClients = () => {
+        const params = searchInput.value.toLowerCase();
+        const toRender = clients.filter(sale => Object.values(flattenObj(sale)).some(s => String(s).toLowerCase().includes(params)));
+        
+        toRender.length > 0 
+            ? renderClients(toRender)
+            : tableBody.innerHTML = '<tr><td colspan="8" class="text-center">No hay clientes que coincidan con la búsqueda</td></tr>';
+    }
+
+    searchInput.addEventListener('input', searchOnClients);
+
 </script>
 @endsection

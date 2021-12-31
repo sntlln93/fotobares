@@ -2,13 +2,29 @@
 
 @section('title', 'Ventas')
 
+@php
+$activeOnly = Str::contains(url()->full(), 'active=1');
+@endphp
+
 @section('content')
 <div class="row">
-    <div class="input-group mb-2 col-sm-12 col-md-6">
+    <div class="input-group col-sm-12 col-md-6 mb-2">
         <input type="text" class="form-control" id="searchInput">
         <div class="input-group-append">
             <span class="input-group-text"><i class="fas fa-search"></i></span>
         </div>
+    </div>
+    <div class="col-sm-12 col-md-6 mb-2">
+        <button id="deliveredFilterBtn" class="btn btn-sm btn-light border h-100">
+            <span class="d-sm-none d-md-inline">Entregados</span>
+            <i class="fas fa-box"></i>
+        </button>
+        <button class="btn btn-sm btn-light border h-100 {{ $activeOnly ? 'filter--active' : '' }}">
+            <a class="btn btn-sm {{ $activeOnly ? 'text-white' : 'text-dark'}}" href=" {{ $activeOnly ? route('sales.index') : route('sales.index',
+                ['active' => true]) }}">
+                <span class="d-sm-none d-md-inline">Activas</span>
+                <i class="fas fa-dollar-sign"></i>
+            </a></button>
     </div>
 </div>
 
@@ -27,15 +43,9 @@
                 <th>Cliente</th>
                 <th>
                     Entrega programada
-                    <button id="orderByDeliverOnBtn" class="btn btn-sm btn-light border">
-                        <i class="fas fa-sort"></i>
-                    </button>
                 </th>
                 <th>
                     Entregado
-                    <button id="deliveredFilterBtn" class="btn btn-sm btn-light border">
-                        <i class="fas fa-filter"></i>
-                    </button>
                 </th>
                 <th>Códigos</th>
                 <th>Vendedor</th>
@@ -61,7 +71,7 @@
 <script src="{{ asset('js/utils/time.js') }}?ts={{ env('APP_ASSET_VERSIONING') }}"></script>
 
 <script>
-    const sales = @json($sales);
+    const sales = Object.values(@json($sales));
     const tableBody = document.querySelector('tbody');
     const showSaleBaseUrl = '{{ route('sales.show', ':sale') }}';
     const showClientBaseUrl = '{{ route('clients.show', ':client') }}';
@@ -70,7 +80,9 @@
     const renderSales = (salesToRender) => {
         tableBody.innerHTML = '';
 
-        salesToRender.forEach(sale => {
+        salesToRender
+        .sort((s1, s2) => s2.id - s1.id)
+        .forEach(sale => {
             const tr = document.createElement('tr');
             const codes = sale.details.map(detail => detail.code && `<span class="badge badge-sm badge-info">${detail.code}</span>`).join(', ');
 
@@ -92,19 +104,13 @@
             tableBody.appendChild(tr);
         });
     }
+
     renderSales(sales);
 </script>
 
 <script>
     const deliveredFilterBtn = document.querySelector('#deliveredFilterBtn');
-    const orderByDeliverOnBtn = document.querySelector('#orderByDeliverOnBtn');
     const searchInput = document.querySelector('#searchInput');
-
-    const filters = {
-        onlyDelivered: false,
-        search: false,
-        orderByDeliverOn: 0
-    };
 
     const flattenObj = (obj, parent, res = {}) => {
         for(let key in obj){
@@ -120,73 +126,27 @@
 
     const searchOnSales = () => {
         const params = searchInput.value.toLowerCase();
-        return sales.filter(sale => Object.values(flattenObj(sale)).some(s => String(s).toLowerCase().includes(params)));
+        const toRender = sales.filter(sale => Object.values(flattenObj(sale)).some(s => String(s).toLowerCase().includes(params)));
+        
+        toRender.length > 0 
+            ? renderSales(toRender)
+            : tableBody.innerHTML = '<tr><td colspan="8" class="text-center">No hay ventas que coincidan con la búsqueda</td></tr>';
     }
 
     const toggleOnlyDelivered = () => {
+        const isFiltered = deliveredFilterBtn.classList.contains('filter--active');
+        const filterFunction = isFiltered ? sale => true : sale => sale.delivered_at !== null;
+
         deliveredFilterBtn.classList.toggle('filter--active')
-        
-        return filters.onlyDelivered ? sales.filter(sale => sale.delivered_at !== null) : sales;
-    }
-
-    const orderByDeliverOn = () => {
-        let orderedSales = sales;
-
-        switch(filters.orderByDeliverOn){
-            case -1:
-                orderByDeliverOnBtn.classList.contains('filter--active') ? null : orderByDeliverOnBtn.classList.add('filter--active');
-                orderedSales = sales.sort((a, b) => Date.parse(a.deliver_on) - Date.parse(b.deliver_on));
-                break;
-            case 0:
-                orderByDeliverOnBtn.classList.contains('filter--active') ? orderByDeliverOnBtn.classList.remove('filter--active') : null;
-                break;
-            case 1:
-                orderByDeliverOnBtn.classList.contains('filter--active') ? null : orderByDeliverOnBtn.classList.add('filter--active');
-                orderedSales = sales.sort((a, b) => Date.parse(b.deliver_on) - Date.parse(a.deliver_on));
-                break;
-            }
-
-        return orderedSales;
-    }
-
-    const applyFilters = (filterName) => {       
-        tableBody.innerHTML = '<tr><td colspan="8" class="text-center"><div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div></td></tr>';
-        
-        let toRender = sales;
-            
-        if(filterName === 'onlyDelivered') {
-            filters[filterName] = !filters[filterName];
-            toRender = toggleOnlyDelivered();
-        }
-        
-        if(filterName === 'search') {
-            filters[filterName] = searchInput.value === "" ? false : true;
-            toRender = searchOnSales();
-        }
-
-        if(filterName === 'orderByDeliverOn') {
-            switch(filters[filterName]) {
-                case -1:
-                    filters[filterName] = 0;
-                    break;
-                case 0:
-                    filters[filterName] = 1;
-                    break;
-                case 1:
-                    filters[filterName] = -1;
-                    break;
-            }
-            toRender = orderByDeliverOn();
-        }
+        const toRender = sales.filter(filterFunction);
 
         toRender.length > 0 
-        ? renderSales(toRender)
-        : tableBody.innerHTML = '<tr><td colspan="8" class="text-center">No hay ventas</td></tr>';
+            ? renderSales(toRender)
+            : tableBody.innerHTML = '<tr><td colspan="8" class="text-center">No hay ventas para mostrar</td></tr>';
     }
 
-    deliveredFilterBtn.addEventListener('click', () => applyFilters('onlyDelivered'));
-    orderByDeliverOnBtn.addEventListener('click', () => applyFilters('orderByDeliverOn'));
-    searchInput.addEventListener('input', () => applyFilters('search'));
+    deliveredFilterBtn.addEventListener('click', toggleOnlyDelivered);
+    searchInput.addEventListener('input', searchOnSales);
 
 </script>
 @endsection
