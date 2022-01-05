@@ -10,7 +10,7 @@ class ShowDeliveries extends Controller
     public function index()
     {
         $sales = Sale::query()
-            ->with('payments', 'client.phones', 'client.address', 'details.product')
+            ->with('payments', 'client.phones', 'client.address', 'details.product', 'details.photo', 'seller')
             ->whereHas('details', fn ($query) => $query->whereNotNull('edited_at')->whereNotNull('manufactured_at'))
             ->whereNull('delivered_at')
             ->orderBy('deliver_on')
