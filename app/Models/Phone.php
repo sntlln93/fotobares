@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Phone extends Model
 {
     protected $guarded = [];
+    protected $appends = ['full_number'];
 
     public function getFormattedNumberAttribute()
     {
