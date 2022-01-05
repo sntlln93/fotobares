@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Address extends Model
 {
     protected $guarded = [];
+    protected $appends = ['formatted_address'];
 
     public function getFormattedAddressAttribute()
     {

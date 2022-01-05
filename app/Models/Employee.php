@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     protected $guarded = [];
+    protected $appends = ['full_name'];
 
     public function getFullNameAttribute()
     {
