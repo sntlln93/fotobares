@@ -127,22 +127,20 @@
 
 @section('scripts')
 <script>
-    document.addEventListener('click', (event) => {
-        const element  = event.target;
-        if(element.id === 'togglePaymentsBtn'){
-            element.innerHTML = element.innerHTML === '<i class="fas fa-eye"></i>' ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
-            //toggle replace class btn-info for btn-warning
-            element.classList.toggle('btn-info');
-            element.classList.toggle('btn-secondary');
-            document.getElementById('paymentsList').classList.toggle('d-none');
-        }
+    document.querySelector('#togglePaymentsBtn').addEventListener('click', ({target}) => {
+        target.innerHTML = target.innerHTML === '<i class="fas fa-eye"></i>' ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+        //toggle replace class btn-info for btn-warning
+        target.classList.toggle('btn-info');
+        target.classList.toggle('btn-secondary');
+        document.getElementById('paymentsList').classList.toggle('d-none');
+    });    
 
-        if(element.id === 'toggleDeliveriesBtn'){
-            element.innerHTML = element.innerHTML === '<i class="fas fa-eye"></i>' ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
-            element.classList.toggle('btn-info');
-            element.classList.toggle('btn-secondary');
-            document.getElementById('deliveriesList').classList.toggle('d-none');
-        }
-    })
+
+    document.querySelector('#toggleDeliveriesBtn').addEventListener('click', ({target}) => {
+        target.innerHTML = target.innerHTML === '<i class="fas fa-eye"></i>' ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+        target.classList.toggle('btn-info');
+        target.classList.toggle('btn-secondary');
+        document.getElementById('deliveriesList').classList.toggle('d-none');
+    });
 </script>
 @endsection
