@@ -141,6 +141,16 @@
     @endif
   </script>
 
+  <script src="{{ asset('js/views/map/map.js') }}?ts={{ env('APP_ASSET_VERSIONING') }}"></script>
+  <script>
+    document.addEventListener('click', event => {
+      const target = event.target;
+
+      if(target.hasAttribute('data-map-add')){
+        addToMap({ target });
+      }
+    });
+  </script>
   @yield('scripts')
 
 </body>

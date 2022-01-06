@@ -46,10 +46,10 @@
                     </a>
                     @endforeach
                     @if ($payment->client->has_location)
-                    <a class="btn btn-sm btn-warning ml-1"
-                        href="{{ route('map.show', ['client' => $payment->client->id]) }}">
+                    <button class="btn btn-sm btn-warning ml-1" data-map-model="{{ $payment->client->id }}"
+                        data-map-add="payment">
                         <i class="fas fa-map-marker"></i>
-                    </a>
+                    </button>
                     @endif
                     <a class="btn btn-sm btn-primary ml-1"
                         href="{{ route('sales.show', ['sale' => $payment->sale_id]) }}">
@@ -102,10 +102,10 @@
                         <b>Dirección:</b>
                         <span>
                             {{ $sale->client->address->formatted_address }}
-                            <a class="btn btn-sm btn-warning ml-1"
-                                href="{{ route('map.show', ['client' => $sale->client_id]) }}">
+                            <button class="btn btn-sm btn-warning ml-1" data-map-model="{{ $sale->client_id }}"
+                                data-map-add="delivery">
                                 <i class="fas fa-map-marker"></i>
-                            </a>
+                            </button>
                         </span>
                     </p>
                     <p class="mb-2">

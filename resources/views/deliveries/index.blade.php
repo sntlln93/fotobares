@@ -64,7 +64,6 @@
     const routes = {
         client:'{{ route('clients.show', ['client' => ':client']) }}',
         whatsapp:'{{ route('whatsapp.send', ['phone' => ':phone']) }}',
-        map: '{{ route('map.show', ['client' => ':client']) }}',
         images: '{{ asset('storage/'. ':path') }}',
         sales: {
             show: '{{ route('sales.show', ['sale' => ':sale']) }}',
@@ -99,9 +98,10 @@
                 <div class="card-header text-right">
                     <button type="button" class="btn btn-sm btn-primary" data-open="modal"
                         data-target="#photo${ sale.id }"><i class="fas fa-image"></i></button>
-                    <a class="btn btn-sm btn-warning" href="${ routes.map.replace(':client', sale.client.id) }">
+                    <button class="btn btn-sm btn-warning ml-1" data-map-model="${ sale.client.id }"
+                        data-map-add="delivery">
                         <i class="fas fa-map-marker"></i>
-                    </a>
+                    </button>
                     ${phoneBtns}
                     <a href="${ routes.sales.show.replace(':sale', sale.id) }" class="btn btn-sm btn-dark"><i
                             class="fas fa-credit-card"></i></a>

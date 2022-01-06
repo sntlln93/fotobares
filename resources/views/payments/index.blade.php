@@ -76,8 +76,11 @@
             return acc += `<a class="btn btn-sm btn-success ml-1" href="${routes.whatsapp.replace(':phone', phone)}" target="_blank"><i class="fab fa-whatsapp"></i></a>`;
         }, '');
 
-        const mapBtn = payment.client.has_location ? `<a class="btn btn-sm btn-warning ml-1" href="${routes.map.replace(':client', payment.client.id)}"><i class="fas fa-map-marker"></i></a>` : '';
-        
+        const mapBtn = payment.client.has_location
+        ? `<button class="btn btn-sm btn-warning ml-1" data-map-model="${ payment.client.id }" data-map-add="payment">
+                <i class="fas fa-map-marker"></i>
+            </button>` 
+        : '';
         return `
             ${phones}
             ${mapBtn}
