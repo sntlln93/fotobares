@@ -73,7 +73,7 @@
         .client__house {
             margin: 0 auto;
             width: 150px;
-            height: auto;
+            height: 200px;
         }
 
         .client__house img {
