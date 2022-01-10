@@ -9,6 +9,6 @@ class ShowClientLocation extends Controller
 {
     public function show(Client $client)
     {
-        return view('map.show')->with('client', $client);
+        return view('map.show')->with('client', $client->load('address'));
     }
 }

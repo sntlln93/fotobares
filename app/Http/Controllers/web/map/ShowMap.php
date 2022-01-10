@@ -9,6 +9,14 @@ class ShowMap extends Controller
 {
     public function index()
     {
-        return view('map.index');
+        if (!request()->has('clients')) {
+            return view('map.index');
+        }
+
+        $clientsId = json_decode(request()->clients);
+        $clients = Client::find($clientsId)->load('address');
+
+        return response()
+            ->json($clients);
     }
 }
