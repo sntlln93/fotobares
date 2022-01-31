@@ -6,7 +6,7 @@
 </div>
 <div class="form-row">
     <label for="quotas">Cantidad de cuotas</label>
-    <input type="number" value="1" id="quotas" class="form-control @error('quotas') is-invalid @enderror" min="1"
+    <input type="number" id="quotas" class="form-control @error('quotas') is-invalid @enderror" min="1"
         value="{{ count(old('quotas', $product->quotas)) }}">
     @error('quotas') <small class="text-danger">{{ $message }}</small> @enderror
 </div>

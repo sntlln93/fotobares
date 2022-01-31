@@ -13,6 +13,7 @@ class CreateProduct extends Controller
     public function create()
     {
         $product = new Product();
+        $product->colors = [];
         return view('products.create')->with('product', $product);
     }
 
