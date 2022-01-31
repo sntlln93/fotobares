@@ -77,6 +77,10 @@
       border: 2px solid rgba(0, 0, 0, 0.3);
       border-radius: 50%;
     }
+
+    .h-scroll {
+      overflow-x: scroll;
+    }
   </style>
   @yield('styles')
 </head>

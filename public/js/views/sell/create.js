@@ -212,7 +212,7 @@ quotasContainer.addEventListener('change', (e) => {
 const renderProducts = (products, oldProduct) => {
   const productsContainer = document.getElementById('products');
   productsContainer.innerHTML = '';
-  productsContainer.classList = 'd-flex';
+  productsContainer.classList = 'd-flex h-scroll';
 
   products.forEach((product) => {
     const productElement = document.createElement('div');
@@ -267,6 +267,7 @@ const renderColorPicker = (colors) => {
 
   colorPickerContainerParent.classList.remove('d-none');
   colorPickerContainer.innerHTML = '';
+  colorPickerContainer.classList = 'd-flex h-scroll';
 
   colors.forEach((color, index) => {
     const checked = oldColor == color ? 'checked' : false;
