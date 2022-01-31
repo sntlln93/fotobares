@@ -30,7 +30,7 @@ class CreateProduct extends Controller
         DB::transaction(function () use ($validated) {
             $product = Product::create([
                 'name' => $validated['name'],
-                'colors' => json_encode($validated['colors']),
+                'colors' => $validated['colors'],
             ]);
 
             for ($i = 0; $i < count($validated['quotas']); $i++) {
