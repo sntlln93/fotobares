@@ -24,12 +24,7 @@ MAP_KEY=your_key_goes_here
 
 Install composer dependencies
 ```
-docker run --rm \
-    -u "$(id -u):$(id -g)" \
-    -v $(pwd):/var/www/html \
-    -w /var/www/html \
-    laravelsail/php81-composer:latest \
-    composer install --ignore-platform-reqs
+composer install
 ```
 
 At this point you should be able to start laravel with
@@ -37,7 +32,7 @@ At this point you should be able to start laravel with
 ./vendor/bin/sail up
 ```
 
-Optionally you could setup an alias
+Optionally you can setup an alias
 ```
 alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
 ```
@@ -71,4 +66,14 @@ sail build --no-cache
 Keep in mind that sail needs to be up (`sail up -d`). After rebuilding the image you need to restart the container
 ```
 sail stop && sail up
+```
+
+## Installing dependencies from sail container
+```
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v $(pwd):/var/www/html \
+    -w /var/www/html \
+    laravelsail/php81-composer:latest \
+    composer install --ignore-platform-reqs
 ```
