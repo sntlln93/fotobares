@@ -187,9 +187,9 @@ return [
         ],
 
         'discord' => [
-            'webhook_url' => 'https://discord.com/api/webhooks/948477189945438259/tfn232A9Qmlw2YonovqBbVnMBApkPBVMN8nOLCHEuo9asdnvV14ABSpzoRfbrOLH2j0w',
+            'webhook_url' => env('DISCORD_WEBHOOK_URL'),
 
-            'username' => 'Foto Tobares',
+            'username' => env('DISCORD_USERNAME', 'Foto Tobares'),
 
             'avatar_url' => null,
         ],
