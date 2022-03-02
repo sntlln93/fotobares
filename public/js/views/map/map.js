@@ -172,10 +172,16 @@ function initMap(clients) {
 
   map = new google.maps.Map(mapContainer, options);
 
-  userMarker = new google.maps.Marker({
-    position: options.center,
-    map: map,
-  }).setIcon('../../../images/map_markers/user_marker.png');
+  navigator.geolocation.getCurrentPosition(
+    ({ coords }) => {
+      userMarker = new google.maps.Marker({
+        position: { lat: coords.latitude, lng: coords.longitude },
+        map: map,
+      }).setIcon('../../../images/map_markers/user_marker.png');
+    },
+    (err) => console(err),
+    {}
+  );
 
   clients && drawClients(clients, map);
 }
