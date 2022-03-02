@@ -11,7 +11,9 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
-        "laraveles/spanish": "^1.5"
+        "laraveles/spanish": "^1.5",
+        "league/flysystem-aws-s3-v3": "^1.0",
+        "spatie/laravel-backup": "^7"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
