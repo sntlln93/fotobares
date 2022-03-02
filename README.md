@@ -22,6 +22,11 @@ Make sure you have an Google Maps API Key and put it in .env file
 MAP_KEY=your_key_goes_here
 ```
 
+And to change the APP_URL variable to localhost (as it is the url that sail will provide) because it is used to serve javascript files needed in some parts of the the application
+```
+APP_URL=localhost
+```
+
 Install composer dependencies
 ```
 composer install
