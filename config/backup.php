@@ -17,7 +17,7 @@ return [
                 /*
                  * The list of directories and files that will be included in the backup.
                  */
-                'include' => [],
+                'include' => [base_path('storage/app/public')],
 
                 /*
                  * These directories and files will be excluded from the backup.
