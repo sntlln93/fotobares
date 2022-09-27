@@ -162,28 +162,45 @@ const drawClients = (clients, map) => {
 };
 
 function initMap(clients) {
-  const mapContainer = document.getElementById('map');
-  mapContainer.innerHTML = '';
-  if (!navigator.geolocation) {
-    mapContainer.innerHTML =
-      'Servicios de geolocalización no soportados por tu navegador';
-    return;
+  const success = (pos) => {
+    const crd = pos.coords;
+
+    const mapContainer = document.getElementById('map');
+    mapContainer.innerHTML = '';
+    if (!navigator.geolocation) {
+      mapContainer.innerHTML =
+        'Servicios de geolocalización no soportados por tu navegador';
+      return;
+    }
+
+    options.center.lat = crd.latitude;
+    options.center.lng = crd.longitude;
+
+    map = new google.maps.Map(mapContainer, options);
+
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        userMarker = new google.maps.Marker({
+          position: { lat: coords.latitude, lng: coords.longitude },
+          map: map,
+        }).setIcon('../../../images/map_markers/user_marker.png');
+      },
+      (err) => console(err),
+      {}
+    );
+
+    clients && drawClients(clients, map);
   }
 
-  map = new google.maps.Map(mapContainer, options);
+  const error = (err) => {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
 
-  navigator.geolocation.getCurrentPosition(
-    ({ coords }) => {
-      userMarker = new google.maps.Marker({
-        position: { lat: coords.latitude, lng: coords.longitude },
-        map: map,
-      }).setIcon('../../../images/map_markers/user_marker.png');
-    },
-    (err) => console(err),
-    {}
-  );
-
-  clients && drawClients(clients, map);
+  navigator.geolocation.getCurrentPosition(success, error, {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+  });
 }
 
 document.addEventListener('click', (event) => {
